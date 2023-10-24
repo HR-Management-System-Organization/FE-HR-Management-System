@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kayıt Sayfası</title>
+    <style>
+        body {
+            background-image: url('HRbackground.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 400px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        input[type="text"], input[type="password"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            width: 100%;
+            background-color: #564caf;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Kayıt Ol</h2>
+        
+        <form action="http://localhost:9093/user/save" method="post">
+            <div id="user-type-container">
+                <label>User Type:</label>
+                <input type="radio" id="admin" name="usertype" value="admin">
+                <label for="admin">Yönetici</label>
+                <input type="radio" id="visitor" name="usertype" value="visitor" checked>
+                <label for="visitor">Ziyaretçi</label>
+            </div><br><br>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            <br>
+            <label for="repassword">Confirm-Password:</label>
+            <input type="password" id="repassword" name="repassword" required>
+            <br>
+            <label for="email">E-Mail:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <div id="tax-company-container" style="display: none;">
+                <label for="taxnumber">Tax Number:</label>
+                <input type="text" id="taxnumber" name="taxnumber">
+                <label for="companyname">Company Name:</label>
+                <input type="text" id="companyname" name="companyname">
+            </div>
+            <br>
+            <input type="submit" value="Register" onclick="return validateForm();">
+        </form>
+        <p style="text-align: center; margin-top: 20px;">Zaten bir hesabınız var mı? <a href="index.html">Giriş yapın</a></p>
+    </div>
+    <script>
+        var adminRadioButton = document.getElementById('admin');
+        var visitorRadioButton = document.getElementById('visitor');
+        var taxCompanyContainer = document.getElementById('tax-company-container');
+        
+        function toggleInputs() {
+            if (adminRadioButton.checked) {
+                taxCompanyContainer.style.display = 'block';
+            } else {
+                taxCompanyContainer.style.display = 'none';
+            }
+        }
+        
+        adminRadioButton.addEventListener('change', toggleInputs);
+        visitorRadioButton.addEventListener('change', toggleInputs);
+        
+        toggleInputs(); // Sayfa yüklendiğinde durumu kontrol etmek için
+
+        function validateForm() {
+            var password = document.getElementById('password').value;
+            var repassword = document.getElementById('repassword').value;
+
+            if (password !== repassword) {
+                alert('Parola ve Tekrar Parola uyuşmuyor.');
+                return false;
+            } else if (password.length < 8) {
+                alert('Parola en az 8 karakter olmalıdır.');
+                return false;
+            }
+        }
+    </script>
+</body>
+</html>
