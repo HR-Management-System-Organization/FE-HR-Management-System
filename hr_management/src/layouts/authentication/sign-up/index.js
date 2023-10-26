@@ -1,38 +1,58 @@
-/**
-=========================================================
-* Material Dashboard 2 React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// react-router-dom components
-import { Link } from "react-router-dom";
-
-// @mui material components
+import React, { useState } from "react";
 import Card from "@mui/material/Card";
-import Checkbox from "@mui/material/Checkbox";
-
-// Material Dashboard 2 React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
-
-// Authentication layout components
+import axios from "axios";
 import CoverLayout from "layouts/authentication/components/CoverLayout";
-
-// Images
 import bgImage from "assets/images/bg-sign-up-cover.jpeg";
 
 function Cover() {
+  const [userInfo, setUserInfo] = useState({
+    email: "",
+    username: "",
+    password: "",
+    rePassword: "",
+    taxNumber: "",
+    companyName: "",
+  });
+
+  function formOnChange(e) {
+    const { name, value } = e.target;
+    setUserInfo({ ...userInfo, [name]: value });
+  }
+
+  function handleSignup(e) {
+    e.preventDefault();
+
+    const { email, username, password, rePassword, taxNumber, companyName } = userInfo;
+
+    axios
+      .post(
+        "http://localhost:7071/api/v1/auth/register_with_rabbitmq",
+        {
+          email,
+          username,
+          password,
+          rePassword,
+          taxNumber,
+          companyName,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        console.log("Kayıt başarılı:", response.data);
+      })
+      .catch((error) => {
+        console.error("İstek hatası:", error);
+      });
+  }
+
   return (
     <CoverLayout image={bgImage}>
       <Card>
@@ -55,67 +75,67 @@ function Cover() {
           </MDTypography>
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
-          <MDBox component="form" role="form">
+          <form onSubmit={handleSignup}>
             <MDBox mb={2}>
-              <MDInput type="text" label="Name" variant="standard" fullWidth />
+              <MDInput
+                type="text"
+                name="username"
+                placeholder="Kullanıcı Adı"
+                onChange={formOnChange}
+                fullWidth
+              />
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="email" label="Email" variant="standard" fullWidth />
+              <MDInput
+                type="email"
+                name="email"
+                placeholder="Email"
+                onChange={formOnChange}
+                fullWidth
+              />
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="password" label="Password" variant="standard" fullWidth />
+              <MDInput
+                type="text"
+                name="companyName"
+                placeholder="Şirket Adı"
+                onChange={formOnChange}
+                fullWidth
+              />
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="repassword" label="Repassword" variant="standard" fullWidth />
+              <MDInput
+                type="text"
+                name="taxNumber"
+                placeholder="Vergi Numarası"
+                onChange={formOnChange}
+                fullWidth
+              />
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="tax" label="Tax Number" variant="standard" fullWidth />
+              <MDInput
+                type="password"
+                name="password"
+                placeholder="Şifre"
+                onChange={formOnChange}
+                fullWidth
+              />
             </MDBox>
             <MDBox mb={2}>
-              <MDInput type="company" label="Company Name" variant="standard" fullWidth />
-            </MDBox>
-            <MDBox display="flex" alignItems="center" ml={-1}>
-              <Checkbox />
-              <MDTypography
-                variant="button"
-                fontWeight="regular"
-                color="text"
-                sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
-              >
-                &nbsp;&nbsp;I agree the&nbsp;
-              </MDTypography>
-              <MDTypography
-                component="a"
-                href="#"
-                variant="button"
-                fontWeight="bold"
-                color="info"
-                textGradient
-              >
-                Terms and Conditions
-              </MDTypography>
+              <MDInput
+                type="password"
+                name="rePassword"
+                placeholder="Şifreyi Tekrar Girin"
+                onChange={formOnChange}
+                fullWidth
+              />
             </MDBox>
             <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="info" fullWidth>
-                sign up
+              <MDButton type="submit" variant="gradient" color="info" fullWidth>
+                Kaydol
               </MDButton>
             </MDBox>
-            <MDBox mt={3} mb={1} textAlign="center">
-              <MDTypography variant="button" color="text">
-                Already have an account?{" "}
-                <MDTypography
-                  component={Link}
-                  to="/authentication/sign-in"
-                  variant="button"
-                  color="info"
-                  fontWeight="medium"
-                  textGradient
-                >
-                  Sign In
-                </MDTypography>
-              </MDTypography>
-            </MDBox>
-          </MDBox>
+          </form>
         </MDBox>
       </Card>
     </CoverLayout>
