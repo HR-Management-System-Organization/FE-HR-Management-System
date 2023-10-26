@@ -123,6 +123,12 @@ function DefaultNavbar({ transparent, light, action }) {
             light={light}
           />
           <DefaultNavbarLink
+            icon="account_circle"
+            name="gsign up"
+            route="/authentication/gsign-up"
+            light={light}
+          />
+          <DefaultNavbarLink
             icon="key"
             name="sign in"
             route="/authentication/sign-in"
