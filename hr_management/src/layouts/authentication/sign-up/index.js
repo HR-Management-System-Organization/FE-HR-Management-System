@@ -16,6 +16,7 @@ function Cover() {
     rePassword: "",
     taxNumber: "",
     companyName: "",
+    gender: "MALE", // Default değeri belirleyebilirsiniz
   });
 
   function formOnChange(e) {
@@ -26,7 +27,7 @@ function Cover() {
   function handleSignup(e) {
     e.preventDefault();
 
-    const { email, username, password, rePassword, taxNumber, companyName } = userInfo;
+    const { email, username, password, rePassword, taxNumber, companyName, gender } = userInfo;
 
     axios
       .post(
@@ -38,6 +39,7 @@ function Cover() {
           rePassword,
           taxNumber,
           companyName,
+          gender,
         },
         {
           headers: {
@@ -129,6 +131,16 @@ function Cover() {
                 onChange={formOnChange}
                 fullWidth
               />
+            </MDBox>
+            <MDBox mb={2}>
+              <select
+                name="gender"
+                onChange={formOnChange}
+                value={userInfo.gender} // Seçili değeri göstermek için value ekleyin
+              >
+                <option value="MALE">Male</option>
+                <option value="FEMALE">Female</option>
+              </select>
             </MDBox>
             <MDBox mt={4} mb={1}>
               <MDButton type="submit" variant="gradient" color="info" fullWidth>
