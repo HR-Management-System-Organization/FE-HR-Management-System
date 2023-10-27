@@ -19,7 +19,7 @@ function Cover() {
     setUserInfo({ ...userInfo, [name]: value });
   }
 
-  function handleSignup(e) {
+  function handleSignIn(e) {
     e.preventDefault();
 
     const { username, password } = userInfo;
@@ -38,10 +38,12 @@ function Cover() {
         }
       )
       .then((response) => {
-        console.log("Kayıt başarılı:", response.data);
+        console.log("Sign In successful:", response.data);
+        // Handle success, e.g., navigate to another page
       })
       .catch((error) => {
-        console.error("İstek hatası:", error);
+        console.error("Sign In failed:", error);
+        // Handle the error, e.g., show an error message to the user
       });
   }
 
@@ -67,12 +69,12 @@ function Cover() {
           </MDTypography>
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
-          <form onSubmit={handleSignup}>
+          <form onSubmit={handleSignIn}>
             <MDBox mb={2}>
               <MDInput
                 type="text"
                 name="username"
-                placeholder="Kullanıcı Adı"
+                placeholder="Username"
                 onChange={formOnChange}
                 fullWidth
               />
@@ -81,14 +83,14 @@ function Cover() {
               <MDInput
                 type="password"
                 name="password"
-                placeholder="Şifre"
+                placeholder="Password"
                 onChange={formOnChange}
                 fullWidth
               />
             </MDBox>
             <MDBox mt={4} mb={1}>
               <MDButton type="submit" variant="gradient" color="info" fullWidth>
-                Girisi
+                Sign in
               </MDButton>
             </MDBox>
           </form>
