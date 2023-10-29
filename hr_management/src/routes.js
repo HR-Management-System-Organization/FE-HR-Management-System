@@ -44,6 +44,8 @@ import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import GSignUp from "layouts/authentication/gsign-up";
+import ActivationFailed from "layouts/authentication/activation-failed";
+import Activation from "layouts/authentication/activation";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -108,10 +110,26 @@ const routes = [
   {
     type: "collapse",
     name: "Sign Up",
-    key: "sign-up",
+    key: "gsign-up",
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/authentication/gsign-up",
     component: <GSignUp />,
+  },
+  {
+    type: "collapse",
+    name: "Sign Up",
+    key: "activation",
+    icon: <Icon fontSize="large">assignment</Icon>,
+    route: "/authentication/activation",
+    component: <Activation />,
+  },
+  {
+    type: "collapse",
+    name: "Sign Up",
+    key: "activation-failed",
+    icon: <Icon fontSize="large">assignment</Icon>,
+    route: "/authentication/activation-failed",
+    component: <ActivationFailed />,
   },
 ];
 

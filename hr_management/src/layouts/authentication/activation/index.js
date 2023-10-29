@@ -9,7 +9,7 @@ import bgImage from "assets/images/bg-sign-up-cover.jpeg";
 import { BrowserRouter, Link } from "react-router-dom";
 import { blue } from "@mui/material/colors";
 
-function Cover() {
+function Activation() {
   return (
     <CoverLayout image={bgImage}>
       <Card>
@@ -64,4 +64,4 @@ function Cover() {
   );
 }
 
-export default Cover;
+export default Activation;
