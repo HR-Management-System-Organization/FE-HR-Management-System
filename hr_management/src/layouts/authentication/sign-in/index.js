@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
@@ -8,44 +10,86 @@ import axios from "axios";
 import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgImage from "assets/images/bg-sign-up-cover.jpeg";
 
+const API_URL = "http://localhost:7072/api/v1/user/login";
+
 function Cover() {
-  const [userInfo, setUserInfo] = useState({
-    username: "",
-    password: "",
+  const [credentials, setCredentials] = useState({ username: "", password: "" });
+  const [error, setError] = useState("");
+  // const { setUserRole } = useCentralState();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [role, setRole] = useState();
+
+  // const storedToken = localStorage.getItem("Authorization");
+  // try {
+  //   const storedRole = jwt_decode(storedToken).role;
+  //   return storedRole;
+  // } catch (error) {
+  //   console.log(error);
+  // }
+  useEffect(() => {
+    const storedToken = localStorage.getItem("Authorization");
+    if (storedToken) {
+      const decodedToken = jwt_decode(storedToken);
+      const decodedUserRole = decodedToken.role;
+      setRole(decodedUserRole);
+      localStorage.setItem(role, decodedUserRole);
+    }
   });
 
-  function formOnChange(e) {
+  const navigate = useNavigate();
+
+  const formOnChange = (e) => {
     const { name, value } = e.target;
-    setUserInfo({ ...userInfo, [name]: value });
-  }
+    setCredentials({ ...credentials, [name]: value });
+  };
+  useEffect(() => {
+    if (isLoggedIn) {
+      const token = localStorage.getItem("Authorization");
+      const decoded = jwt_decode(token);
+      if (role === "COMPANY_MANAGER") {
+        navigate("/company_manager/dashboard");
+      } else if (role === "ADMIN") {
+        navigate("/admin/dashboard");
+      } else if (role === "EMPLOYEE") {
+        navigate("/employee/dashboard");
+      } else {
+        navigate("/guest/activation-failed");
+      }
+    }
+  }, [isLoggedIn, navigate]);
 
-  function handleSignIn(e) {
+  const handleSignInSuccess = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleSignIn = (e) => {
     e.preventDefault();
-
-    const { username, password } = userInfo;
+    const { username, password } = credentials;
 
     axios
       .post(
-        "http://localhost:7072/api/v1/user/login",
+        API_URL,
+        { username, password },
         {
-          username,
-          password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
         }
       )
       .then((response) => {
-        console.log("Sign In successful:", response.data);
-        // Handle success, e.g., navigate to another page
+        const token = response.data;
+        localStorage.setItem("Authorization", `Bearer ${token}`);
+        axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+        console.log("Login successful!", response.data);
+        console.log(role);
+        handleSignInSuccess();
       })
       .catch((error) => {
-        console.error("Sign In failed:", error);
-        // Handle the error, e.g., show an error message to the user
+        console.error("Login failed:", error);
+        setError("Login failed. Please check your credentials.");
       });
-  }
+
+    // Clear the input fields
+    setCredentials({ username: "", password: "" });
+  };
 
   return (
     <CoverLayout image={bgImage}>
@@ -68,13 +112,15 @@ function Cover() {
             Enter your username and password to sign in
           </MDTypography>
         </MDBox>
-        <MDBox pt={4} pb={3} px={3}>
+        <MDBox pt={4} pb={3} px={3} textAlign="center">
           <form onSubmit={handleSignIn}>
+            {error && <div style={{ color: "red", fontFamily: "monospace" }}>{error}</div>}
             <MDBox mb={2}>
               <MDInput
                 type="text"
                 name="username"
                 placeholder="Username"
+                value={credentials.username}
                 onChange={formOnChange}
                 fullWidth
               />
@@ -84,6 +130,7 @@ function Cover() {
                 type="password"
                 name="password"
                 placeholder="Password"
+                value={credentials.password}
                 onChange={formOnChange}
                 fullWidth
               />

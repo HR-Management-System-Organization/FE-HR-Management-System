@@ -1,6 +1,6 @@
 /**
 =========================================================
-* Material Dashboard 2 React - v2.2.0
+* HR Management System React - v2.2.0
 =========================================================
 
 * Product Page: https://www.creative-tim.com/product/material-dashboard-react
@@ -16,7 +16,7 @@ Coded by www.creative-tim.com
 // @mui material components
 import { styled } from "@mui/material/styles";
 
-// Material Dashboard 2 React components
+// HR Management System React components
 import MDButton from "components/MDButton";
 
 export default styled(MDButton)(({ theme, ownerState }) => {
