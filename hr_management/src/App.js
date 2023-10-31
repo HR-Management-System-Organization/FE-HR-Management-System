@@ -49,7 +49,7 @@ import routes from "routes";
 import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "context";
 
 // Images
-import brandWhite from "assets/images/logo-ct.png";
+import brandWhite from "assets/images/apple-icon.png";
 import brandDark from "assets/images/logo-ct-dark.png";
 
 export default function App() {
@@ -152,7 +152,7 @@ export default function App() {
           <>
             <Sidenav
               color={sidenavColor}
-              brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
+              // brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
               brandName="HR Management System"
               routes={routes}
               onMouseEnter={handleOnMouseEnter}
@@ -165,7 +165,7 @@ export default function App() {
         {layout === "vr" && <Configurator />}
         <Routes>
           {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/authentication/sign-in" />} />
+          <Route path="*" element={<Navigate to="/authentication/actvation" />} />
         </Routes>
       </ThemeProvider>
     </CacheProvider>
@@ -189,7 +189,7 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       <Routes>
         {getRoutes(routes)}
-        <Route path="*" element={<Navigate to="/authentication/sign-in" />} />
+        <Route path="*" element={<Navigate to="/authentication/activation" />} />
       </Routes>
     </ThemeProvider>
   );

@@ -79,7 +79,7 @@ function Cover() {
         localStorage.setItem("Authorization", `Bearer ${token}`);
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         console.log("Login successful!", response.data);
-        console.log(role);
+        // console.log(role);
         handleSignInSuccess();
       })
       .catch((error) => {

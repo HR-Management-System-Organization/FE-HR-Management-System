@@ -47,7 +47,7 @@ import GSignUp from "layouts/authentication/gsign-up";
 import ActivationFailed from "layouts/authentication/activation-failed";
 import Activation from "layouts/authentication/activation";
 import UserNotification from "layouts/user-layout/notifications";
-import UserProfile from "layouts/user-layout/profile";
+import Overview from "layouts/profile";
 import UserDashboard from "layouts/user-layout/dashboard";
 import AddNewComment from "layouts/user-layout/add-new-comment";
 import MyCompany from "layouts/user-layout/my-company";
@@ -67,7 +67,7 @@ const routes = [
   },
   {
     type: "route",
-    name: "Add Comment",
+    name: "Comments",
     key: "user-dashboard",
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "employee/comment",
@@ -86,11 +86,11 @@ const routes = [
   {
     type: "route",
     name: "Notifications",
-    key: "notifications",
+    key: "employee-notifications",
     icon: <Icon fontSize="small">notifications</Icon>,
-    route: "/notifications",
+    route: "employee/notifications",
     component: <Notifications />,
-    visibleRoles: [""],
+    visibleRoles: ["EMPLOYEE"],
   },
   {
     type: "route",
@@ -116,7 +116,7 @@ const routes = [
     key: "profile",
     icon: <Icon fontSize="small">person</Icon>,
     route: "employee/profile",
-    component: <UserProfile />,
+    component: <Overview />,
     visibleRoles: ["EMPLOYEE"],
   },
 

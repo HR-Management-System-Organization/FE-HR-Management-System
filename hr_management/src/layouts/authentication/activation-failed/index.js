@@ -7,7 +7,6 @@ import axios from "axios";
 import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgImage from "assets/images/bg-sign-up-cover.jpeg";
 import { BrowserRouter, Link } from "react-router-dom";
-import { blue } from "@mui/material/colors";
 
 function ActivationFailed() {
   return (
@@ -42,7 +41,7 @@ function ActivationFailed() {
               justifyContent="center"
               variant="h1"
               fontWeight="medium"
-              color="white"
+              color="success"
               mt={12}
             >
               Aktivasyon İşlemi Başarısız
