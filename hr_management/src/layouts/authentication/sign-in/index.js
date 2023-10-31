@@ -85,7 +85,7 @@ function Cover() {
       .catch((error) => {
         console.error("Login failed:", error);
         setError("Login failed. Please check your credentials.");
-      });
+      }, []);
 
     // Clear the input fields
     setCredentials({ username: "", password: "" });

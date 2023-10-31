@@ -46,6 +46,11 @@ import SignUp from "layouts/authentication/sign-up";
 import GSignUp from "layouts/authentication/gsign-up";
 import ActivationFailed from "layouts/authentication/activation-failed";
 import Activation from "layouts/authentication/activation";
+import UserNotification from "layouts/user-layout/notifications";
+import UserProfile from "layouts/user-layout/profile";
+import UserDashboard from "layouts/user-layout/dashboard";
+import AddNewComment from "layouts/user-layout/add-new-comment";
+import MyCompany from "layouts/user-layout/my-company";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -56,27 +61,27 @@ const routes = [
     name: "Dashboard",
     key: "dashboard",
     icon: <Icon fontSize="small">dashboard</Icon>,
-    route: "/dashboard",
-    component: <Dashboard />,
-    visibleRoles: ["Personel"],
+    route: "employee/dashboard",
+    component: <UserDashboard />,
+    visibleRoles: ["EMPLOYEE"],
   },
   {
     type: "route",
-    name: "Tables",
-    key: "tables",
+    name: "Add Comment",
+    key: "user-dashboard",
     icon: <Icon fontSize="small">table_view</Icon>,
-    route: "/tables",
-    component: <Tables />,
-    visibleRoles: ["Personel"],
+    route: "employee/comment",
+    component: <AddNewComment />,
+    visibleRoles: ["EMPLOYEE"],
   },
   {
     type: "route",
     name: "Billing",
     key: "billing",
     icon: <Icon fontSize="small">receipt_long</Icon>,
-    route: "/billing",
+    route: "/company_manager/dashboard",
     component: <Billing />,
-    visibleRoles: ["Personel"],
+    visibleRoles: ["COMPANY_MANAGER"],
   },
   {
     type: "route",
@@ -85,26 +90,36 @@ const routes = [
     icon: <Icon fontSize="small">notifications</Icon>,
     route: "/notifications",
     component: <Notifications />,
-    visibleRoles: ["COMPANY_MANAGER"],
+    visibleRoles: [""],
+  },
+  {
+    type: "route",
+    name: "My Company",
+    key: "myCompany",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/authentication/sign-in",
+    component: <SignIn />,
+    visibleRoles: [],
+  },
+  {
+    type: "route",
+    name: "My Company",
+    key: "sign-in",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/employee/company",
+    component: <MyCompany />,
+    visibleRoles: ["EMPLOYEE"],
   },
   {
     type: "route",
     name: "Profile",
     key: "profile",
     icon: <Icon fontSize="small">person</Icon>,
-    route: "/profile",
-    component: <Profile />,
-    visibleRoles: ["Admin", "Personel", "COMPANY_MANAGER"],
+    route: "employee/profile",
+    component: <UserProfile />,
+    visibleRoles: ["EMPLOYEE"],
   },
-  {
-    type: "route",
-    name: "",
-    key: "sign-in",
-    icon: "",
-    route: "/authentication/sign-in",
-    component: <SignIn />,
-    visibleRoles: ["Personel"],
-  },
+
   {
     type: "route",
     name: "Sign Up",
@@ -112,7 +127,7 @@ const routes = [
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/authentication/sign-up",
     component: <SignUp />,
-    visibleRoles: ["Personel"],
+    visibleRoles: [""],
   },
   {
     type: "route",
@@ -121,25 +136,26 @@ const routes = [
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/authentication/gsign-up",
     component: <GSignUp />,
-    visibleRoles: ["Personel"],
+    visibleRoles: [""],
   },
+
   {
     type: "route",
-    name: "Sign Up",
+    name: "",
     key: "activation",
     icon: <Icon fontSize="large">assignment</Icon>,
     route: "/authentication/activation",
     component: <Activation />,
-    visibleRoles: ["All"],
+    visibleRoles: [""],
   },
   {
-    type: "admin",
+    type: "route",
     name: "",
     key: "activation-failed",
     icon: "",
     route: "/authentication/activation-failed",
     component: <ActivationFailed />,
-    visibleRoles: ["Personel"],
+    visibleRoles: [""],
   },
 ];
 

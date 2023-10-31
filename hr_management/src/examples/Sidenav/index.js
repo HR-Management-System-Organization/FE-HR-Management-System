@@ -98,7 +98,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
     ({ type, name, icon, title, noCollapse, key, href, route, visibleRoles }) => {
       let returnValue;
 
-      if (type === role) {
+      if (visibleRoles.includes(role)) {
         returnValue = href ? (
           <Link
             href={href}
