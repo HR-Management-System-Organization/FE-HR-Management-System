@@ -68,7 +68,6 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
       const decodedUserRole = decodedToken.role;
       setRole(decodedUserRole);
       localStorage.setItem(role, decodedUserRole);
-      console.log(role);
     }
   });
   const closeSidenav = () => setMiniSidenav(dispatch, true);
