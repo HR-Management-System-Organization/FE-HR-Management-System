@@ -7,8 +7,10 @@ import MDButton from "components/MDButton";
 import axios from "axios";
 import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgImage from "assets/images/bg-sign-up-cover.jpeg";
+import { Link } from "react-router-dom";
 
 function Cover() {
+  const [error, setError] = useState();
   const [userInfo, setUserInfo] = useState({
     email: "",
     username: "",
@@ -47,6 +49,7 @@ function Cover() {
         console.log("Kayıt başarılı:", response.data);
       })
       .catch((error) => {
+        setError("Kayıt hatalı");
         console.error("İstek hatası:", error);
       });
   }
@@ -74,6 +77,7 @@ function Cover() {
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
           <form onSubmit={handleSignup}>
+            {error && <div style={{ color: "red", fontFamily: "monospace" }}>{error}</div>}
             <MDBox mb={2}>
               <MDInput
                 type="text"
@@ -120,11 +124,10 @@ function Cover() {
                 <option value="FEMALE">Female</option>
               </select>
             </MDBox>
-            <MDBox mt={4} mb={1}>
-              <MDButton type="submit" variant="gradient" color="info" fullWidth>
-                Kaydol
-              </MDButton>
-            </MDBox>
+            <MDBox mt={4} mb={1}></MDBox>
+            <MDButton type="submit" variant="gradient" color="info" fullWidth>
+              Kayıt Ol
+            </MDButton>
           </form>
         </MDBox>
       </Card>

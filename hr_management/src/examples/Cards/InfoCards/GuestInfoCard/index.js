@@ -83,15 +83,15 @@ function GuestInfoCard({ title, description, info, social, action }) {
   };
 
   const renderItems = Object.keys(info).map((label, index) => (
-    <MDBox key={label} display="flex" py={2} pr={2} alignItems="center">
+    <MDBox key={label} display="flex" py={2} pr={2} alignItems="center" marginLeft="-40px">
       <MDBox
         sx={{
           position: "absolute",
           left: "30px",
           transform: "translateY(-50%)",
           color: "success",
-          fontSize: "1.35rem",
-          marginTop: "38px",
+          fontSize: "1.5rem",
+          marginTop: "1px",
         }}
       >
         <MDTypography color="light">{getIcon(label)}</MDTypography>

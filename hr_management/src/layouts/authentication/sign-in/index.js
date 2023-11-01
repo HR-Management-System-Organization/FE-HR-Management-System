@@ -99,9 +99,9 @@ function Cover() {
           bgColor="info"
           borderRadius="lg"
           coloredShadow="success"
-          mx={2}
-          mt={-3}
-          p={3}
+          mx={2.5}
+          mt={2}
+          p={4}
           mb={1}
           textAlign="center"
         >
