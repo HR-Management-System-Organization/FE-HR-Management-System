@@ -35,7 +35,7 @@ function Footer({ company, links }) {
     links.map((link) => (
       <MDBox key={link.name} component="li" px={2} lineHeight={1}>
         <Link href={link.href} target="_blank">
-          <MDTypography variant="button" fontWeight="regular" color="text">
+          <MDTypography variant="text" fontWeight="regular" color="text">
             {link.name}
           </MDTypography>
         </Link>
@@ -49,22 +49,23 @@ function Footer({ company, links }) {
       flexDirection={{ xs: "column", lg: "row" }}
       justifyContent="space-between"
       alignItems="center"
-      px={1.5}
+      px={0}
+      position="relative"
     >
       <MDBox
         display="flex"
         justifyContent="center"
-        alignItems="center"
+        alignItems="down"
         flexWrap="wrap"
         color="text"
         fontSize={size.sm}
-        px={1.5}
+        px={2}
       >
         &copy; {new Date().getFullYear()}, made with
-        <MDBox fontSize={size.md} color="text" mb={-0.5} mx={0.25}>
-          <Icon color="inherit" fontSize="inherit">
+        <MDBox fontSize={size.md} color="text" mb={-0.25} mx={0.25}>
+          {/* <Icon color="inherit" fontSize="inherit">
             favorite
-          </Icon>
+          </Icon> */}
         </MDBox>
         by ASOMA
       </MDBox>
@@ -76,9 +77,9 @@ function Footer({ company, links }) {
           alignItems: "center",
           justifyContent: "center",
           listStyle: "none",
-          mt: 3,
+          mt: 5,
           mb: 0,
-          p: 0,
+          p: 3,
 
           [breakpoints.up("lg")]: {
             mt: 0,
@@ -93,10 +94,10 @@ function Footer({ company, links }) {
 
 // Setting default values for the props of Footer
 Footer.defaultProps = {
-  company: { href: "https://www.creative-tim.com/", name: "Creative Tim" },
+  company: { href: "http://localhost:3000/authentication/sign-in", name: "Creative Tim" },
   links: [
-    { href: "https://www.creative-tim.com/presentation", name: "About Us" },
-    { href: "https://www.creative-tim.com/blog", name: "Blog" },
+    { href: "http://localhost:3000/authentication/sign-in", name: "About Us" },
+    { href: "http://localhost:3000/authentication/sign-in", name: "Blog" },
     { href: "https://www.creative-tim.com/license", name: "License" },
   ],
 };

@@ -33,15 +33,11 @@ function Header({ fullName }) {
 
       formData.append("userId", decodedToken.id);
 
-      const response = await axios.post(
-        "http://localhost:9095/api/v1/user/transfer-photo",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data", //Multi part data olarak database deki metota gönderiyorum
-          },
-        }
-      );
+      const response = await axios.post("http://localhost:7072/api/v1/user/photoUrl", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data", //Multi part data olarak database deki metota gönderiyorum
+        },
+      });
 
       console.log("Dosya yükleme başarılı:", response.data);
       alert("Fotoğraf başarıyla değiştirildi. ID: " + decodedToken.id);
@@ -74,28 +70,40 @@ function Header({ fullName }) {
   return (
     <MDBox position="relative">
       <DashboardNavbar />
-      <MDBox height="220px" />
+      <MDBox height="220px" margin="-110px" />
       <Card
         sx={{
-          py: 2,
-          px: 2,
+          py: 5,
+          px: 2.5,
           boxShadow: ({ boxShadows: { md } }) => md,
         }}
       >
-        <Grid item display="flex" justifyContent alignContent="space-between" alignItems="center">
-          <MDBox>
+        <Grid
+          item
+          display="flex"
+          justifyContent="center"
+          alignContent="space-between"
+          alignItems="center"
+        >
+          <MDBox
+            display="flex"
+            alignContent="space-between"
+            gap="15px"
+            justifyContent="center"
+            alignItems="center"
+          >
             <MDAvatar
-              src={profileImage} //getImage metotundan dönen image profil fotosu olarak yazdırılıyor
+              src={
+                "https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"
+              } //getImage metotundan dönen image profil fotosu olarak yazdırılıyor
               alt="profile-image"
               size="xxl"
               shadow="sm"
               onError={handleImageError}
             />
-          </MDBox>
-          <MDBox>
             <Typography>{fullName}</Typography>
           </MDBox>
-          <MDBox sx={{ ml: "75%" }}>
+          <MDBox sx={{ ml: "60%" }}>
             <MDButton color="warning" size="small" onClick={handleUpload}>
               Change Photo
             </MDButton>

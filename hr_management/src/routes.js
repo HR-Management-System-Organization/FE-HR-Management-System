@@ -83,15 +83,7 @@ const routes = [
     component: <Billing />,
     visibleRoles: ["COMPANY_MANAGER"],
   },
-  {
-    type: "route",
-    name: "Notifications",
-    key: "employee-notifications",
-    icon: <Icon fontSize="small">notifications</Icon>,
-    route: "employee/notifications",
-    component: <Notifications />,
-    visibleRoles: ["EMPLOYEE"],
-  },
+
   {
     type: "route",
     name: "My Company",

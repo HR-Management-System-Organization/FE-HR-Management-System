@@ -9,6 +9,7 @@ import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgImage from "assets/images/bg-sign-up-cover.jpeg";
 
 function Cover() {
+  const [error, setError] = useState();
   const [userInfo, setUserInfo] = useState({
     email: "",
     username: "",
@@ -26,6 +27,7 @@ function Cover() {
 
   function handleSignup(e) {
     e.preventDefault();
+    console.log("hatasız");
 
     const { email, username, password, rePassword, taxNumber, companyName, gender } = userInfo;
 
@@ -51,6 +53,7 @@ function Cover() {
         console.log("Kayıt başarılı:", response.data);
       })
       .catch((error) => {
+        setError("Sign Up Failed");
         console.error("İstek hatası:", error);
       });
   }
@@ -78,6 +81,8 @@ function Cover() {
         </MDBox>
         <MDBox pt={4} pb={3} px={3}>
           <form onSubmit={handleSignup}>
+            {error && <div style={{ color: "red", fontFamily: "monospace" }}>{error}</div>}
+
             <MDBox mb={2}>
               <MDInput
                 type="text"
@@ -103,6 +108,7 @@ function Cover() {
                 placeholder="Şirket Adı"
                 onChange={formOnChange}
                 fullWidth
+                value="companyName"
               />
             </MDBox>
             <MDBox mb={2}>
@@ -140,6 +146,16 @@ function Cover() {
               >
                 <option value="MALE">Male</option>
                 <option value="FEMALE">Female</option>
+              </select>
+            </MDBox>
+            <MDBox mb={2}>
+              <select
+                name="gender"
+                onChange={formOnChange}
+                value={userInfo.gender} // Seçili değeri göstermek için value ekleyin
+              >
+                <option value="Bilge Adam">Bilge Adam</option>
+                <option value="adassda">adassda</option>
               </select>
             </MDBox>
             <MDBox mt={4} mb={1}>
