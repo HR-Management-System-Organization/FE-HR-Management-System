@@ -23,9 +23,7 @@ function MyCompany() {
     const decodedToken = jwtDecode(storedToken);
     if (storedToken) {
       try {
-        const response = await axios.get(
-          `http://localhost:7072/api/v1/user/find_by_id/${decodedToken.myId}`
-        );
+        const response = await axios.get(`http://localhost/user/find_by_id/${decodedToken.myId}`);
         return response.data;
       } catch (error) {
         console.error("An error occurred while trying to retrieve user information:", error);
@@ -36,9 +34,7 @@ function MyCompany() {
   async function company(companyId) {
     try {
       console.log("asdad");
-      const response = await axios.get(
-        `http://localhost:7073/api/v1/company/findbycompanyid/${companyId}`
-      );
+      const response = await axios.get(`http://localhost/company/findbycompanyid/${companyId}`);
       return response.data;
     } catch (error) {
       console.error("company error", error);
