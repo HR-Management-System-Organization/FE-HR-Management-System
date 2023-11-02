@@ -51,6 +51,21 @@ import Overview from "layouts/profile";
 import UserDashboard from "layouts/user-layout/dashboard";
 import AddNewComment from "layouts/user-layout/add-new-comment";
 import MyCompany from "layouts/user-layout/my-company";
+import ManagerDashboard from "layouts/company-manager-layout/dashboard";
+import ManagerEmplyees from "layouts/company-manager-layout/employees";
+import ManagerMyCompany from "layouts/company-manager-layout/my-company";
+import ManagerTables from "layouts/company-manager-layout/tables";
+import Logout from "layouts/authentication/logout";
+
+import GuestDashboard from "layouts/guest-layout/dashboard";
+import GuestTables from "layouts/guest-layout/tables";
+import GuestNotifications from "layouts/guest-layout/notifications";
+
+import AdminDashboard from "layouts/admin/dashboard";
+import AdminTables from "layouts/admin/tables";
+import AdminBilling from "layouts/admin/billing";
+import AdminNotifications from "layouts/admin/notifications";
+import AdminProfile from "layouts/admin/profile";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -79,7 +94,7 @@ const routes = [
     name: "Billing",
     key: "billing",
     icon: <Icon fontSize="small">receipt_long</Icon>,
-    route: "/company_manager/dashboard",
+    route: "/manager/billing",
     component: <Billing />,
     visibleRoles: ["COMPANY_MANAGER"],
   },
@@ -148,6 +163,142 @@ const routes = [
     route: "/authentication/activation-failed",
     component: <ActivationFailed />,
     visibleRoles: [""],
+  },
+  {
+    type: "route",
+    name: "Dashboard",
+    key: "dashboard",
+    icon: <Icon fontSize="small">dashboard</Icon>,
+    route: "guest/dashboard",
+    component: <GuestDashboard />,
+    visibleRoles: ["GUEST"],
+  },
+  {
+    type: "route",
+    name: "Tables",
+    key: "tables",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "guest/tables",
+    component: <GuestTables />,
+    visibleRoles: ["GUEST"],
+  },
+  {
+    type: "route",
+    name: "Notifications",
+    key: "notifications",
+    icon: <Icon fontSize="small">notifications</Icon>,
+    route: "guest/notifications",
+    component: <GuestNotifications />,
+    visibleRoles: ["GUEST"],
+  },
+  {
+    type: "route",
+    name: "Profile",
+    key: "profile",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "guest/profile",
+    component: <Overview />,
+    visibleRoles: ["GUEST"],
+  },
+  {
+    type: "route",
+    name: "Dashboard",
+    key: "dashboard",
+    icon: <Icon fontSize="small">dashboard</Icon>,
+    route: "manager/dashboard",
+    component: <ManagerDashboard />,
+    visibleRoles: ["COMPANY_MANAGER"],
+  },
+  {
+    type: "route",
+    name: "Employees",
+    key: "employees",
+    icon: <Icon fontSize="small">dashboard</Icon>,
+    route: "manager/employees",
+    component: <ManagerEmplyees />,
+    visibleRoles: ["COMPANY_MANAGER"],
+  },
+  {
+    type: "route",
+    name: "My Company",
+    key: "sign-in",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/manager/company",
+    component: <ManagerMyCompany />,
+    visibleRoles: ["COMPANY_MANAGER"],
+  },
+  {
+    type: "route",
+    name: "Tables",
+    key: "tables",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "manager/tables",
+    component: <ManagerTables />,
+    visibleRoles: ["COMPANY_MANAGER"],
+  },
+  {
+    type: "route",
+    name: "Profile",
+    key: "profile",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "manager/profile",
+    component: <Overview />,
+    visibleRoles: ["COMPANY_MANAGER"],
+  },
+  {
+    type: "route",
+    name: "Tables",
+    key: "tables",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "admin/tables",
+    component: <AdminTables />,
+    visibleRoles: ["ADMIN"],
+  },
+  {
+    type: "route",
+    name: "Billing",
+    key: "billing",
+    icon: <Icon fontSize="small">receipt_long</Icon>,
+    route: "admin/billing",
+    component: <AdminBilling />,
+    visibleRoles: ["ADMIN"],
+  },
+  {
+    type: "route",
+    name: "Notifications",
+    key: "notifications",
+    icon: <Icon fontSize="small">notifications</Icon>,
+    route: "admin/notifications",
+    component: <AdminNotifications />,
+    visibleRoles: ["ADMIN"],
+  },
+  {
+    type: "route",
+    name: "Profile",
+    key: "profile",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "admin/profile",
+    component: <AdminProfile />,
+    visibleRoles: ["ADMIN"],
+  },
+
+  {
+    type: "admin",
+    name: "Admindashboard",
+    key: "admindashboard",
+    icon: <Icon fontSize="large">assignment</Icon>,
+    route: "/admin/dashboard",
+    component: <AdminDashboard />,
+    visibleRoles: ["ADMIN"],
+  },
+  {
+    type: "admin",
+    name: "LOGOUT",
+    key: "logout",
+    icon: <Icon fontSize="large">assignment</Icon>,
+    route: "/authentication/logout",
+    component: <Logout />,
+    visibleRoles: ["ADMIN", "COMPANY_MANAGER", "GUEST", "EMPLOYEE"],
   },
 ];
 

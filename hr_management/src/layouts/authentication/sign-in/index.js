@@ -32,6 +32,7 @@ function Cover() {
       const decodedToken = jwt_decode(storedToken);
       const decodedUserRole = decodedToken.role;
       setRole(decodedUserRole);
+      console.log(role);
       localStorage.setItem(role, decodedUserRole);
     }
   });
@@ -47,13 +48,13 @@ function Cover() {
       const token = localStorage.getItem("Authorization");
       const decoded = jwt_decode(token);
       if (role === "COMPANY_MANAGER") {
-        navigate("/company_manager/dashboard");
+        navigate("/manager/dashboard");
       } else if (role === "ADMIN") {
         navigate("/admin/dashboard");
       } else if (role === "EMPLOYEE") {
         navigate("/employee/dashboard");
       } else {
-        navigate("/guest/activation-failed");
+        navigate("/authentication/activation-failed");
       }
     }
   }, [isLoggedIn, navigate]);

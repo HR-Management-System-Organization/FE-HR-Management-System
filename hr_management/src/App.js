@@ -165,7 +165,7 @@ export default function App() {
         {layout === "vr" && <Configurator />}
         <Routes>
           {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/authentication/actvation" />} />
+          {/* <Route path="*" element={<Navigate to="/authentication/actvation" />} /> */}
         </Routes>
       </ThemeProvider>
     </CacheProvider>
@@ -189,7 +189,7 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       <Routes>
         {getRoutes(routes)}
-        <Route path="*" element={<Navigate to="/authentication/activation" />} />
+        {/* <Route path="*" element={<Navigate to="/authentication/activation" />} /> */}
       </Routes>
     </ThemeProvider>
   );
