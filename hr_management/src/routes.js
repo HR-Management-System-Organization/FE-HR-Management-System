@@ -68,6 +68,7 @@ import AdminTables from "layouts/admin/tables";
 import AdminBilling from "layouts/admin/billing";
 import AdminNotifications from "layouts/admin/notifications";
 import AdminProfile from "layouts/admin/profile";
+import Comment from "layouts/user-layout/add-new-comment";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -88,7 +89,7 @@ const routes = [
     key: "user-dashboard",
     icon: <Icon fontSize="small">table_view</Icon>,
     route: "employee/comment",
-    component: <AddNewComment />,
+    component: <Comment />,
     visibleRoles: ["EMPLOYEE"],
   },
   {
@@ -303,9 +304,9 @@ const routes = [
   },
   {
     type: "admin",
-    name: "LOGOUT",
+    name: "Log Out",
     key: "logout",
-    icon: <Icon fontSize="large">assignment</Icon>,
+    icon: <Icon fontSize="small">assignment</Icon>,
     route: "/authentication/logout",
     component: <Logout />,
     visibleRoles: ["ADMIN", "COMPANY_MANAGER", "GUEST", "EMPLOYEE"],
