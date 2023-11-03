@@ -53,6 +53,8 @@ function Cover() {
         navigate("/admin/dashboard");
       } else if (role === "EMPLOYEE") {
         navigate("/employee/dashboard");
+      } else if (role === "GUEST") {
+        navigate("/guest/dashboard");
       } else {
         navigate("/authentication/activation-failed");
       }
