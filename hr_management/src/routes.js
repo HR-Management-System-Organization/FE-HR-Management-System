@@ -51,10 +51,12 @@ import Overview from "layouts/profile";
 import UserDashboard from "layouts/user-layout/dashboard";
 import AddNewComment from "layouts/user-layout/add-new-comment";
 import MyCompany from "layouts/user-layout/my-company";
+
 import ManagerDashboard from "layouts/company-manager-layout/dashboard";
 import ManagerEmplyees from "layouts/company-manager-layout/employees";
 import ManagerMyCompany from "layouts/company-manager-layout/my-company";
 import ManagerTables from "layouts/company-manager-layout/tables";
+import AddNewEmployee from "layouts/company-manager-layout/add-new-employee";
 import Logout from "layouts/authentication/logout";
 
 import GuestDashboard from "layouts/guest-layout/dashboard";
@@ -98,7 +100,15 @@ const routes = [
     component: <Billing />,
     visibleRoles: ["COMPANY_MANAGER"],
   },
-
+  {
+    type: "route",
+    name: "Add Employee",
+    key: "addEmployee",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "/manager/addEmployee",
+    component: <AddNewEmployee />,
+    visibleRoles: ["COMPANY_MANAGER"],
+  },
   {
     type: "route",
     name: "My Company",
