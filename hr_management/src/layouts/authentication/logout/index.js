@@ -15,11 +15,16 @@ function Logout() {
 
   const handleLoginClick = () => {
     // "/authentication/sign-in" sayfasına yönlendirme yapar
+    localStorage.removeItem("token");
+    console.log(localStorage);
+
     navigate("/authentication/sign-in");
+    window.location.reload();
   };
   useEffect(() => {
     // Sayfa yüklendiğinde çalışacak kod
-    localStorage.setItem("Authorization", ""); // Authorization anahtarını sıfırlar
+    localStorage.clear(); // Authorization anahtarını sıfırlar
+    console.log(localStorage);
   }, []);
   return (
     <CoverLayout image={bgImage}>

@@ -68,6 +68,7 @@ import AdminTables from "layouts/admin/tables";
 import AdminBilling from "layouts/admin/billing";
 import AdminNotifications from "layouts/admin/notifications";
 import AdminProfile from "layouts/admin/profile";
+import Leaverequest from "layouts/user-layout/leaverequest";
 import Comment from "layouts/user-layout/add-new-comment";
 
 // @mui icons
@@ -310,6 +311,15 @@ const routes = [
     route: "/authentication/logout",
     component: <Logout />,
     visibleRoles: ["ADMIN", "COMPANY_MANAGER", "GUEST", "EMPLOYEE"],
+  },
+  {
+    type: "route",
+    name: "request",
+    key: "request",
+    icon: <Icon fontSize="large">person</Icon>,
+    route: "/employee/request",
+    component: <Leaverequest />,
+    visibleRoles: ["EMPLOYEE"],
   },
 ];
 

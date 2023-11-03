@@ -49,8 +49,17 @@ function Cover() {
         console.log("Kayıt başarılı:", response.data);
       })
       .catch((error) => {
-        setError("Kayıt hatalı");
-        console.error("İstek hatası:", error);
+        let errorMessage = error.response.data.message;
+        if (errorMessage == "Parametre Hatası!") {
+          errorMessage = "Şifre Uzunluğu En Az 8 Karakter, En Fazla 32 Karakter Olabilir";
+          console.log(errorMessage);
+        } else {
+          setError(errorMessage);
+        }
+        setError(errorMessage);
+
+        console.error(error);
+        console.log(errorMessage);
       });
   }
 

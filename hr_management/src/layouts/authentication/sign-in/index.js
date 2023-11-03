@@ -9,6 +9,8 @@ import MDButton from "components/MDButton";
 import axios from "axios";
 import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgImage from "assets/images/bg-sign-up-cover.jpeg";
+import MDAlert from "components/MDAlert";
+import { Alert } from "reactstrap";
 
 const API_URL = "http://localhost:7072/api/v1/user/login";
 
@@ -17,6 +19,8 @@ function Cover() {
   const [error, setError] = useState("");
   // const { setUserRole } = useCentralState();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn2, setIsLoggedIn2] = useState(false);
+
   const [role, setRole] = useState();
 
   // const storedToken = localStorage.getItem("Authorization");
@@ -27,13 +31,16 @@ function Cover() {
   //   console.log(error);
   // }
   useEffect(() => {
-    const storedToken = localStorage.getItem("Authorization");
-    if (storedToken) {
-      const decodedToken = jwt_decode(storedToken);
-      const decodedUserRole = decodedToken.role;
-      setRole(decodedUserRole);
-      console.log(role);
-      localStorage.setItem(role, decodedUserRole);
+    if (isLoggedIn2) {
+      const storedToken = localStorage.getItem("Authorization");
+      if (storedToken) {
+        const decodedToken = jwt_decode(storedToken);
+        const decodedUserRole = decodedToken.role;
+        setRole(decodedUserRole);
+        setIsLoggedIn(true);
+        console.log(role);
+        localStorage.setItem(role, decodedUserRole);
+      }
     }
   });
 
@@ -62,7 +69,7 @@ function Cover() {
   }, [isLoggedIn, navigate]);
 
   const handleSignInSuccess = () => {
-    setIsLoggedIn(true);
+    setIsLoggedIn(false);
   };
 
   const handleSignIn = (e) => {
@@ -82,12 +89,16 @@ function Cover() {
         localStorage.setItem("Authorization", `Bearer ${token}`);
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
         console.log("Login successful!", response.data);
+        setIsLoggedIn2(true);
         // console.log(role);
         handleSignInSuccess();
       })
       .catch((error) => {
+        const errorMessage = error.response.data.message;
         console.error("Login failed:", error);
-        setError("Login failed. Please check your credentials.");
+
+        console.log(errorMessage);
+        setError(errorMessage);
       }, []);
 
     // Clear the input fields
@@ -96,6 +107,7 @@ function Cover() {
 
   return (
     <CoverLayout image={bgImage}>
+      {error && <Alert color="danger">Giris basarisiz</Alert>}
       <Card>
         <MDBox
           variant="gradient"

@@ -47,22 +47,21 @@ function Overview() {
   async function axiosIstek() {
     if (storedToken) {
       const decodedToken = jwtDecode(storedToken);
-      if (decodedToken) {
-        console.log(decodedToken.myId);
-        try {
-          const response = await axios.get(
-            `http://localhost:7072/api/v1/user/find_by_id/${decodedToken.myId}`
-          );
-          setUserInfo(response.data);
-        } catch (error) {
-          console.error("Kullanıcı bilgilerini alırken bir hata oluştu:", error);
-        }
+      console.log(decodedToken.myId);
+      try {
+        const response = await axios.get(
+          `http://localhost:7072/api/v1/user/find_by_id/${decodedToken.myId}`
+        );
+        setUserInfo(response.data);
+      } catch (error) {
+        console.error("Kullanıcı bilgilerini alırken bir hata oluştu:", error);
       }
     }
   }
   useEffect(() => {
     axiosIstek();
     console.log(userInfo.companyId);
+    console.log(userInfo);
   }, []);
   return (
     <DashboardLayout
@@ -86,6 +85,7 @@ function Overview() {
                 name: userInfo.name && `${userInfo.name}`,
 
                 surname: userInfo?.surName && `${userInfo.surName}`,
+                phone: userInfo?.phone && `${userInfo.phone}`,
 
                 personalEmail: userInfo?.personalEmail || `${userInfo.email}`,
                 companyId: userInfo?.companyId && `${userInfo.companyId}`,

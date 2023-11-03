@@ -27,12 +27,18 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
-// Data
-import authorsTableData from "layouts/tables/data/authorsTableData";
+// Datasrc\layouts\company-manager-layout\tables\data\authorsTableData.js
+import authorsTableData from "layouts/company-manager-layout/tables/data/authorsTableData";
+import authorsTableData2 from "layouts/company-manager-layout/tables/data/authorsTableData2";
+import authorsTableData3 from "layouts/company-manager-layout/tables/data/authorsTableData3";
+
 import projectsTableData from "layouts/tables/data/projectsTableData";
 
 function UserTables() {
   const { columns, rows } = authorsTableData();
+  const { columns: rColumns, rows: rRows } = authorsTableData2();
+  const { columns: yColumns, rows: yRows } = authorsTableData3();
+
   const { columns: pColumns, rows: pRows } = projectsTableData();
 
   return (
@@ -59,6 +65,60 @@ function UserTables() {
               <MDBox pt={3}>
                 <DataTable
                   table={{ columns, rows }}
+                  isSorted={false}
+                  entriesPerPage={false}
+                  showTotalEntries={false}
+                  noEndBorder
+                />
+              </MDBox>
+            </Card>
+          </Grid>
+          <Grid item xs={12}>
+            <Card>
+              <MDBox
+                mx={2}
+                mt={-3}
+                py={3}
+                px={2}
+                variant="gradient"
+                bgColor="info"
+                borderRadius="lg"
+                coloredShadow="info"
+              >
+                <MDTypography variant="h6" color="white">
+                  Request
+                </MDTypography>
+              </MDBox>
+              <MDBox pt={3}>
+                <DataTable
+                  table={{ columns: rColumns, rows: rRows }}
+                  isSorted={false}
+                  entriesPerPage={false}
+                  showTotalEntries={false}
+                  noEndBorder
+                />
+              </MDBox>
+            </Card>
+          </Grid>
+          <Grid item xs={12}>
+            <Card>
+              <MDBox
+                mx={2}
+                mt={-3}
+                py={3}
+                px={2}
+                variant="gradient"
+                bgColor="info"
+                borderRadius="lg"
+                coloredShadow="info"
+              >
+                <MDTypography variant="h6" color="white">
+                  Past Request
+                </MDTypography>
+              </MDBox>
+              <MDBox pt={3}>
+                <DataTable
+                  table={{ columns: yColumns, rows: yRows }}
                   isSorted={false}
                   entriesPerPage={false}
                   showTotalEntries={false}

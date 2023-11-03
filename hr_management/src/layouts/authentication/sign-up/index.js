@@ -51,10 +51,20 @@ function Cover() {
       )
       .then((response) => {
         console.log("Kayıt başarılı:", response.data);
+        navigate("/authentication/sign-in");
       })
       .catch((error) => {
-        setError("Sign Up Failed");
-        console.error("İstek hatası:", error);
+        let errorMessage = error.response.data.message;
+        if (errorMessage == "Parametre Hatası!") {
+          errorMessage = "Şifre Uzunluğu En Az 8 Karakter, En Fazla 32 Karakter Olabilir";
+          console.log(errorMessage);
+        } else {
+          setError(errorMessage);
+        }
+        setError(errorMessage);
+
+        console.error(error);
+        console.log(errorMessage);
       });
   }
 
@@ -108,7 +118,6 @@ function Cover() {
                 placeholder="Şirket Adı"
                 onChange={formOnChange}
                 fullWidth
-                value="companyName"
               />
             </MDBox>
             <MDBox mb={2}>
@@ -148,16 +157,7 @@ function Cover() {
                 <option value="FEMALE">Female</option>
               </select>
             </MDBox>
-            <MDBox mb={2}>
-              <select
-                name="gender"
-                onChange={formOnChange}
-                value={userInfo.gender} // Seçili değeri göstermek için value ekleyin
-              >
-                <option value="Bilge Adam">Bilge Adam</option>
-                <option value="adassda">adassda</option>
-              </select>
-            </MDBox>
+
             <MDBox mt={4} mb={1}>
               <MDButton type="submit" variant="gradient" color="info" fullWidth>
                 Kaydol

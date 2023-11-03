@@ -27,9 +27,9 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Footer from "examples/Footer";
 import DataTable from "examples/Tables/DataTable";
 
-// Data
-import authorsTableData from "layouts/tables/data/authorsTableData";
-import authorsTableData2 from "layouts/tables/data/authorsTableData2";
+// Datasrc\layouts\admin\tables\data\authorsTableData.js
+import authorsTableData from "layouts/admin/tables/data/authorsTableData";
+import authorsTableData2 from "layouts/admin/tables/data/authorsTableData2";
 
 import projectsTableData from "layouts/tables/data/projectsTableData";
 

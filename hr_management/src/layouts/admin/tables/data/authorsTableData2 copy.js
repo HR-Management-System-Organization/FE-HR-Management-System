@@ -55,34 +55,10 @@ export default function data() {
       console.error("authorId is null. Cannot send the request.");
     }
   };
-  const handleEdit2 = (authorId) => {
-    console.log("Author ID to edit:", authorId, " ", typeof authorId); // Add this line for debugging
-    // Burada POST isteğinizi göndermek için Axios veya başka bir HTTP istemci kullanabilirsiniz,
-    if (authorId !== null) {
-      Axios.post(
-        "http://localhost:7072/api/v1/user/deletebyadmin?authorId=" + authorId,
-        null, // Boş bir body, çünkü veriyi parametre olarak gönderiyoruz
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      )
-
-        .then((response) => {
-          // İsteğiniz başarıyla tamamlandığında yapılması gereken işlemler
-        })
-        .catch((error) => {
-          console.error("Error editing data:", error);
-        });
-    } else {
-      console.error("authorId is null. Cannot send the request.");
-    }
-  };
 
   useEffect(() => {
     Axios.post(
-      "http://localhost:7072/api/v1/user/findallbyadminpending",
+      "http://localhost:7072/api/v1/user/findallguestbycompanymanager",
       { token },
       {
         headers: { "Content-Type": "application/json" },
@@ -131,8 +107,7 @@ export default function data() {
             {author.createDate}
           </MDTypography>
         ),
-        Active: <button onClick={() => handleEdit(author.id)}>Active et</button>,
-        Delete: <button onClick={() => handleEdit2(author.id)}>Delete et</button>,
+        action: <button onClick={() => handleEdit(author.id)}>Active et</button>,
       }))
     : [];
 
@@ -142,8 +117,7 @@ export default function data() {
       { Header: "function", accessor: "function", align: "left" },
       { Header: "status", accessor: "status", align: "center" },
       { Header: "employed", accessor: "employed", align: "center" },
-      { Header: "Active", accessor: "Active", align: "center" },
-      { Header: "Delete", accessor: "Delete", align: "center" },
+      { Header: "action", accessor: "action", align: "center" },
     ],
 
     rows: rows,
