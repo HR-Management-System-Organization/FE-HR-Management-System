@@ -140,9 +140,14 @@ export default function Data() {
             {formatDate(author.izinbaslangic)}
           </MDTypography>
         ),
+        calisaninintotalizinhakki: (
+          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+            {author.izinhakki} days
+          </MDTypography>
+        ),
         izinsüresi: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            {calculateDurationInDays(author.izinbaslangic, author.izinbitis)} days
+            {author.izinsuresi} days
           </MDTypography>
         ),
         bitis: (
@@ -150,6 +155,7 @@ export default function Data() {
             {formatDate(author.izinbitis)}
           </MDTypography>
         ),
+
         Active: <button onClick={() => handleEdit(author.id)}>Onayla</button>,
         Delete: <button onClick={() => handleEdit2(author.id)}>Reddet</button>,
       }))
@@ -161,8 +167,14 @@ export default function Data() {
       { Header: "function", accessor: "function", align: "left" },
       { Header: "status", accessor: "status", align: "center" },
       { Header: "baslangic", accessor: "baslangic", align: "center" },
+      {
+        Header: "calisaninintotalizinhakki",
+        accessor: "calisaninintotalizinhakki",
+        align: "center",
+      },
       { Header: "izinsüresi", accessor: "izinsüresi", align: "center" },
       { Header: "bitis", accessor: "bitis", align: "center" },
+
       { Header: "Active", accessor: "Active", align: "center" },
       { Header: "Delete", accessor: "Delete", align: "center" },
     ],

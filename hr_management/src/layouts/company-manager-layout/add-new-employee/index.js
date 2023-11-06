@@ -113,7 +113,6 @@ function AddNewEmployee() {
       console.log(decodedToken);
 
       const addEmployeeCompanyDto = {
-        authid: decodedToken.id,
         name: name,
         surname: surname,
         username: username,
@@ -127,15 +126,13 @@ function AddNewEmployee() {
       };
 
       axios
-        .post(
-          `http://localhost:7072/api/v1/user/addEmployee/${decodedToken.id}`,
-          addEmployeeCompanyDto
-        )
+        .post(`http://localhost:7072/api/v1/user/addEmployee`, addEmployeeCompanyDto)
         .then((response) => {
           console.log("Add employee is successfull!");
           handleAddEmployeeSuccess();
         })
         .catch((error) => {
+          console.log("Add employee is failed: ", error.response.data.message);
           console.error("Add employee is failed: ", error);
         })
         .finally(() => {
