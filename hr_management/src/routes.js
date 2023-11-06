@@ -36,40 +36,34 @@ Coded by www.creative-tim.com
 */
 
 // HR Management System React layouts
-import Dashboard from "layouts/dashboard";
-import Tables from "layouts/tables";
-import Billing from "layouts/billing";
-import Notifications from "layouts/notifications";
-import Profile from "layouts/profile";
+import Activation from "layouts/authentication/activation";
+import ActivationFailed from "layouts/authentication/activation-failed";
+import GSignUp from "layouts/authentication/gsign-up";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
-import GSignUp from "layouts/authentication/gsign-up";
-import ActivationFailed from "layouts/authentication/activation-failed";
-import Activation from "layouts/authentication/activation";
-import UserNotification from "layouts/user-layout/notifications";
+import Billing from "layouts/billing";
 import Overview from "layouts/profile";
 import UserDashboard from "layouts/user-layout/dashboard";
-import AddNewComment from "layouts/user-layout/add-new-comment";
 import MyCompany from "layouts/user-layout/my-company";
 
+import Logout from "layouts/authentication/logout";
+import AddNewEmployee from "layouts/company-manager-layout/add-new-employee";
 import ManagerDashboard from "layouts/company-manager-layout/dashboard";
 import ManagerEmplyees from "layouts/company-manager-layout/employees";
 import ManagerMyCompany from "layouts/company-manager-layout/my-company";
 import ManagerTables from "layouts/company-manager-layout/tables";
-import AddNewEmployee from "layouts/company-manager-layout/add-new-employee";
-import Logout from "layouts/authentication/logout";
 
-import GuestDashboard from "layouts/guest-layout/dashboard";
-import GuestTables from "layouts/guest-layout/tables";
+import GuestHomepage from "layouts/guest-layout/guest-homepage";
 import GuestNotifications from "layouts/guest-layout/notifications";
+import GuestTables from "layouts/guest-layout/tables";
 
-import AdminDashboard from "layouts/admin/dashboard";
-import AdminTables from "layouts/admin/tables";
 import AdminBilling from "layouts/admin/billing";
+import AdminDashboard from "layouts/admin/dashboard";
 import AdminNotifications from "layouts/admin/notifications";
 import AdminProfile from "layouts/admin/profile";
-import Leaverequest from "layouts/user-layout/leaverequest";
+import AdminTables from "layouts/admin/tables";
 import Comment from "layouts/user-layout/add-new-comment";
+import Leaverequest from "layouts/user-layout/leaverequest";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -178,11 +172,11 @@ const routes = [
   },
   {
     type: "route",
-    name: "Dashboard",
-    key: "dashboard",
-    icon: <Icon fontSize="small">dashboard</Icon>,
-    route: "guest/dashboard",
-    component: <GuestDashboard />,
+    name: "Home",
+    key: "homepage",
+    icon: <Icon fontSize="medium">home</Icon>,
+    route: "guest/homepage",
+    component: <GuestHomepage />,
     visibleRoles: ["GUEST"],
   },
   {
@@ -316,7 +310,7 @@ const routes = [
     type: "route",
     name: "request",
     key: "request",
-    icon: <Icon fontSize="large">person</Icon>,
+    icon: <Icon fontSize="medium">person</Icon>,
     route: "/employee/request",
     component: <Leaverequest />,
     visibleRoles: ["EMPLOYEE"],

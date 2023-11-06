@@ -61,7 +61,7 @@ function Cover() {
       } else if (role === "EMPLOYEE") {
         navigate("/employee/dashboard");
       } else if (role === "GUEST") {
-        navigate("/guest/dashboard");
+        navigate("/guest/homepage");
       } else {
         navigate("/authentication/activation-failed");
       }
