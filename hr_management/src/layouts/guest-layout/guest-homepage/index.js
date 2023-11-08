@@ -1,19 +1,23 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import axios from "axios";
 import MDBox from "components/MDBox";
+import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
 import MDTypography from "components/MDTypography";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import jwtDecode from "jwt-decode";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import Footer from "examples/Footer";
+import { useHistory } from "react-router-dom";
 
 function GuestHomepage() {
   const storedToken = localStorage.getItem("Authorization");
   const [userInfo, setUserInfo] = useState({});
   const [companyList, setCompanyList] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
 
   async function getGuest() {
     const decodedToken = jwtDecode(storedToken);
@@ -22,25 +26,51 @@ function GuestHomepage() {
         const response = await axios.get(`http://localhost/user/find_by_id/${decodedToken.myId}`);
         return response.data;
       } catch (error) {
-        console.error("An error occurred while trying to retrieve user information:", error);
-        return null; // Return null in case of an error
+        console.error("Kullanıcı bilgileri alınırken hata oluştu:", error);
+        return null; // Hata durumunda null döndür
       }
     }
-    return null; // Return null if storedToken is empty
+    return null; // Boş storedToken için null döndür
   }
 
   async function getCompanies() {
     if (storedToken) {
       try {
-        const response = await axios.get("http://localhost/company/findall"); // Update the endpoint URL
+        const response = await axios.get("http://localhost/company/findall"); // Endpoint URL'sini güncelle
         return response.data;
       } catch (error) {
-        console.error("An error occurred while trying to retrieve company information:", error);
-        return null; // Return null in case of an error
+        console.error("Şirket bilgileri alınırken hata oluştu:", error);
+        return null; // Hata durumunda null döndür
       }
     }
     return null;
   }
+
+  const handleSearch = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+
+    if (Array.isArray(companyList)) {
+      const filtered = companyList.filter((item) => {
+        return item.companyName.toLowerCase().includes(query.toLowerCase());
+      });
+
+      setFilteredData(filtered);
+    }
+  };
+
+  useEffect(() => {
+    const apiUrl = "http://localhost/company/findall";
+
+    axios
+      .get(apiUrl)
+      .then((response) => {
+        setCompanyList(response.data);
+      })
+      .catch((error) => {
+        console.error("Veri alınırken hata oluştu:", error);
+      });
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -52,7 +82,14 @@ function GuestHomepage() {
       if (companyList) setCompanyList(companyList);
     }
     fetchData();
-  }, [storedToken]); // Make sure to include storedToken as a dependency
+  }, [storedToken]); // storedToken'ı bağımlılık olarak dahil etmeyi unutma
+  // Arama sorgusuna göre verileri filtrele
+  useEffect(() => {
+    const filteredData = companyList.filter((item) =>
+      item.companyName.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredData(filteredData);
+  }, [companyList, searchQuery]);
 
   return (
     <DashboardLayout>
@@ -73,7 +110,7 @@ function GuestHomepage() {
         </MDTypography>
       </MDBox>
       <MDTypography variant="h6" fontWeight="light" fontFamily="monospace" margin="25px">
-        Size en iyi hizmeti verebilmek için sürekli daha iyiye ideolojisi ile hareket ediyoruz.{" "}
+        Size en iyi hizmeti verebilmek için sürekli daha iyiye ideolojisi ile hareket ediyoruz.
         <br />
         <MDTypography variant="text" fontWeight="medium" paddingTop="150px">
           Aşağıda şirket isimlerini görebilirsiniz. İlgilendiğiniz ve daha fazla bilgi almak
@@ -93,19 +130,22 @@ function GuestHomepage() {
       </MDTypography>
       <MDBox>
         <MDTypography display="block" variant="h4" color="dark" my={4}>
-          Company List:
+          Şirket Listesi:
         </MDTypography>
       </MDBox>
+      <MDBox pr={1}>
+        <MDInput label="Buradan arama yapın" value={searchQuery} onChange={handleSearch} />
+      </MDBox>
       <TableContainer>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table sx={{ minWidth: 650 }} aria-label="basit tablo">
           <TableHead>
             <TableRow>
-              <TableCell padding="checkbox">Name</TableCell>
-              <TableCell align="center">Location</TableCell>
+              <TableCell padding="checkbox">İsim</TableCell>
+              <TableCell align="center">Konum</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {companyList.map((row) => (
+            {filteredData.map((row) => (
               <TableRow
                 key={row.companyName}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
@@ -116,7 +156,9 @@ function GuestHomepage() {
                 </TableCell>
                 <TableCell align="right">
                   <MDButton color="warning">
-                    <Link to={`findbycompanyid/${row.companyId}`}>Info</Link>
+                    <Link to={`http://localhost/company/findbycompanyid/${row.companyId}`}>
+                      Bilgi
+                    </Link>
                   </MDButton>
                 </TableCell>
               </TableRow>
@@ -130,3 +172,8 @@ function GuestHomepage() {
 }
 
 export default GuestHomepage;
+{
+  /*<Navigate to={`http://localhost/company/findbycompanyid/${row.companyId}`}>
+                      Bilgi
+</Navigate>*/
+}

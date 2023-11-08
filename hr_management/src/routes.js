@@ -64,6 +64,7 @@ import AdminProfile from "layouts/admin/profile";
 import AdminTables from "layouts/admin/tables";
 import Comment from "layouts/user-layout/add-new-comment";
 import Leaverequest from "layouts/user-layout/leaverequest";
+import Company from "layouts/company";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -314,6 +315,15 @@ const routes = [
     route: "/employee/request",
     component: <Leaverequest />,
     visibleRoles: ["EMPLOYEE"],
+  },
+  {
+    type: "route",
+    name: "companys_page",
+    key: "companys_page",
+    icon: "",
+    route: "/companys_page",
+    component: <Company />,
+    visibleRoles: [""],
   },
 ];
 
