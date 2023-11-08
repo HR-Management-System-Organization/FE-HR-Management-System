@@ -1,16 +1,15 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import axios from "axios";
 import MDBox from "components/MDBox";
-import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
+import MDInput from "components/MDInput";
 import MDTypography from "components/MDTypography";
+import Footer from "examples/Footer";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import jwtDecode from "jwt-decode";
 import { useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
-import Footer from "examples/Footer";
-import { useHistory } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 function GuestHomepage() {
   const storedToken = localStorage.getItem("Authorization");
@@ -18,6 +17,7 @@ function GuestHomepage() {
   const [companyList, setCompanyList] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredData, setFilteredData] = useState([]);
+  const navigate = useNavigate(); // useNavigate fonksiyonunu ekleyin
 
   async function getGuest() {
     const decodedToken = jwtDecode(storedToken);
@@ -27,20 +27,20 @@ function GuestHomepage() {
         return response.data;
       } catch (error) {
         console.error("Kullanıcı bilgileri alınırken hata oluştu:", error);
-        return null; // Hata durumunda null döndür
+        return null;
       }
     }
-    return null; // Boş storedToken için null döndür
+    return null;
   }
 
   async function getCompanies() {
     if (storedToken) {
       try {
-        const response = await axios.get("http://localhost/company/findall"); // Endpoint URL'sini güncelle
+        const response = await axios.get("http://localhost/company/findall");
         return response.data;
       } catch (error) {
         console.error("Şirket bilgileri alınırken hata oluştu:", error);
-        return null; // Hata durumunda null döndür
+        return null;
       }
     }
     return null;
@@ -82,8 +82,8 @@ function GuestHomepage() {
       if (companyList) setCompanyList(companyList);
     }
     fetchData();
-  }, [storedToken]); // storedToken'ı bağımlılık olarak dahil etmeyi unutma
-  // Arama sorgusuna göre verileri filtrele
+  }, [storedToken]);
+
   useEffect(() => {
     const filteredData = companyList.filter((item) =>
       item.companyName.toLowerCase().includes(searchQuery.toLowerCase())
@@ -155,10 +155,13 @@ function GuestHomepage() {
                   {row.companyCountry} / {row.companyProvince}
                 </TableCell>
                 <TableCell align="right">
-                  <MDButton color="warning">
-                    <Link to={`http://localhost/company/findbycompanyid/${row.companyId}`}>
-                      Bilgi
-                    </Link>
+                  <MDButton
+                    color="warning"
+                    onClick={() => {
+                      navigate(`/company/${row.companyId}`); // Doğru fonksiyonu kullanın
+                    }}
+                  >
+                    INFO
                   </MDButton>
                 </TableCell>
               </TableRow>
@@ -172,8 +175,3 @@ function GuestHomepage() {
 }
 
 export default GuestHomepage;
-{
-  /*<Navigate to={`http://localhost/company/findbycompanyid/${row.companyId}`}>
-                      Bilgi
-</Navigate>*/
-}

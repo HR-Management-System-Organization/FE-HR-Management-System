@@ -325,6 +325,15 @@ const routes = [
     component: <Company />,
     visibleRoles: [""],
   },
+  {
+    type: "route",
+    name: "companys_page",
+    key: "companys_page",
+    icon: "",
+    route: "company/findbycompanyid/:companyId",
+    component: <Company />,
+    visibleRoles: [""],
+  },
 ];
 
 export default routes;

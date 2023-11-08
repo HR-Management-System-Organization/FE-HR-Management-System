@@ -52,6 +52,9 @@ import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "co
 import brandWhite from "assets/images/apple-icon.png";
 import brandDark from "assets/images/logo-ct-dark.png";
 
+import CompanyInfo from "layouts/guest-layout/guest-homepage/companyInfo";
+import GuestHomepage from "layouts/guest-layout/guest-homepage";
+
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
   const {
@@ -164,9 +167,14 @@ export default function App() {
         )}
         {layout === "vr" && <Configurator />}
         <Routes>
+          <Route path="/" element={<GuestHomepage />} />
+          <Route path="/company/:companyId" element={<CompanyInfo />} />{" "}
+          {/* CompanyInfo bileşenini yönlendirin */}
+        </Routes>
+        {/* <Routes>
           {getRoutes(routes)}
           <Route path="/" element={<Navigate to="/authentication/sign-in" />} />
-        </Routes>
+        </Routes> */}
       </ThemeProvider>
     </CacheProvider>
   ) : (
@@ -189,7 +197,7 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       <Routes>
         {getRoutes(routes)}
-        {<Route path="*" element={<Navigate to="/authentication/sign-in" />} />}
+        {<Route path="/company/:companyId" element={<CompanyInfo />} />}
       </Routes>
     </ThemeProvider>
   );
