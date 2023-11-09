@@ -36,7 +36,31 @@ export default function data() {
     // Burada POST isteğinizi göndermek için Axios veya başka bir HTTP istemci kullanabilirsiniz,
     if (authorId !== null) {
       Axios.post(
-        "http://localhost:7072/api/v1/user/activationbyadmin?authorId=" + authorId,
+        "http://localhost:7074/api/v1/comment/activationbyadmin?authorId=" + authorId,
+        null, // Boş bir body, çünkü veriyi parametre olarak gönderiyoruz
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+
+        .then((response) => {
+          // İsteğiniz başarıyla tamamlandığında yapılması gereken işlemler
+        })
+        .catch((error) => {
+          console.error("Error editing data:", error);
+        });
+    } else {
+      console.error("authorId is null. Cannot send the request.");
+    }
+  };
+  const handleEdit2 = (authorId) => {
+    console.log("Author ID to edit:", authorId, " ", typeof authorId); // Add this line for debugging
+    // Burada POST isteğinizi göndermek için Axios veya başka bir HTTP istemci kullanabilirsiniz,
+    if (authorId !== null) {
+      Axios.post(
+        "http://localhost:7074/api/v1/comment/deletebyadmin?authorId=" + authorId,
         null, // Boş bir body, çünkü veriyi parametre olarak gönderiyoruz
         {
           headers: {
@@ -58,7 +82,7 @@ export default function data() {
 
   useEffect(() => {
     Axios.post(
-      "http://localhost:7072/api/v1/user/findallguestbycompanymanager",
+      "http://localhost:7074/api/v1/comment/findallbyadminpending",
       { token },
       {
         headers: { "Content-Type": "application/json" },
@@ -95,29 +119,27 @@ export default function data() {
   );
   const rows = data
     ? data.map((author, index) => ({
-        author: <Author image={team2} name={author.username} email={author.email} />,
-        function: <Job title={author.role} description={author.description} />,
         status: (
           <MDBox ml={-1}>
-            <MDBadge badgeContent={author.status} variant="gradient" size="sm" />
+            <MDBadge badgeContent={author.ecommentStatus} variant="gradient" size="sm" />
           </MDBox>
         ),
-        employed: (
+        Comment: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            {author.createDate}
+            {author.comment}
           </MDTypography>
         ),
-        action: <button onClick={() => handleEdit(author.id)}>Active et</button>,
+        Active: <button onClick={() => handleEdit(author.commentId)}>Active et</button>,
+        Delete: <button onClick={() => handleEdit2(author.commentId)}>Delete et</button>,
       }))
     : [];
 
   return {
     columns: [
-      { Header: "author", accessor: "author", width: "45%", align: "left" },
-      { Header: "function", accessor: "function", align: "left" },
       { Header: "status", accessor: "status", align: "center" },
-      { Header: "employed", accessor: "employed", align: "center" },
-      { Header: "action", accessor: "action", align: "center" },
+      { Header: "Comment", accessor: "Comment", align: "center" },
+      { Header: "Active", accessor: "Active", align: "center" },
+      { Header: "Delete", accessor: "Delete", align: "center" },
     ],
 
     rows: rows,
