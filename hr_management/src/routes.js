@@ -52,7 +52,7 @@ import ManagerDashboard from "layouts/company-manager-layout/dashboard";
 
 import ManagerMyCompany from "layouts/company-manager-layout/my-company";
 import ManagerTables from "layouts/company-manager-layout/tables";
-
+import CompanyBilling from "layouts/company-manager-layout/billing";
 import GuestHomepage from "layouts/guest-layout/guest-homepage";
 import GuestNotifications from "layouts/guest-layout/notifications";
 import GuestTables from "layouts/guest-layout/tables";
@@ -115,7 +115,7 @@ const routes = [
     key: "billing",
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/manager/billing",
-    component: <Billing />,
+    component: <CompanyBilling />,
     visibleRoles: ["COMPANY_MANAGER"],
   },
   {
