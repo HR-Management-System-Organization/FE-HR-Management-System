@@ -171,10 +171,10 @@ export default function App() {
           <Route path="/company/:companyId" element={<CompanyInfo />} />{" "}
           {/* CompanyInfo bileşenini yönlendirin */}
         </Routes>
-        {/* <Routes>
+        <Routes>
           {getRoutes(routes)}
           <Route path="/" element={<Navigate to="/authentication/sign-in" />} />
-        </Routes> */}
+        </Routes>
       </ThemeProvider>
     </CacheProvider>
   ) : (
@@ -198,6 +198,7 @@ export default function App() {
       <Routes>
         {getRoutes(routes)}
         {<Route path="/company/:companyId" element={<CompanyInfo />} />}
+        {<Route path="/" element={<Navigate to="/authentication/sign-in" />} />}
       </Routes>
     </ThemeProvider>
   );
