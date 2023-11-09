@@ -49,7 +49,7 @@ import MyCompany from "layouts/user-layout/my-company";
 import Logout from "layouts/authentication/logout";
 import AddNewEmployee from "layouts/company-manager-layout/add-new-employee";
 import ManagerDashboard from "layouts/company-manager-layout/dashboard";
-import ManagerEmplyees from "layouts/company-manager-layout/employees";
+
 import ManagerMyCompany from "layouts/company-manager-layout/my-company";
 import ManagerTables from "layouts/company-manager-layout/tables";
 
@@ -65,6 +65,9 @@ import AdminTables from "layouts/admin/tables";
 import Comment from "layouts/user-layout/add-new-comment";
 import Leaverequest from "layouts/user-layout/leaverequest";
 import Company from "layouts/company";
+
+import Addsalary from "layouts/company-manager-layout/add-sallary/tables";
+import Addincome from "layouts/company-manager-layout/add-income";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -216,15 +219,7 @@ const routes = [
     component: <ManagerDashboard />,
     visibleRoles: ["COMPANY_MANAGER"],
   },
-  {
-    type: "route",
-    name: "Employees",
-    key: "employees",
-    icon: <Icon fontSize="small">dashboard</Icon>,
-    route: "manager/employees",
-    component: <ManagerEmplyees />,
-    visibleRoles: ["COMPANY_MANAGER"],
-  },
+
   {
     type: "route",
     name: "My Company",
@@ -298,15 +293,7 @@ const routes = [
     component: <AdminDashboard />,
     visibleRoles: ["ADMIN"],
   },
-  {
-    type: "admin",
-    name: "Log Out",
-    key: "logout",
-    icon: <Icon fontSize="small">assignment</Icon>,
-    route: "/authentication/logout",
-    component: <Logout />,
-    visibleRoles: ["ADMIN", "COMPANY_MANAGER", "GUEST", "EMPLOYEE"],
-  },
+
   {
     type: "route",
     name: "request",
@@ -315,6 +302,15 @@ const routes = [
     route: "/employee/request",
     component: <Leaverequest />,
     visibleRoles: ["EMPLOYEE"],
+  },
+  {
+    type: "route",
+    name: "addincome",
+    key: "addincome",
+    icon: <Icon fontSize="small">person</Icon>,
+    route: "manager/addincome",
+    component: <Addincome />,
+    visibleRoles: ["COMPANY_MANAGER", "EMPLOYEE"],
   },
   {
     type: "route",
@@ -333,6 +329,24 @@ const routes = [
     route: "company/findbycompanyid/:companyId",
     component: <Company />,
     visibleRoles: [""],
+  },
+  {
+    type: "route",
+    name: "Employees",
+    key: "employees",
+    icon: <Icon fontSize="small">dashboard</Icon>,
+    route: "manager/employees",
+    component: <Addsalary />,
+    visibleRoles: ["COMPANY_MANAGER"],
+  },
+  {
+    type: "admin",
+    name: "Log Out",
+    key: "logout",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/authentication/logout",
+    component: <Logout />,
+    visibleRoles: ["ADMIN", "COMPANY_MANAGER", "GUEST", "EMPLOYEE"],
   },
 ];
 
