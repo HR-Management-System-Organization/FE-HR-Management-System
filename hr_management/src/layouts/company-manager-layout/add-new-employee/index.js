@@ -1,5 +1,5 @@
 import Card from "@mui/material/Card";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import jwt_decode from "jwt-decode";
 import "react-calendar/dist/Calendar.css";
 import "react-time-picker/dist/TimePicker.css";
@@ -26,7 +26,7 @@ function AddNewEmployee() {
   const storedToken = localStorage.getItem("Authorization");
   const [isEmployeeAdded, setIsEmployeeAdded] = useState(false);
   const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
+  const [surName, setSurname] = useState("");
   const [username, setUsername] = useState("");
   const [personalEmail, setPersonalEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,6 +35,45 @@ function AddNewEmployee() {
   const [info, setInfo] = useState("");
   const [avatar, setAvatar] = useState("");
   const [birthday, setBirthday] = useState("");
+  const [companyname, setcompanyname] = useState("");
+
+  const [userInfo, setUserInfo] = useState({});
+  const [companyInfo, setCompanyInfo] = useState({});
+  useEffect(() => {
+    async function fetchData() {
+      const userInfo = await user();
+      console.log("if üzeri");
+      if (userInfo) {
+        setUserInfo(userInfo);
+        console.log(userInfo.companyId);
+        const companyInfo = await company(userInfo.companyId);
+        if (companyInfo) {
+          setCompanyInfo(companyInfo);
+        }
+      }
+    }
+    fetchData();
+  }, []);
+  async function company(companyId) {
+    try {
+      console.log("asdad");
+      const response = await axios.get(`http://localhost/company/findbycompanyid/${companyId}`);
+      return response.data;
+    } catch (error) {
+      console.error("company error", error);
+    }
+  }
+  async function user() {
+    const decodedToken = jwt_decode(storedToken);
+    if (storedToken) {
+      try {
+        const response = await axios.get(`http://localhost/user/find_by_id/${decodedToken.myId}`);
+        return response.data;
+      } catch (error) {
+        console.error("An error occurred while trying to retrieve user information:", error);
+      }
+    }
+  }
 
   const useStyles = makeStyles({
     root: {
@@ -64,6 +103,7 @@ function AddNewEmployee() {
 
   const handleNameChange = (event) => {
     setName(event.target.value);
+    setcompanyname(companyInfo.companyName);
   };
 
   const handleSurnameChange = (event) => {
@@ -114,7 +154,7 @@ function AddNewEmployee() {
 
       const addEmployeeCompanyDto = {
         name: name,
-        surname: surname,
+        surName: surName,
         username: username,
         personalEmail: personalEmail,
         password: password,
@@ -123,6 +163,7 @@ function AddNewEmployee() {
         info: info,
         avatar: avatar,
         birthday: birthday,
+        companyname: companyname,
       };
 
       axios
@@ -186,8 +227,8 @@ function AddNewEmployee() {
                     </MDBox>
                     <MDBox mb={2} width="100%">
                       <MDInput
-                        placeholder="Address"
-                        name="address"
+                        placeholder="E-mail"
+                        name="E-mail"
                         value={address}
                         onChange={handleAddressChange}
                       />
@@ -200,7 +241,7 @@ function AddNewEmployee() {
                       <MDInput
                         placeholder="Surname"
                         name="surname"
-                        value={surname}
+                        value={surName}
                         onChange={handleSurnameChange}
                       />
                     </MDBox>
