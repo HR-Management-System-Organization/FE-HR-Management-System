@@ -1,163 +1,186 @@
-/**
-=========================================================
-* HR Management System React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
-
-// @mui material components
-import Grid from "@mui/material/Grid";
-
-// HR Management System React components
-import MDBox from "components/MDBox";
-
-// HR Management System React example components
+import React, { useEffect, useRef, useState } from "react";
+import axios from "axios";
+import jwtDecode from "jwt-decode";
+import Chart from "chart.js/auto";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import DashboardNavbar from "examples/Navbars/DashboardNavbar";
-import Footer from "examples/Footer";
-import ReportsBarChart from "examples/Charts/BarCharts/ReportsBarChart";
-import ReportsLineChart from "examples/Charts/LineCharts/ReportsLineChart";
-import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatisticsCard";
+import MDButton from "components/MDButton";
 
-// Data
-import reportsBarChartData from "layouts/dashboard/data/reportsBarChartData";
-import reportsLineChartData from "layouts/dashboard/data/reportsLineChartData";
+function MyCompany() {
+  const storedToken = localStorage.getItem("Authorization");
+  const [userInfo, setUserInfo] = useState({});
+  const [companyInfo, setCompanyInfo] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
-// Dashboard components
-import Projects from "layouts/dashboard/components/Projects";
-import OrdersOverview from "layouts/dashboard/components/OrdersOverview";
+  const chartRef = useRef(null);
+  const chartRef2 = useRef(null);
+  const chartRef3 = useRef(null);
+  const chartRef4 = useRef(null);
 
-function UserDashboard() {
-  const { sales, tasks } = reportsLineChartData;
+  async function user() {
+    const decodedToken = jwtDecode(storedToken);
+    if (storedToken) {
+      try {
+        const response = await axios.get(`http://localhost/user/find_by_id/${decodedToken.myId}`);
+        return response.data;
+      } catch (error) {
+        console.error("An error occurred while trying to retrieve user information:", error);
+      }
+    }
+  }
+
+  async function company(companyId) {
+    try {
+      const response = await axios.get(`http://localhost/company/findbycompanyid2/${companyId}`);
+      return response.data;
+    } catch (error) {
+      console.error("company error", error);
+    }
+  }
+
+  useEffect(() => {
+    async function fetchData() {
+      const userInfo = await user();
+
+      if (userInfo) {
+        setUserInfo(userInfo);
+        const companyInfo = await company(userInfo.companyId);
+
+        if (companyInfo) {
+          setCompanyInfo(companyInfo);
+          updateChart(companyInfo);
+          updateChart1(companyInfo);
+          updateChart2(companyInfo);
+          updateChart3(companyInfo);
+          console.log(companyInfo);
+        }
+      }
+
+      setIsLoading(false);
+    }
+
+    fetchData();
+  }, []);
+
+  const updateChart = (companyInfo) => {
+    const ctx = chartRef.current.getContext("2d");
+    const chart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: ["Hafta 1", "Hafta 2", "Hafta 3", "Hafta 4"],
+        datasets: [
+          {
+            label: "Gelir (TL)",
+            data: [
+              companyInfo.totalincome1,
+              companyInfo.totalincome2,
+              companyInfo.totalincome3,
+              companyInfo.totalincome4,
+            ],
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 1,
+            fill: false,
+          },
+        ],
+      },
+    });
+  };
+  const updateChart2 = (companyInfo) => {
+    const ctx = chartRef3.current.getContext("2d");
+    const chart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: ["Hafta 1", "Hafta 2", "Hafta 3", "Hafta 4"],
+        datasets: [
+          {
+            label: "Gider (TL)",
+            data: [
+              companyInfo.totalexpense1,
+              companyInfo.totalexpense2,
+              companyInfo.totalexpense3,
+              companyInfo.totalexpense4,
+            ],
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 1,
+            fill: false,
+          },
+        ],
+      },
+    });
+  };
+  const updateChart1 = (companyInfo) => {
+    const ctx1 = chartRef2.current.getContext("2d");
+    const chart1 = new Chart(ctx1, {
+      type: "pie",
+      data: {
+        labels: ["Total harcamalar", "Total gelir"],
+        datasets: [
+          {
+            label: "Expenses by Category",
+            data: [companyInfo.totalexpense, companyInfo.totalincome],
+            backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0"],
+          },
+        ],
+      },
+    });
+  };
+  const updateChart3 = (companyInfo) => {
+    const ctx3 = chartRef4.current.getContext("2d");
+    const chart3 = new Chart(ctx3, {
+      type: "bar",
+      data: {
+        labels: ["AylikHarcamaTotal", "TotalHarcama", "AylikKar", "TotalKar"],
+        datasets: [
+          {
+            label: "Aylik ve Toplam Gider Gelir Tablosu",
+            data: [
+              companyInfo.montlytotalexpense,
+              companyInfo.totalexpense,
+              companyInfo.montlytotalincome,
+              companyInfo.totalincome,
+            ],
+            backgroundColor: ["#28A745", "#DC3545", "#FFCE56"],
+          },
+        ],
+      },
+    });
+  };
 
   return (
-    <DashboardLayout>
-      <DashboardNavbar />
-      <MDBox py={3}>
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
-              <ComplexStatisticsCard
-                color="dark"
-                icon="weekend"
-                title="Bookings"
-                count={281}
-                percentage={{
-                  color: "success",
-                  amount: "+55%",
-                  label: "than lask week",
-                }}
-              />
-            </MDBox>
-          </Grid>
-          <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
-              <ComplexStatisticsCard
-                icon="leaderboard"
-                title="Today's Users"
-                count="2,300"
-                percentage={{
-                  color: "success",
-                  amount: "+3%",
-                  label: "than last month",
-                }}
-              />
-            </MDBox>
-          </Grid>
-          <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
-              <ComplexStatisticsCard
-                color="success"
-                icon="store"
-                title="Revenue"
-                count="34k"
-                percentage={{
-                  color: "success",
-                  amount: "+1%",
-                  label: "than yesterday",
-                }}
-              />
-            </MDBox>
-          </Grid>
-          <Grid item xs={12} md={6} lg={3}>
-            <MDBox mb={1.5}>
-              <ComplexStatisticsCard
-                color="primary"
-                icon="person_add"
-                title="Followers"
-                count="+91"
-                percentage={{
-                  color: "success",
-                  amount: "",
-                  label: "Just updated",
-                }}
-              />
-            </MDBox>
-          </Grid>
-        </Grid>
-        <MDBox mt={4.5}>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsBarChart
-                  color="info"
-                  title="website views"
-                  description="Last Campaign Performance"
-                  date="campaign sent 2 days ago"
-                  chart={reportsBarChartData}
-                />
-              </MDBox>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsLineChart
-                  color="success"
-                  title="daily sales"
-                  description={
-                    <>
-                      (<strong>+15%</strong>) increase in today sales.
-                    </>
-                  }
-                  date="updated 4 min ago"
-                  chart={sales}
-                />
-              </MDBox>
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <MDBox mb={3}>
-                <ReportsLineChart
-                  color="dark"
-                  title="completed tasks"
-                  description="Last Campaign Performance"
-                  date="just updated"
-                  chart={tasks}
-                />
-              </MDBox>
-            </Grid>
-          </Grid>
-        </MDBox>
-        <MDBox>
-          <Grid container spacing={3}>
-            <Grid item xs={12} md={6} lg={8}>
-              <Projects />
-            </Grid>
-            <Grid item xs={12} md={6} lg={4}>
-              <OrdersOverview />
-            </Grid>
-          </Grid>
-        </MDBox>
-      </MDBox>
-      <Footer />
+    <DashboardLayout
+      sx={{
+        backgroundImage: ({ functions: { rgba, linearGradient }, palette: { gradients } }) =>
+          `${linearGradient(
+            rgba(gradients.info.main, 0.6),
+            rgba(gradients.info.state, 0.6)
+          )}, url(${bgImage})`,
+        backgroundPositionY: "50%",
+      }}
+    >
+      <div
+        style={{
+          width: "50%",
+          height: "calc(100vh - 64px)",
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gridGap: "1rem",
+          placeItems: "center",
+        }}
+      >
+        <div style={{ height: "100%", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Gelir Grafiği</h2>
+          <canvas ref={chartRef} />
+          <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Toplan gelir-Gider Grafigi</h2>
+          <canvas ref={chartRef2} />
+        </div>
+
+        <div style={{ height: "100%", margin: "0 auto" }}>
+          <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Gider Grafiği</h2>
+          <canvas ref={chartRef3} style={{ padding: "60px" }} />
+          <canvas ref={chartRef4} />
+        </div>
+      </div>
     </DashboardLayout>
   );
 }
 
-export default UserDashboard;
+export default MyCompany;
