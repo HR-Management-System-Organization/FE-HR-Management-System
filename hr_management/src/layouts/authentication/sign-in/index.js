@@ -124,7 +124,7 @@ function Cover() {
             Welcome
           </MDTypography>
           <MDTypography display="block" variant="button" color="white" my={1}>
-            Enter your username and password to sign in
+            Enter your username or email and password to sign in
           </MDTypography>
         </MDBox>
         <MDBox pt={4} pb={3} px={3} textAlign="center">
