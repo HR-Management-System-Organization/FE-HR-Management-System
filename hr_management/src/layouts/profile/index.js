@@ -84,9 +84,9 @@ function Overview() {
                 surname: userInfo?.surName && `${userInfo.surName}`,
 
                 personalEmail: userInfo?.personalEmail || `${userInfo.email}`,
-                companyId: userInfo?.companyId && `${userInfo.companyId}`,
+                // companyId: userInfo?.companyId && `${userInfo.companyId}`,
 
-                // phone: userInfo?.phone && `${userInfo.phone}`,
+                phone: userInfo?.phone && `${userInfo.phone}`,
 
                 // address: userInfo?.address & `${userInfo.adress}`,
               }}
