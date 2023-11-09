@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import jwtDecode from "jwt-decode";
 import MDBox from "components/MDBox";
 import MDInput from "components/MDInput";
@@ -72,12 +72,15 @@ class Comment extends Component {
     if (storedToken) {
       const decodedToken = jwtDecode(storedToken);
       const userId = decodedToken.myId;
-      const apiUrl = "http://localhost:7074/api/v1/comment/personel-make-comment";
+      const apiUrl = "http://localhost/comment/personel-make-comment";
 
       this.setState({ showText: true });
 
       try {
-        await axios.get(`${apiUrl}/${userId}?comment=${this.state.inputText}`);
+        const companyId = this.state.userInfo.companyId;
+        await axios.get(
+          `${apiUrl}/${userId}?comment=${this.state.inputText}&companyId=${companyId}`
+        );
         this.setState({ inputText: "", showText: false });
         this.fetchActiveComments(); // Yorumları güncelleyin
       } catch (error) {
