@@ -61,7 +61,7 @@ function Logout() {
               color="white"
               mt={12}
             >
-              Cikis islemi basarili
+              Log Out Successful
             </MDTypography>
           </div>
         </MDBox>
@@ -76,7 +76,7 @@ function Logout() {
                 fullWidth
                 onClick={handleLoginClick}
               >
-                Giris
+                Log in
               </MDButton>
             </MDBox>
           </form>

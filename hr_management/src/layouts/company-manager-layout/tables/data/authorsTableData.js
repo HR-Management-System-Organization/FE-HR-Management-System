@@ -28,6 +28,8 @@ import team4 from "assets/images/team-4.jpg";
 import MDButton from "components/MDButton";
 import MDInput from "components/MDInput";
 import { useHistory } from "react";
+import EditIcon from "@mui/icons-material/Edit";
+import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 
 const style = {
   position: "absolute",
@@ -163,7 +165,7 @@ export default function EmployeeTable() {
 
   const rows = data
     ? data.map((author, index) => ({
-        author: <Author image={team2} name={author.username} email={author.email} />,
+        Employee: <Author image={team2} name={author.username} email={author.email} />,
         function: <Job title={author.role} description={author.name} />,
         status: (
           <MDBox ml={-1}>
@@ -183,7 +185,10 @@ export default function EmployeeTable() {
         edit: (
           <MDBox mt={4} mb={1}>
             <div>
-              <MDButton onClick={() => handleOpen(author.id)}>EDİT</MDButton>
+              <MDButton onClick={() => handleOpen(author.id)}>
+                EDIT
+                <EditIcon fontSize="big" />
+              </MDButton>
               <Modal
                 open={open}
                 onClose={handleClose}
@@ -216,7 +221,10 @@ export default function EmployeeTable() {
                     value={phone}
                   />
                   <br></br>
-                  <MDButton onClick={handleSubmit}>EDİT</MDButton>
+                  <MDButton onClick={handleSubmit}>
+                    Done
+                    <DoneOutlineIcon fontSize="big" />
+                  </MDButton>
                 </MDBox>
               </Modal>
             </div>
@@ -228,7 +236,7 @@ export default function EmployeeTable() {
 
   return {
     columns: [
-      { Header: "author", accessor: "author", width: "45%", align: "left" },
+      { Header: "Employee", accessor: "Employee", width: "45%", align: "left" },
       { Header: "function", accessor: "function", align: "left" },
       { Header: "status", accessor: "status", align: "center" },
       { Header: "Gender", accessor: "gender", align: "center" },

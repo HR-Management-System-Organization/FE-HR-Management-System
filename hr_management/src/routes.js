@@ -45,6 +45,11 @@ import Billing from "layouts/billing";
 import Overview from "layouts/profile";
 import UserDashboard from "layouts/user-layout/dashboard";
 import MyCompany from "layouts/user-layout/my-company";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import PriceChangeIcon from "@mui/icons-material/PriceChange";
+import ApartmentIcon from "@mui/icons-material/Apartment";
+import PeopleIcon from "@mui/icons-material/People";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 import Logout from "layouts/authentication/logout";
 import AddNewEmployee from "layouts/company-manager-layout/add-new-employee";
@@ -78,24 +83,6 @@ const routes = [
     name: "Dashboard",
     key: "dashboard",
     icon: <Icon fontSize="small">dashboard</Icon>,
-    route: "employee/dashboard",
-    component: <UserDashboard />,
-    visibleRoles: ["EMPLOYEE"],
-  },
-  {
-    type: "admin",
-    name: "Admindashboard",
-    key: "admindashboard",
-    icon: <Icon fontSize="large">assignment</Icon>,
-    route: "/admin/dashboard",
-    component: <AdminDashboard />,
-    visibleRoles: ["ADMIN"],
-  },
-  {
-    type: "route",
-    name: "Dashboard",
-    key: "dashboard",
-    icon: <Icon fontSize="small">dashboard</Icon>,
     route: "manager/dashboard",
     component: <ManagerDashboard />,
     visibleRoles: ["COMPANY_MANAGER"],
@@ -122,7 +109,7 @@ const routes = [
     type: "route",
     name: "Add Employee",
     key: "addEmployee",
-    icon: <Icon fontSize="small">person</Icon>,
+    icon: <PersonAddIcon fontSize="medium">person</PersonAddIcon>,
     route: "/manager/addEmployee",
     component: <AddNewEmployee />,
     visibleRoles: ["COMPANY_MANAGER"],
@@ -130,7 +117,7 @@ const routes = [
   {
     type: "route",
     name: "My Company",
-    key: "myCompany",
+    key: "sign-in",
     icon: <Icon fontSize="small">person</Icon>,
     route: "/authentication/sign-in",
     component: <SignIn />,
@@ -139,8 +126,8 @@ const routes = [
   {
     type: "route",
     name: "My Company",
-    key: "sign-in",
-    icon: <Icon fontSize="small">person</Icon>,
+    key: "myCompany",
+    icon: <ApartmentIcon fontSize="small">person</ApartmentIcon>,
     route: "/employee/company",
     component: <MyCompany />,
     visibleRoles: ["EMPLOYEE"],
@@ -192,39 +179,21 @@ const routes = [
     component: <GuestHomepage />,
     visibleRoles: ["GUEST"],
   },
-  {
-    type: "route",
-    name: "Tables",
-    key: "tables",
-    icon: <Icon fontSize="small">table_view</Icon>,
-    route: "guest/tables",
-    component: <GuestTables />,
-    visibleRoles: ["GUEST"],
-  },
-  {
-    type: "route",
-    name: "Notifications",
-    key: "notifications",
-    icon: <Icon fontSize="small">notifications</Icon>,
-    route: "guest/notifications",
-    component: <GuestNotifications />,
-    visibleRoles: ["GUEST"],
-  },
 
   {
     type: "route",
     name: "My Company",
     key: "sign-in",
-    icon: <Icon fontSize="small">person</Icon>,
+    icon: <ApartmentIcon fontSize="small">person</ApartmentIcon>,
     route: "/manager/company",
     component: <ManagerMyCompany />,
     visibleRoles: ["COMPANY_MANAGER"],
   },
   {
     type: "route",
-    name: "Tables",
+    name: "Employees",
     key: "tables",
-    icon: <Icon fontSize="small">table_view</Icon>,
+    icon: <PeopleIcon fontSize="medium">table_view</PeopleIcon>,
     route: "manager/tables",
     component: <ManagerTables />,
     visibleRoles: ["COMPANY_MANAGER"],
@@ -248,19 +217,10 @@ const routes = [
   //   component: <AdminBilling />,
   //   visibleRoles: ["ADMIN"],
   // },
-  {
-    type: "route",
-    name: "Notifications",
-    key: "notifications",
-    icon: <Icon fontSize="small">notifications</Icon>,
-    route: "admin/notifications",
-    component: <AdminNotifications />,
-    visibleRoles: ["ADMIN"],
-  },
 
   {
     type: "route",
-    name: "request",
+    name: "Request",
     key: "request",
     icon: <Icon fontSize="medium">person</Icon>,
     route: "/employee/request",
@@ -269,9 +229,9 @@ const routes = [
   },
   {
     type: "route",
-    name: "addincome",
+    name: "Add Income",
     key: "addincome",
-    icon: <Icon fontSize="small">person</Icon>,
+    icon: <AttachMoneyIcon fontSize="medium">attachmoney</AttachMoneyIcon>,
     route: "manager/addincome",
     component: <Addincome />,
     visibleRoles: ["COMPANY_MANAGER", "EMPLOYEE"],
@@ -296,9 +256,9 @@ const routes = [
   },
   {
     type: "route",
-    name: "Employees",
+    name: "Add Salary",
     key: "employees",
-    icon: <Icon fontSize="small">dashboard</Icon>,
+    icon: <PriceChangeIcon fontSize="medium">dashboard</PriceChangeIcon>,
     route: "manager/employees",
     component: <Addsalary />,
     visibleRoles: ["COMPANY_MANAGER"],

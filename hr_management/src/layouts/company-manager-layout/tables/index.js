@@ -59,7 +59,7 @@ function UserTables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Authors Table
+                  Employees
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>
@@ -119,33 +119,6 @@ function UserTables() {
               <MDBox pt={3}>
                 <DataTable
                   table={{ columns: yColumns, rows: yRows }}
-                  isSorted={false}
-                  entriesPerPage={false}
-                  showTotalEntries={false}
-                  noEndBorder
-                />
-              </MDBox>
-            </Card>
-          </Grid>
-          <Grid item xs={12}>
-            <Card>
-              <MDBox
-                mx={2}
-                mt={-3}
-                py={3}
-                px={2}
-                variant="gradient"
-                bgColor="info"
-                borderRadius="lg"
-                coloredShadow="info"
-              >
-                <MDTypography variant="h6" color="white">
-                  Projects Table
-                </MDTypography>
-              </MDBox>
-              <MDBox pt={3}>
-                <DataTable
-                  table={{ columns: pColumns, rows: pRows }}
                   isSorted={false}
                   entriesPerPage={false}
                   showTotalEntries={false}

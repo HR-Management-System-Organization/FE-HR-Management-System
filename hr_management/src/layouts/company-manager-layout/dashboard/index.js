@@ -66,10 +66,10 @@ function MyCompany() {
     const chart = new Chart(ctx, {
       type: "line",
       data: {
-        labels: ["Hafta 1", "Hafta 2", "Hafta 3", "Hafta 4"],
+        labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
         datasets: [
           {
-            label: "Gelir (TL)",
+            label: "Expense (TL)",
             data: [
               companyInfo.totalincome1,
               companyInfo.totalincome2,
@@ -89,10 +89,10 @@ function MyCompany() {
     const chart = new Chart(ctx, {
       type: "line",
       data: {
-        labels: ["Hafta 1", "Hafta 2", "Hafta 3", "Hafta 4"],
+        labels: ["Week 1", "Week 2", "Week 3", "Week 4"],
         datasets: [
           {
-            label: "Gider (TL)",
+            label: "Expense (TL)",
             data: [
               companyInfo.totalexpense1,
               companyInfo.totalexpense2,
@@ -112,7 +112,7 @@ function MyCompany() {
     const chart1 = new Chart(ctx1, {
       type: "pie",
       data: {
-        labels: ["Total harcamalar", "Total gelir"],
+        labels: ["Total Expense", "Total Income"],
         datasets: [
           {
             label: "Expenses by Category",
@@ -128,10 +128,10 @@ function MyCompany() {
     const chart3 = new Chart(ctx3, {
       type: "bar",
       data: {
-        labels: ["AylikHarcamaTotal", "TotalHarcama", "AylikKar", "TotalKar"],
+        labels: ["Montly Expense", "Total Expense", "Montly Income", "Total Income"],
         datasets: [
           {
-            label: "Aylik ve Toplam Gider Gelir Tablosu",
+            label: "Monthly and Total Expense Income Statement",
             data: [
               companyInfo.montlytotalexpense,
               companyInfo.totalexpense,
@@ -167,14 +167,14 @@ function MyCompany() {
         }}
       >
         <div style={{ height: "100%", margin: "0 auto" }}>
-          <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Gelir Grafiği</h2>
+          <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Income Chart</h2>
           <canvas ref={chartRef} />
-          <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Toplan gelir-Gider Grafigi</h2>
+          <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Total Income-Expense Chart</h2>
           <canvas ref={chartRef2} />
         </div>
 
         <div style={{ height: "100%", margin: "0 auto" }}>
-          <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Gider Grafiği</h2>
+          <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Expense Chart</h2>
           <canvas ref={chartRef3} style={{ padding: "60px" }} />
           <canvas ref={chartRef4} />
         </div>

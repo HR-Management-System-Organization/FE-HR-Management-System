@@ -20,6 +20,7 @@ import MDBadge from "components/MDBadge";
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import jwt_decode from "jwt-decode";
+import CurrencyLiraIcon from "@mui/icons-material/CurrencyLira";
 
 // Images
 import team2 from "assets/images/team-2.jpg";
@@ -100,14 +101,14 @@ export default function Data() {
 
   const rows = data
     ? data.map((author, index) => ({
-        author: <Author image={team2} name={author.username} email={""} />,
-        function: <Job title={author.title} description={author.description} />,
-        maas: (
+        Employee: <Author image={team2} name={author.username} email={""} />,
+        function: <Job title={author.role} description={author.description} />,
+        Salary: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            {author.izinsuresi} days
+            {author.izinsuresi} <CurrencyLiraIcon fontSize="small">receipt_long</CurrencyLiraIcon>,
           </MDTypography>
         ),
-        maasduzenle: (
+        SalarySeting: (
           <input
             type="text"
             id={`sebep-${author.id}`}
@@ -127,7 +128,7 @@ export default function Data() {
               )
             }
           >
-            Onayla
+            Accept
           </button>
         ),
       }))
@@ -135,10 +136,10 @@ export default function Data() {
 
   return {
     columns: [
-      { Header: "author", accessor: "author", width: "15%", align: "left" },
+      { Header: "Employee", accessor: "Employee", width: "15%", align: "left" },
       { Header: "function", accessor: "function", align: "left" },
-      { Header: "maas", accessor: "maas", align: "center" },
-      { Header: "maasduzenle", accessor: "maasduzenle", align: "center" },
+      { Header: "Salary", accessor: "Salary", align: "center" },
+      { Header: "SalarySeting", accessor: "SalarySeting", align: "center" },
       { Header: "Active", accessor: "Active", align: "center" },
     ],
     rows: rows,

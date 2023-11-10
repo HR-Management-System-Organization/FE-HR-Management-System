@@ -61,7 +61,7 @@ function UserTables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Maas ayarlari
+                  Salary Settings
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>

@@ -22,6 +22,7 @@ import MDAvatar from "components/MDAvatar";
 import MDBadge from "components/MDBadge";
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
+import DoneIcon from "@mui/icons-material/Done";
 
 // Images
 import team2 from "assets/images/team-2.jpg";
@@ -129,8 +130,8 @@ export default function data() {
             {author.comment}
           </MDTypography>
         ),
-        Active: <button onClick={() => handleEdit(author.commentId)}>Active et</button>,
-        Delete: <button onClick={() => handleEdit2(author.commentId)}>Delete et</button>,
+        Active: <button onClick={() => handleEdit(author.commentId)}>Accept</button>,
+        Delete: <button onClick={() => handleEdit2(author.commentId)}>Delete</button>,
       }))
     : [];
 

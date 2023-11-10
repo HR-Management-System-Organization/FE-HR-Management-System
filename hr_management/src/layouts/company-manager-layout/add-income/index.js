@@ -1,79 +1,41 @@
-import FacebookIcon from "@mui/icons-material/Facebook";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import TwitterIcon from "@mui/icons-material/Twitter";
-
-// HR Management System React components
-import MDBox from "components/MDBox";
-
-// HR Management System React example components
-import Footer from "examples/Footer";
+import { useState, useEffect } from "react";
+import { TextField, Select, MenuItem, Button } from "@mui/material";
+import CurrencyLiraIcon from "@mui/icons-material/CurrencyLira";
+import Axios from "axios";
+import jwtDecode from "jwt-decode";
+import axios from "axios";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 
-// Overview page components
-import Header from "layouts/profile/components/Header";
-
-// Data
-
-// Images
-import axios from "axios";
-import GuestInfoCard from "examples/Cards/InfoCards/GuestInfoCard";
-import jwtDecode from "jwt-decode";
-import { useEffect, useState } from "react";
-
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  Button,
-} from "@mui/material";
-import { Calendar, momentLocalizer } from "react-big-calendar";
-import moment from "moment";
-
-import Axios from "axios";
-
-const localizer = momentLocalizer(moment);
-
 function MyForm() {
-  const [sebep, setSebep] = useState("");
-  const [gelir, setgelir] = useState("");
-  const [userid, setuserid] = useState("");
-  const [gelirtarihi, setgelirtarihi] = useState("");
-  const [gelirtur, setgelirtur] = useState("sabittur");
+  const [reason, setReason] = useState("");
+  const [income, setIncome] = useState("");
+  const [incomeType, setIncomeType] = useState("Rate");
+  const [incomeDate, setIncomeDate] = useState("");
   const [error, setError] = useState("");
-  const storedToken = localStorage.getItem("Authorization");
   const [userInfo, setUserInfo] = useState({});
-  const [companyInfo, setCompanyInfo] = useState({});
 
-  async function axiosIstek() {
-    if (storedToken) {
-      const decodedToken = jwtDecode(storedToken);
-      console.log(decodedToken.myId);
-      try {
-        const response = await axios.get(`http://localhost/user/find_by_id/${decodedToken.myId}`);
-        setUserInfo(response.data);
-      } catch (error) {
-        console.error("Kullanıcı bilgilerini alırken bir hata oluştu:", error);
+  useEffect(() => {
+    async function fetchUserInfo() {
+      const storedToken = localStorage.getItem("Authorization");
+
+      if (storedToken) {
+        const decodedToken = jwtDecode(storedToken);
+        try {
+          const response = await axios.get(`http://localhost/user/find_by_id/${decodedToken.myId}`);
+          setUserInfo(response.data);
+        } catch (error) {
+          console.error("Kullanıcı bilgilerini alırken bir hata oluştu:", error);
+        }
       }
     }
-  }
-  useEffect(() => {
-    axiosIstek();
-    console.log(userInfo.companyId);
+
+    fetchUserInfo();
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const requestData = {
-      sebep,
-      gelirtur,
-      gelirtarihi,
-      gelir,
-    };
-
-    const apiUrl = `http://localhost:7073/api/v1/company/addincome?&sebep=${sebep}&companyid=${userInfo.companyId}&gelir=${gelir}&gelirtur=${gelirtur}&gelirtarihi=${gelirtarihi}&id=${userInfo.id}&name=${userInfo.name}&surname=${userInfo.surName}`;
+    const apiUrl = `http://localhost:7073/api/v1/company/addincome?&sebep=${reason}&companyid=${userInfo.companyId}&gelir=${income}&gelirtur=${incomeType}&gelirtarihi=${incomeDate}&id=${userInfo.id}&name=${userInfo.name}&surname=${userInfo.surName}`;
 
     Axios.post(apiUrl)
       .then((response) => {
@@ -88,49 +50,67 @@ function MyForm() {
 
   return (
     <DashboardLayout>
-      <div>
-        <h2>İzin Talebi Formu</h2>
+      <div style={{ textAlign: "center" }}>
+        <h2>Add Income</h2>
         <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="gelir">Gelir fiyat:</label>
-            <input
-              type="text"
-              id="gelir"
-              value={gelir}
-              onChange={(e) => setgelir(e.target.value)}
+          <TextField
+            label="Income Explanation"
+            id="reason"
+            value={reason}
+            onChange={(e) => setReason(e.target.value)}
+            fullWidth
+          />
+          <br />
+          <br />
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <TextField
+              label="Income Price"
+              id="income"
+              type="number"
+              value={income}
+              onChange={(e) => setIncome(e.target.value)}
             />
+            <CurrencyLiraIcon style={{ marginLeft: "5px" }} fontSize="small">
+              receipt_long
+            </CurrencyLiraIcon>
           </div>
-          <div>
-            <label htmlFor="sebep">Gelir Aciklamasi:</label>
-            <input
-              type="text"
-              id="sebep"
-              value={sebep}
-              onChange={(e) => setSebep(e.target.value)}
-            />
+          <br />
+          <p style={{ display: "flex", alignItems: "center" }}>Income Type</p>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <br></br>
+            <Select
+              label="Income Type"
+              id="incomeType"
+              value={incomeType}
+              onChange={(e) => setIncomeType(e.target.value)}
+            >
+              <MenuItem value="Fixed Income">Fixed Income</MenuItem>
+              <MenuItem value="Selling Income">Selling Income</MenuItem>
+              <MenuItem value="Rate">Interest Income</MenuItem>
+            </Select>
           </div>
-          <div>
-            <label htmlFor="gelirtur">Gelirturu:</label>
-            <select id="gelirtur" value={gelirtur} onChange={(e) => setgelirtur(e.target.value)}>
-              <option value="sabittur">sabit</option>
-              <option value="satis">Satis</option>
-              <option value="faiz">faiz</option>
-            </select>
-          </div>
-          <div>
-            <label htmlFor="gelirtarihi">Gelir Tarihi:</label>
-            <input
+          <br />
+          <p style={{ display: "flex", alignItems: "center" }}>Income date</p>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <TextField
+              label=""
+              id="incomeDate"
               type="date"
-              id="gelirtarihi"
-              value={gelirtarihi}
-              onChange={(e) => setgelirtarihi(e.target.value)}
+              value={incomeDate}
+              onChange={(e) => setIncomeDate(e.target.value)}
+              center
             />
           </div>
-
-          {error && <div style={{ color: "red", fontFamily: "monospace" }}>{error}</div>}
-          <div>
-            <button type="submit">Gelir Kaydet</button>
-          </div>
+          <br />
+          {error && <div style={{ color: "red" }}>{error}</div>}
+          <Button
+            style={{ display: "flex", alignItems: "center" }}
+            type="submit"
+            variant="contained"
+            color="primary"
+          >
+            Save Income
+          </Button>
         </form>
       </div>
     </DashboardLayout>

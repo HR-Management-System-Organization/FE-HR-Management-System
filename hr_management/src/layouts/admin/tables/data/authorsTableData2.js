@@ -131,8 +131,8 @@ export default function data() {
             {author.createDate}
           </MDTypography>
         ),
-        Active: <button onClick={() => handleEdit(author.id)}>Active et</button>,
-        Delete: <button onClick={() => handleEdit2(author.id)}>Delete et</button>,
+        Active: <button onClick={() => handleEdit(author.id)}>Accept</button>,
+        Delete: <button onClick={() => handleEdit2(author.id)}>Delete</button>,
       }))
     : [];
 

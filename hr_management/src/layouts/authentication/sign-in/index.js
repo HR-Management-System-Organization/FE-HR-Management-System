@@ -57,9 +57,9 @@ function Cover() {
       if (role === "COMPANY_MANAGER") {
         navigate("/manager/dashboard");
       } else if (role === "ADMIN") {
-        navigate("/admin/dashboard");
+        navigate("/admin/profile");
       } else if (role === "EMPLOYEE") {
-        navigate("/employee/dashboard");
+        navigate("/employee/company");
       } else if (role === "GUEST") {
         navigate("/guest/homepage");
       } else {

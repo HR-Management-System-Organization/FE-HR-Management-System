@@ -6,8 +6,10 @@ import {
   DialogActions,
   TextField,
   Button,
+  Select,
 } from "@mui/material";
 import { Calendar, momentLocalizer } from "react-big-calendar";
+import MenuItem from "@mui/material/MenuItem";
 import moment from "moment";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import Axios from "axios";
@@ -61,11 +63,11 @@ function MyForm() {
   return (
     <DashboardLayout>
       <div>
-        <h2>İzin Talebi Formu</h2>
+        <h2>Leave Request Form</h2>
         <form onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="sebep">İzin Sebebi:</label>
-            <input
+            <label htmlFor="sebep">Reason:</label>
+            <TextField
               type="text"
               id="sebep"
               value={sebep}
@@ -73,25 +75,28 @@ function MyForm() {
             />
           </div>
           <div>
-            <label htmlFor="izinTur">İzin Türü:</label>
-            <select id="izinTur" value={izinTur} onChange={(e) => setIzinTur(e.target.value)}>
-              <option value="yillik">Yillik İzin</option>
-              <option value="babalik">Babalik İzni</option>
-              <option value="annelik">Annelik İzni</option>
-            </select>
+            <br></br>
+            <label htmlFor="izinTur">Permission Type:</label>
+            <Select id="izinTur" value={izinTur} onChange={(e) => setIzinTur(e.target.value)}>
+              <MenuItem value="yillik">Annual Leave</MenuItem>
+              <MenuItem value="babalik">Paternity Leave</MenuItem>
+              <MenuItem value="annelik">Maternity Leave</MenuItem>
+            </Select>
           </div>
+          <br></br>
           <div>
-            <label htmlFor="baslangicTarih">İzin Başlangıç Tarihi:</label>
-            <input
+            <label htmlFor="baslangicTarih">Permit Start Date:</label>
+            <TextField
               type="date"
               id="baslangicTarih"
               value={baslangicTarih}
               onChange={(e) => setBaslangicTarih(e.target.value)}
             />
           </div>
+          <br></br>
           <div>
-            <label htmlFor="bitisTarih">İzin Bitiş Tarihi:</label>
-            <input
+            <label htmlFor="bitisTarih">First Working Day After Leave:</label>
+            <TextField
               type="date"
               id="bitisTarih"
               value={bitisTarih}
@@ -100,7 +105,10 @@ function MyForm() {
           </div>
           {error && <div style={{ color: "red", fontFamily: "monospace" }}>{error}</div>}
           <div>
-            <button type="submit">İzni Gönder</button>
+            <Button type="submit" variant="contained" color="white">
+              {" "}
+              İzni Gönder
+            </Button>
           </div>
         </form>
       </div>

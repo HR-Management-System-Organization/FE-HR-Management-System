@@ -55,7 +55,7 @@ function UserTables() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Yaklasan odemeler
+                  Upcoming Payments
                 </MDTypography>
               </MDBox>
               <MDBox pt={3}>

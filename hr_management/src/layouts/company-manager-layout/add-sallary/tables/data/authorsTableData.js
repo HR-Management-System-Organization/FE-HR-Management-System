@@ -71,7 +71,7 @@ export default function data() {
   );
   const rows = data
     ? data.map((author, index) => ({
-        author: <Author image={team2} name={author.username} email={author.email} />,
+        Employee: <Author image={team2} name={author.username} email={author.email} />,
         function: <Job title={author.role} description={author.description} />,
         status: (
           <MDBox ml={-1}>
@@ -99,7 +99,7 @@ export default function data() {
 
   return {
     columns: [
-      { Header: "author", accessor: "author", width: "45%", align: "left" },
+      { Header: "Employee", accessor: "Employee", width: "45%", align: "left" },
       { Header: "function", accessor: "function", align: "left" },
       { Header: "status", accessor: "status", align: "center" },
       { Header: "Gender", accessor: "gender", align: "center" },

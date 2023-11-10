@@ -128,8 +128,8 @@ export default function Data() {
 
   const rows = data
     ? data.map((author, index) => ({
-        author: <Author image={team2} name={author.username} email={""} />,
-        function: <Job title={author.nedeni} description={author.managerid} />,
+        Employee: <Author image={team2} name={author.username} email={""} />,
+        function: <Job title={author.izinTur} description={author.nedeni} />,
         status: (
           <MDBox ml={-1}>
             <MDBadge badgeContent={author.status} variant="gradient" size="sm" />
@@ -156,14 +156,14 @@ export default function Data() {
           </MDTypography>
         ),
 
-        Active: <button onClick={() => handleEdit(author.id)}>Onayla</button>,
-        Delete: <button onClick={() => handleEdit2(author.id)}>Reddet</button>,
+        Active: <button onClick={() => handleEdit(author.id)}>Accept</button>,
+        Delete: <button onClick={() => handleEdit2(author.id)}>Reject</button>,
       }))
     : [];
 
   return {
     columns: [
-      { Header: "author", accessor: "author", width: "15%", align: "left" },
+      { Header: "Employee", accessor: "Employee", width: "15%", align: "left" },
       { Header: "function", accessor: "function", align: "left" },
       { Header: "status", accessor: "status", align: "center" },
       { Header: "baslangic", accessor: "baslangic", align: "center" },

@@ -1,4 +1,5 @@
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import contained from "assets/theme-dark/components/button/contained";
 import axios from "axios";
 import MDBox from "components/MDBox";
 import MDButton from "components/MDButton";
@@ -106,15 +107,15 @@ function GuestHomepage() {
         textAlign="center"
       >
         <MDTypography variant="h5" fontWeight="light" color="light" mt={1}>
-          Hoşgeldin {userInfo.name}
+          Welcome {userInfo.name}
         </MDTypography>
       </MDBox>
       <MDTypography variant="h6" fontWeight="light" fontFamily="monospace" margin="25px">
-        Size en iyi hizmeti verebilmek için sürekli daha iyiye ideolojisi ile hareket ediyoruz.
+        We act with the ideology of constantly improving in order to provide you with the best
+        service.
         <br />
         <MDTypography variant="text" fontWeight="medium" paddingTop="150px">
-          Aşağıda şirket isimlerini görebilirsiniz. İlgilendiğiniz ve daha fazla bilgi almak
-          istediğiniz şirketin yanındaki{" "}
+          You can see the company names below. Just click on the{" "}
           <span
             style={{
               color: "red",
@@ -125,40 +126,55 @@ function GuestHomepage() {
           >
             info
           </span>{" "}
-          butonuna tıklamanız yeterlidir.
+          button next to the company you want to be interested in and get more information about.
         </MDTypography>
       </MDTypography>
       <MDBox>
         <MDTypography display="block" variant="h4" color="dark" my={4}>
-          Şirket Listesi:
+          Company List:
         </MDTypography>
       </MDBox>
+
       <MDBox pr={1}>
-        <MDInput label="Buradan arama yapın" value={searchQuery} onChange={handleSearch} />
+        <MDInput label="Search" value={searchQuery} onChange={handleSearch} />
       </MDBox>
+
       <TableContainer>
         <Table sx={{ minWidth: 650 }} aria-label="basit tablo">
           <TableHead>
-            <TableRow>
-              <TableCell padding="checkbox">İsim</TableCell>
-              <TableCell align="center">Konum</TableCell>
+            <TableRow
+              sx={{
+                backgroundColor: "#f5f5f5",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <TableCell padding="center">Company Name</TableCell>
+              <TableCell align="center" sx={{ fontWeight: "bold" }}>
+                Location
+              </TableCell>
+              <TableCell align="center">Info</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {filteredData.map((row) => (
               <TableRow
                 key={row.companyName}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                sx={{
+                  "&:last-child td, &:last-child th": { border: 0 },
+                  alignItems: "center",
+                }}
               >
-                <TableCell align="left">{row.companyName}</TableCell>
-                <TableCell align="left">
+                <TableCell align="center">{row.companyName}</TableCell>
+                <TableCell align="center">
                   {row.companyCountry} / {row.companyProvince}
                 </TableCell>
-                <TableCell align="right">
+                <TableCell align="center">
                   <MDButton
                     color="warning"
                     onClick={() => {
-                      navigate(`/company/${row.companyId}`); // Doğru fonksiyonu kullanın
+                      navigate(`/company/${row.companyId}`);
                     }}
                   >
                     INFO
@@ -169,6 +185,7 @@ function GuestHomepage() {
           </TableBody>
         </Table>
       </TableContainer>
+
       <Footer />
     </DashboardLayout>
   );
