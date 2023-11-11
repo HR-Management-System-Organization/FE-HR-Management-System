@@ -141,21 +141,19 @@ function GuestHomepage() {
 
       <TableContainer>
         <Table sx={{ minWidth: 650 }} aria-label="basit tablo">
-          <TableHead>
-            <TableRow
-              sx={{
-                backgroundColor: "#f5f5f5",
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <TableCell padding="center">Company Name</TableCell>
-              <TableCell align="center" sx={{ fontWeight: "bold" }}>
-                Location
-              </TableCell>
-              <TableCell align="center">Info</TableCell>
-            </TableRow>
+          <TableHead
+            sx={{
+              backgroundColor: "#f5f5f5",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <TableCell padding="center">Company Name</TableCell>
+            <TableCell align="center" sx={{ fontWeight: "bold" }}>
+              Location
+            </TableCell>
+            <TableCell align="center">Info</TableCell>
           </TableHead>
           <TableBody>
             {filteredData.map((row) => (

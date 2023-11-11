@@ -122,19 +122,24 @@ class Comment extends Component {
             {this.state.activeComments.length > 0 && (
               <TableContainer>
                 <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Name </TableCell>
-                      <TableCell>Email </TableCell>
-                      <TableCell>Comment</TableCell>
-                    </TableRow>
+                  <TableHead
+                    sx={{
+                      backgroundColor: "#f5f5f5",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <TableCell>Name </TableCell>
+                    <TableCell>Email </TableCell>
+                    <TableCell>Comment</TableCell>
                   </TableHead>
                 </Table>
                 {this.state.activeComments.map((comment, index) => (
                   <TableContainer component={Paper} key={index}>
                     <Table sx={{ minWidth: 650 }} size="medium" aria-label="a dense table">
                       <TableBody justifycontent="space-between">
-                        <TableRow justifycontent="start">
+                        <TableRow justifycontent="space-between">
                           <TableCell align="left">{this.state.userInfo.name}</TableCell>
                           <TableCell align="left">{this.state.userInfo.email}</TableCell>
                           <TableCell align="left">{comment.comment}</TableCell>
