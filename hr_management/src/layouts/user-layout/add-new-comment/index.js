@@ -140,9 +140,9 @@ class Comment extends Component {
                     <Table sx={{ minWidth: 650 }} size="medium" aria-label="a dense table">
                       <TableBody justifycontent="space-between">
                         <TableRow justifycontent="space-between">
-                          <TableCell align="left">{this.state.userInfo.name}</TableCell>
-                          <TableCell align="left">{this.state.userInfo.email}</TableCell>
-                          <TableCell align="left">{comment.comment}</TableCell>
+                          <TableCell align="center">{this.state.userInfo.name}</TableCell>
+                          <TableCell align="center">{this.state.userInfo.email}</TableCell>
+                          <TableCell align="center">{comment.comment}</TableCell>
                         </TableRow>
                       </TableBody>
                     </Table>
