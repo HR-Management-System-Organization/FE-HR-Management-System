@@ -19,6 +19,7 @@ Coded by www.creative-tim.com
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
+import MDButton from "components/MDButton";
 import MDBadge from "components/MDBadge";
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
@@ -131,8 +132,16 @@ export default function data() {
             {author.createDate}
           </MDTypography>
         ),
-        Active: <button onClick={() => handleEdit(author.id)}>Accept</button>,
-        Delete: <button onClick={() => handleEdit2(author.id)}>Delete</button>,
+        Active: (
+          <MDButton color="success" onClick={() => handleEdit(author.id)}>
+            Accept
+          </MDButton>
+        ),
+        Delete: (
+          <MDButton color="warning" onClick={() => handleEdit2(author.id)}>
+            Delete
+          </MDButton>
+        ),
       }))
     : [];
 

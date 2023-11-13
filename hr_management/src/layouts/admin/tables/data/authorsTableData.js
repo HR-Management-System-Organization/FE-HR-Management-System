@@ -92,10 +92,12 @@ export default function EmployeeTable() {
     setPhone(event.target.value);
   };
 
-  const handleEdit = (event) => {
-    const id = author.id;
+  const handleEdit = (author) => {
+    const id = author.id; // Assuming you want to get the id from the clicked author
+    // Navigate using the id
     navigate(`/manager/edit/${id}`);
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -120,7 +122,7 @@ export default function EmployeeTable() {
     console.log(data);
   };
   const handleEdit2 = (authorId) => {
-    console.log("Author ID to edit:", authorId, " ", typeof authorId);
+    console.log("Author ID to delete:", authorId, " ", typeof authorId);
     if (authorId !== null) {
       Axios.post(
         `http://localhost:7072/api/v1/user/deleteprofilebycompanymanager?authorId=${authorId}`,
@@ -132,10 +134,11 @@ export default function EmployeeTable() {
         }
       )
         .then((response) => {
-          // Handle the successful response here
+          // Filter out the deleted profile from the data state
+          setData((prevData) => prevData.filter((author) => author.id !== authorId));
         })
         .catch((error) => {
-          console.error("Error editing data:", error);
+          console.error("Error deleting data:", error);
         });
     } else {
       console.error("authorId is null. Cannot send the request.");
@@ -185,7 +188,7 @@ export default function EmployeeTable() {
         edit: (
           <MDBox mt={4} mb={1}>
             <div>
-              <MDButton onClick={() => handleOpen(author.id)}>
+              <MDButton color="success" onClick={() => handleOpen(author.id)}>
                 EDIT
                 <EditIcon fontSize="big" />
               </MDButton>
@@ -221,7 +224,7 @@ export default function EmployeeTable() {
                     value={phone}
                   />
                   <br></br>
-                  <MDButton onClick={handleSubmit}>
+                  <MDButton color="success" onClick={handleSubmit}>
                     Done
                     <DoneOutlineIcon fontSize="big" />
                   </MDButton>
@@ -230,7 +233,11 @@ export default function EmployeeTable() {
             </div>
           </MDBox>
         ),
-        Delete: <button onClick={() => handleEdit2(author.id)}>Delete</button>,
+        Delete: (
+          <MDButton color="error" onClick={() => handleEdit2(author.id)}>
+            Delete
+          </MDButton>
+        ),
       }))
     : [];
 
