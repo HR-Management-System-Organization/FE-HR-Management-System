@@ -33,7 +33,7 @@ function Cover() {
 
     axios
       .post(
-        "http://localhost:7071/api/v1/auth/register_with_rabbitmq",
+        "http://localhost/auth/register_with_rabbitmq",
         {
           email,
           username,
