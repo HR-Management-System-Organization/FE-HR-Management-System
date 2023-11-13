@@ -42,7 +42,7 @@ export default function Data() {
       console.log("companyid");
       console.log(companyid);
       console.log("companyid");
-      const apiUrl = `http://localhost:7073/api/v1/company/addsalary?authorId=${id}&maas=${maas}&name=${name}&surname=${surName}&companyid=${companyid}`;
+      const apiUrl = `http://localhost:7072/api/v1/user/addsalary?authorId=${id}&maas=${maas}&name=${name}&surname=${surName}&companyid=${companyid}`;
 
       // Axios ile POST isteği gönderin
       Axios.post(apiUrl, null, {
@@ -105,7 +105,7 @@ export default function Data() {
         function: <Job title={author.role} description={author.description} />,
         Salary: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            {author.izinsuresi} <CurrencyLiraIcon fontSize="small">receipt_long</CurrencyLiraIcon>,
+            {author.salary} <CurrencyLiraIcon fontSize="small">receipt_long</CurrencyLiraIcon>,
           </MDTypography>
         ),
         SalarySeting: (

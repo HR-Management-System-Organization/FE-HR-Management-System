@@ -68,7 +68,10 @@ import AdminNotifications from "layouts/admin/notifications";
 import AdminProfile from "layouts/admin/profile";
 import AdminTables from "layouts/admin/tables";
 import Comment from "layouts/user-layout/add-new-comment";
+
 import Leaverequest from "layouts/user-layout/leaverequest";
+import Avansrequest from "layouts/user-layout/avansrequest";
+
 import Company from "layouts/company";
 
 import Addsalary from "layouts/company-manager-layout/add-sallary/tables";
@@ -76,6 +79,7 @@ import Addincome from "layouts/company-manager-layout/add-income";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
+import PaidIcon from "@mui/icons-material/Paid";
 
 const routes = [
   {
@@ -220,12 +224,21 @@ const routes = [
 
   {
     type: "route",
+    name: "AvansRequest",
+    key: "avansrequest",
+    icon: <PaidIcon fontSize="medium">person</PaidIcon>,
+    route: "/employee/avansrequest",
+    component: <Avansrequest />,
+    visibleRoles: ["COMPANY_MANAGER", "EMPLOYEE"],
+  },
+  {
+    type: "route",
     name: "Request",
     key: "request",
     icon: <Icon fontSize="medium">person</Icon>,
-    route: "/employee/request",
+    route: "/employee/leaverequest",
     component: <Leaverequest />,
-    visibleRoles: ["EMPLOYEE"],
+    visibleRoles: ["COMPANY_MANAGER", "EMPLOYEE"],
   },
   {
     type: "route",

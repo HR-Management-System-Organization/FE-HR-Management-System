@@ -31,6 +31,7 @@ import DataTable from "examples/Tables/DataTable";
 import authorsTableData from "layouts/company-manager-layout/tables/data/authorsTableData";
 import authorsTableData2 from "layouts/company-manager-layout/tables/data/authorsTableData2";
 import authorsTableData3 from "layouts/company-manager-layout/tables/data/authorsTableData3";
+import authorsTableDataavans from "layouts/company-manager-layout/tables/data/authorsTableDataavans";
 
 import projectsTableData from "layouts/tables/data/projectsTableData";
 
@@ -38,6 +39,7 @@ function UserTables() {
   const { columns, rows } = authorsTableData();
   const { columns: rColumns, rows: rRows } = authorsTableData2();
   const { columns: yColumns, rows: yRows } = authorsTableData3();
+  const { columns: yxColumns, rows: yxRows } = authorsTableDataavans();
 
   const { columns: pColumns, rows: pRows } = projectsTableData();
 
@@ -119,6 +121,33 @@ function UserTables() {
               <MDBox pt={3}>
                 <DataTable
                   table={{ columns: yColumns, rows: yRows }}
+                  isSorted={false}
+                  entriesPerPage={false}
+                  showTotalEntries={false}
+                  noEndBorder
+                />
+              </MDBox>
+            </Card>
+          </Grid>
+          <Grid item xs={12}>
+            <Card>
+              <MDBox
+                mx={2}
+                mt={-3}
+                py={3}
+                px={2}
+                variant="gradient"
+                bgColor="info"
+                borderRadius="lg"
+                coloredShadow="info"
+              >
+                <MDTypography variant="h6" color="white">
+                  AVans Request
+                </MDTypography>
+              </MDBox>
+              <MDBox pt={3}>
+                <DataTable
+                  table={{ columns: yxColumns, rows: yxRows }}
                   isSorted={false}
                   entriesPerPage={false}
                   showTotalEntries={false}
