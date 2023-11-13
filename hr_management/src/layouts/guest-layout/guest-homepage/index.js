@@ -1,4 +1,14 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import {
+  CardMedia,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Card,
+  CardContent,
+} from "@mui/material";
 import contained from "assets/theme-dark/components/button/contained";
 import axios from "axios";
 import MDBox from "components/MDBox";
@@ -110,6 +120,14 @@ function GuestHomepage() {
           Welcome {userInfo.name}
         </MDTypography>
       </MDBox>
+      <Card>
+        <CardMedia
+          sx={{ height: 450 }}
+          image={`${process.env.PUBLIC_URL}/indir.jpeg`}
+          title="company"
+        />
+      </Card>
+
       <MDTypography variant="h6" fontWeight="light" fontFamily="monospace" margin="25px">
         We act with the ideology of constantly improving in order to provide you with the best
         service.
@@ -135,17 +153,62 @@ function GuestHomepage() {
         </MDTypography>
       </MDBox>
 
-      <MDBox pr={1}>
-        <MDInput label="Search" value={searchQuery} onChange={handleSearch} />
+      <MDBox pr={1} sx={{}}>
+        <MDInput
+          sx={{ width: 350, paddingBottom: 5 }}
+          label="Search"
+          value={searchQuery}
+          onChange={handleSearch}
+        />
+      </MDBox>
+      <MDBox sx={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
+        {filteredData.map((row) => (
+          <Card
+            key={row.companyId}
+            sx={{ width: 350, maxHeight: "%100", display: "flex", gap: 5, cursor: "pointer" }}
+            onClick={() => {
+              navigate(`/company/${row.companyId}`);
+            }}
+          >
+            <CardMedia
+              sx={{ height: 250, cursor: "pointer" }}
+              image={`${process.env.PUBLIC_URL}/pxfuel.jpg`}
+              title="company"
+            />
+            <CardContent
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 5,
+                textAlign: "center",
+              }}
+            >
+              <MDTypography variant="h3" color="dark">
+                {row.companyName}
+              </MDTypography>
+              <MDTypography variant="h5" color="secondary">
+                {row.companyCountry} / {row.companyProvince}
+              </MDTypography>
+              <MDButton
+                color="warning"
+                onClick={() => {
+                  navigate(`/company/${row.companyId}`);
+                }}
+              >
+                INFO
+              </MDButton>
+            </CardContent>
+          </Card>
+        ))}
       </MDBox>
 
-      <TableContainer>
+      {/* <TableContainer>
         <Table sx={{ minWidth: 650 }} aria-label="basit tablo">
           <TableHead
             sx={{
               backgroundColor: "#f5f5f5",
               display: "flex",
-              justifyContent: "space-between",
+              justifyContent: "space-around",
               alignItems: "center",
             }}
           >
@@ -161,7 +224,10 @@ function GuestHomepage() {
                 key={row.companyName}
                 sx={{
                   "&:last-child td, &:last-child th": { border: 0 },
+                  display: "flex",
+                  justifyContent: "space-between",
                   alignItems: "center",
+                  border: "0,25px solid",
                 }}
               >
                 <TableCell align="center">{row.companyName}</TableCell>
@@ -182,7 +248,7 @@ function GuestHomepage() {
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
+      </TableContainer> */}
 
       <Footer />
     </DashboardLayout>

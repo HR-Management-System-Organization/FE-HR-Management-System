@@ -130,9 +130,11 @@ class Comment extends Component {
                       alignItems: "center",
                     }}
                   >
-                    <TableCell>Name </TableCell>
-                    <TableCell>Email </TableCell>
-                    <TableCell>Comment</TableCell>
+                    <TableRow>
+                      <TableCell>Name </TableCell>
+                      <TableCell>Email </TableCell>
+                      <TableCell>Comment</TableCell>
+                    </TableRow>
                   </TableHead>
                 </Table>
                 {this.state.activeComments.map((comment, index) => (
