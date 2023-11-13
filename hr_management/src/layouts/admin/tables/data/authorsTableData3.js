@@ -1,24 +1,17 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/function-component-definition */
 /**
-=========================================================
-* HR Management System React - v2.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/material-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-
-Coded by www.creative-tim.com
-
- =========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-*/
+ * HR Management System React - v2.2.0
+ * Product Page: https://www.creative-tim.com/product/material-dashboard-react
+ * Copyright 2023 Creative Tim (https://www.creative-tim.com)
+ * Coded by www.creative-tim.com
+ */
 
 // HR Management System React components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDAvatar from "components/MDAvatar";
+import MDButton from "components/MDButton";
 import MDBadge from "components/MDBadge";
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
@@ -29,55 +22,57 @@ import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
 
-export default function data() {
+export default function CommentTable() {
   const [data, setData] = useState(null);
   const token = String(localStorage.getItem("Authorization"));
-  const handleEdit = (authorId) => {
-    console.log("Author ID to edit:", authorId, " ", typeof authorId); // Add this line for debugging
-    // Burada POST isteğinizi göndermek için Axios veya başka bir HTTP istemci kullanabilirsiniz,
-    if (authorId !== null) {
+
+  const handleEdit = (commentId) => {
+    console.log("Comment ID to accept:", commentId, " ", typeof commentId);
+
+    if (commentId !== null) {
       Axios.post(
-        "http://localhost:7074/api/v1/comment/activationbyadmin?authorId=" + authorId,
-        null, // Boş bir body, çünkü veriyi parametre olarak gönderiyoruz
+        `http://localhost:7074/api/v1/comment/activationbyadmin?commentId=${commentId}`,
+        null,
         {
           headers: {
             "Content-Type": "application/json",
           },
         }
       )
-
         .then((response) => {
-          // İsteğiniz başarıyla tamamlandığında yapılması gereken işlemler
+          // Filter out the accepted comment from the data state
+          setData((prevData) => prevData.filter((comment) => comment.commentId !== commentId));
         })
         .catch((error) => {
-          console.error("Error editing data:", error);
+          console.error("Error accepting data:", error);
         });
     } else {
-      console.error("authorId is null. Cannot send the request.");
+      console.error("commentId is null. Cannot send the request.");
     }
   };
-  const handleEdit2 = (authorId) => {
-    console.log("Author ID to edit:", authorId, " ", typeof authorId); // Add this line for debugging
-    // Burada POST isteğinizi göndermek için Axios veya başka bir HTTP istemci kullanabilirsiniz,
-    if (authorId !== null) {
+
+  const handleEdit2 = (commentId) => {
+    console.log("Comment ID to delete:", commentId, " ", typeof commentId);
+
+    if (commentId !== null) {
       Axios.post(
-        "http://localhost:7074/api/v1/comment/deletebyadmin?authorId=" + authorId,
-        null, // Boş bir body, çünkü veriyi parametre olarak gönderiyoruz
+        `http://localhost:7074/api/v1/comment/deletebyadmin?commentId=${commentId}`,
+        null,
         {
           headers: {
             "Content-Type": "application/json",
           },
         }
       )
-
         .then((response) => {
-          // İsteğiniz başarıyla tamamlandığında yapılması gereken işlemler
+          // Filter out the deleted comment from the data state
+          setData((prevData) => prevData.filter((comment) => comment.commentId !== commentId));
         })
         .catch((error) => {
-          console.error("Error editing data:", error);
+          console.error("Error deleting data:", error);
         });
     } else {
-      console.error("authorId is null. Cannot send the request.");
+      console.error("commentId is null. Cannot send the request.");
     }
   };
 
@@ -97,7 +92,7 @@ export default function data() {
         console.error("Error fetching data:", error);
       });
   }, []);
-  console.log(data);
+
   const Author = ({ image, name, email }) => (
     <MDBox display="flex" alignItems="center" lineHeight={1}>
       <MDAvatar src={image} name={name} size="sm" />
@@ -118,20 +113,29 @@ export default function data() {
       <MDTypography variant="caption">{description}</MDTypography>
     </MDBox>
   );
+
   const rows = data
-    ? data.map((author, index) => ({
+    ? data.map((comment, index) => ({
         status: (
           <MDBox ml={-1}>
-            <MDBadge badgeContent={author.ecommentStatus} variant="gradient" size="sm" />
+            <MDBadge badgeContent={comment.ecommentStatus} variant="gradient" size="sm" />
           </MDBox>
         ),
         Comment: (
           <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            {author.comment}
+            {comment.comment}
           </MDTypography>
         ),
-        Active: <button onClick={() => handleEdit(author.commentId)}>Accept</button>,
-        Delete: <button onClick={() => handleEdit2(author.commentId)}>Delete</button>,
+        Active: (
+          <MDButton color="success" onClick={() => handleEdit(comment.commentId)}>
+            Accept
+          </MDButton>
+        ),
+        Delete: (
+          <MDButton color="error" onClick={() => handleEdit2(comment.commentId)}>
+            Delete
+          </MDButton>
+        ),
       }))
     : [];
 
