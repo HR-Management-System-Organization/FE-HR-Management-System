@@ -90,7 +90,7 @@ export default function Data() {
 
   useEffect(() => {
     Axios.post(
-      "http://localhost:7073/api/v1/company/findalloldrequesbycompanymanager2",
+      "http://localhost/company/findalloldrequesbycompanymanager2",
       { token },
       {
         headers: { "Content-Type": "application/json" },
@@ -128,7 +128,7 @@ export default function Data() {
 
   const rows = data
     ? data.map((author, index) => ({
-        Employee: <Author image={team2} name={author.username} email={""} />,
+        Employee: <Author image={team2} name={author.name} email={""} />,
         function: <Job title={author.izinTur} description={author.nedeni} />,
         status: (
           <MDBox ml={-1}>
