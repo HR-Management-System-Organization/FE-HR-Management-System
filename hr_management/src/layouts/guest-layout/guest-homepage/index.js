@@ -155,7 +155,7 @@ function GuestHomepage() {
 
       <MDBox pr={1} sx={{}}>
         <MDInput
-          sx={{ width: 350, margingBottom: 2 }}
+          sx={{ width: 350, paddingBottom: 5 }}
           label="Search"
           value={searchQuery}
           onChange={handleSearch}
@@ -163,9 +163,15 @@ function GuestHomepage() {
       </MDBox>
       <MDBox sx={{ display: "flex", flexWrap: "wrap", gap: 10 }}>
         {filteredData.map((row) => (
-          <Card key={row.companyId} sx={{ width: 350, maxHeight: "%100", display: "flex", gap: 5 }}>
+          <Card
+            key={row.companyId}
+            sx={{ width: 350, maxHeight: "%100", display: "flex", gap: 5, cursor: "pointer" }}
+            onClick={() => {
+              navigate(`/company/${row.companyId}`);
+            }}
+          >
             <CardMedia
-              sx={{ height: 250 }}
+              sx={{ height: 250, cursor: "pointer" }}
               image={`${process.env.PUBLIC_URL}/pxfuel.jpg`}
               title="company"
             />
@@ -177,10 +183,10 @@ function GuestHomepage() {
                 textAlign: "center",
               }}
             >
-              <MDTypography variant="h3" color="dark">
+              <MDTypography variant="h3" color="primary">
                 {row.companyName}
               </MDTypography>
-              <MDTypography variant="h5">
+              <MDTypography variant="h5" color="secondary">
                 {row.companyCountry} / {row.companyProvince}
               </MDTypography>
               <MDButton
@@ -196,7 +202,7 @@ function GuestHomepage() {
         ))}
       </MDBox>
 
-      <TableContainer>
+      {/* <TableContainer>
         <Table sx={{ minWidth: 650 }} aria-label="basit tablo">
           <TableHead
             sx={{
@@ -242,7 +248,7 @@ function GuestHomepage() {
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
+      </TableContainer> */}
 
       <Footer />
     </DashboardLayout>
