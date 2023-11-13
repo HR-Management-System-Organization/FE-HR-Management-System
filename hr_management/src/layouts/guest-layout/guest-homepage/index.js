@@ -147,10 +147,11 @@ function GuestHomepage() {
           button next to the company you want to be interested in and get more information about.
         </MDTypography>
       </MDTypography>
-
-      <MDTypography display="block" variant="h3" color="dark" my={4}>
-        Company List:
-      </MDTypography>
+      <MDBox>
+        <MDTypography display="block" variant="h4" color="dark" my={4}>
+          Company List:
+        </MDTypography>
+      </MDBox>
 
       <MDBox pr={1} sx={{}}>
         <MDInput
@@ -194,6 +195,54 @@ function GuestHomepage() {
           </Card>
         ))}
       </MDBox>
+
+      <TableContainer>
+        <Table sx={{ minWidth: 650 }} aria-label="basit tablo">
+          <TableHead
+            sx={{
+              backgroundColor: "#f5f5f5",
+              display: "flex",
+              justifyContent: "space-around",
+              alignItems: "center",
+            }}
+          >
+            <TableCell padding="center">Company Name</TableCell>
+            <TableCell align="center" sx={{ fontWeight: "bold" }}>
+              Location
+            </TableCell>
+            <TableCell align="center">Info</TableCell>
+          </TableHead>
+          <TableBody>
+            {filteredData.map((row) => (
+              <TableRow
+                key={row.companyName}
+                sx={{
+                  "&:last-child td, &:last-child th": { border: 0 },
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  border: "0,25px solid",
+                }}
+              >
+                <TableCell align="center">{row.companyName}</TableCell>
+                <TableCell align="center">
+                  {row.companyCountry} / {row.companyProvince}
+                </TableCell>
+                <TableCell align="center">
+                  <MDButton
+                    color="warning"
+                    onClick={() => {
+                      navigate(`/company/${row.companyId}`);
+                    }}
+                  >
+                    INFO
+                  </MDButton>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
       <Footer />
     </DashboardLayout>
