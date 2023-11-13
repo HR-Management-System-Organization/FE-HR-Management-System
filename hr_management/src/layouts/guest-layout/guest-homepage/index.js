@@ -183,7 +183,7 @@ function GuestHomepage() {
                 textAlign: "center",
               }}
             >
-              <MDTypography variant="h3" color="primary">
+              <MDTypography variant="h3" color="dark">
                 {row.companyName}
               </MDTypography>
               <MDTypography variant="h5" color="secondary">
