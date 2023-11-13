@@ -73,6 +73,7 @@ import Company from "layouts/company";
 
 import Addsalary from "layouts/company-manager-layout/add-sallary/tables";
 import Addincome from "layouts/company-manager-layout/add-income";
+import Addexpense from "layouts/company-manager-layout/add-expense";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -262,6 +263,15 @@ const routes = [
     route: "manager/employees",
     component: <Addsalary />,
     visibleRoles: ["COMPANY_MANAGER"],
+  },
+  {
+    type: "route",
+    name: "Add Expense",
+    key: "expense",
+    icon: <PriceChangeIcon fontSize="medium">dashboard</PriceChangeIcon>,
+    route: "manager/addexpense",
+    component: <Addexpense />,
+    visibleRoles: ["COMPANY_MANAGER", "EMPLOYEE"],
   },
   {
     type: "route",
