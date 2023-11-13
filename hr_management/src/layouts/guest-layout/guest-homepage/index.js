@@ -145,7 +145,7 @@ function GuestHomepage() {
             sx={{
               backgroundColor: "#f5f5f5",
               display: "flex",
-              justifyContent: "space-between",
+              justifyContent: "space-around",
               alignItems: "center",
             }}
           >
@@ -161,7 +161,10 @@ function GuestHomepage() {
                 key={row.companyName}
                 sx={{
                   "&:last-child td, &:last-child th": { border: 0 },
+                  display: "flex",
+                  justifyContent: "space-between",
                   alignItems: "center",
+                  border: "0,25px solid",
                 }}
               >
                 <TableCell align="center">{row.companyName}</TableCell>
