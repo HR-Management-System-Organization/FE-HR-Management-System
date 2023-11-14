@@ -4,6 +4,7 @@ import MDInput from "components/MDInput";
 import MDTypography from "components/MDTypography";
 import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgImage from "assets/images/bg-sign-up-cover.jpeg";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 function GuestHomepage() {
   return (
@@ -19,6 +20,7 @@ function GuestHomepage() {
         mb={1}
         textAlign="center"
       >
+        <DashboardNavbar />
         <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
           Welcome
         </MDTypography>

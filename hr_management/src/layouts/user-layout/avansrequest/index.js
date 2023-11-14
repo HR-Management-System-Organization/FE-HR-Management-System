@@ -14,6 +14,7 @@ import moment from "moment";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import Axios from "axios";
 import CurrencyLiraIcon from "@mui/icons-material/CurrencyLira";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 const localizer = momentLocalizer(moment);
 
@@ -56,6 +57,7 @@ function MyForm() {
 
   return (
     <DashboardLayout>
+      <DashboardNavbar />
       <div>
         <h2>Avans Request Form</h2>
         <form onSubmit={handleSubmit}>

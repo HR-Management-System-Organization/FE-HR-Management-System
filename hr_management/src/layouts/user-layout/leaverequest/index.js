@@ -12,6 +12,7 @@ import { Calendar, momentLocalizer } from "react-big-calendar";
 import MenuItem from "@mui/material/MenuItem";
 import moment from "moment";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import Axios from "axios";
 
 const localizer = momentLocalizer(moment);
@@ -62,6 +63,7 @@ function MyForm() {
 
   return (
     <DashboardLayout>
+      <DashboardNavbar />
       <div>
         <h2>Leave Request Form</h2>
         <form onSubmit={handleSubmit}>

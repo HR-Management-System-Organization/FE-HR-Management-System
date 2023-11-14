@@ -27,6 +27,7 @@ import MDBox from "components/MDBox";
 // HR Management System React example components
 import Footer from "examples/Footer";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 // Overview page components
 import Header from "layouts/profile/components/Header";
@@ -74,6 +75,7 @@ function Overview() {
         backgroundPositionY: "50%",
       }}
     >
+      <DashboardNavbar />
       <Header fullName={[userInfo.name, " ", userInfo.surName]} />
       <MDBox mt={3} mb={2}>
         <Grid container spacing={3}>
