@@ -12,7 +12,37 @@ function MyForm() {
   const [incomeType, setIncomeType] = useState("Interest Expense");
   const [incomeDate, setIncomeDate] = useState("");
   const [error, setError] = useState("");
+  const [expenseid, setexpenseid] = useState("");
   const [userInfo, setUserInfo] = useState({});
+  const [selectedFile, setSelectedFile] = useState(null);
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+  };
+  const handleFileUpload = (e) => {
+    e.preventDefault();
+
+    const apiUrl = `http://localhost:7073/api/v1/company/uploadpdf`;
+
+    if (selectedFile) {
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+
+      Axios.post(apiUrl, formData)
+        .then((response) => {
+          // İşlem başarılıysa, response'dan gerekli bilgileri alabilirsiniz.
+          console.log(response.data);
+          // Başka işlemler yapabilirsiniz, örneğin bir mesaj gösterme.
+        })
+        .catch((error) => {
+          let errorMessage = error.response ? error.response.data.message : "Sunucu hatası";
+          console.error("Dosya yükleme hatası", error);
+          setError(errorMessage);
+        });
+    } else {
+      console.log("Dosya seçilmedi, PDF yoksa boş bırakabilirsiniz.");
+    }
+  };
 
   useEffect(() => {
     async function fetchUserInfo() {
@@ -39,7 +69,9 @@ function MyForm() {
 
     Axios.post(apiUrl)
       .then((response) => {
-        // Handle the response, e.g., display a success message
+        console.log(response);
+        setexpenseid(response.data);
+        handleFileUpload(e);
       })
       .catch((error) => {
         let errorMessage = error.response.data.message;
@@ -89,7 +121,8 @@ function MyForm() {
               <MenuItem value="Interest Expense">Interest Expense</MenuItem>
             </Select>
           </div>
-          <br />
+          <br></br>
+
           <p style={{ display: "flex", alignItems: "center" }}>Expense date</p>
           <div style={{ display: "flex", alignItems: "center" }}>
             <TextField
@@ -103,6 +136,10 @@ function MyForm() {
           </div>
           <br />
           {error && <div style={{ color: "red" }}>{error}</div>}
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <input type="file" onChange={handleFileChange} />
+          </div>
+          <br></br>
           <Button
             style={{ display: "flex", alignItems: "center" }}
             type="submit"

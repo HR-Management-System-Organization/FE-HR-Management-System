@@ -42,51 +42,9 @@ export default function Data() {
     return date.toLocaleDateString(); // You can use other formatting options if needed
   };
 
-  const handleEdit2 = (authorId) => {
-    console.log("Author ID to edit:", authorId, " ", typeof authorId);
-    if (authorId !== null) {
-      Axios.post(
-        `http://localhost/company/deleteexpensebycompanymanager?authorId=${authorId}`,
-        { token },
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      )
-        .then((response) => {
-          // Handle the successful response here
-        })
-        .catch((error) => {
-          console.error("Error editing data:", error);
-        });
-    } else {
-      console.error("authorId is null. Cannot send the request.");
-    }
-  };
-
-  const handleEdit = (authorId) => {
-    console.log("Author ID to edit:", authorId, " ", typeof authorId);
-    if (authorId !== null) {
-      Axios.post(
-        `http://localhost/company/activeexpensebycompanymanager?authorId=${authorId}`,
-        { token },
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      )
-        .then((response) => {
-          // Handle the successful response here
-        })
-        .catch((error) => {
-          console.error("Error editing data:", error);
-        });
-    } else {
-      console.error("authorId is null. Cannot send the request.");
-    }
-  };
-
   useEffect(() => {
     Axios.post(
-      "http://localhost/company/findalloldrequesbycompanymanager2",
+      "http://localhost/company/findalloldrequesbycompanymanager3",
       { token },
       {
         headers: { "Content-Type": "application/json" },
@@ -129,17 +87,17 @@ export default function Data() {
           function: <Job title={author.expenseId} description={author.nedeni} />,
           status: (
             <MDBox ml={-1}>
-              <MDBadge badgeContent={author.eExpenseStatus} variant="gradient" size="sm" />
+              <MDBadge badgeContent={author.status} variant="gradient" size="sm" />
             </MDBox>
           ),
           baslangic: (
             <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-              {formatDate(author.billDate)}
+              {formatDate(author.izinbaslangic)}
             </MDTypography>
           ),
           calisaninintotalizinhakki: (
             <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-              {author.amount} days
+              {author.izinhakki} days
             </MDTypography>
           ),
           izinsüresi: (
@@ -152,9 +110,6 @@ export default function Data() {
               {formatDate(author.izinbitis)}
             </MDTypography>
           ),
-
-          Active: <button onClick={() => handleEdit(author.expenseId)}>Accept</button>,
-          Delete: <button onClick={() => handleEdit2(author.expenseId)}>Reject</button>,
         }))
       : [];
 
@@ -171,9 +126,6 @@ export default function Data() {
       },
       { Header: "izinsüresi", accessor: "izinsüresi", align: "center" },
       { Header: "bitis", accessor: "bitis", align: "center" },
-
-      { Header: "Active", accessor: "Active", align: "center" },
-      { Header: "Delete", accessor: "Delete", align: "center" },
     ],
     rows: rows,
   };
