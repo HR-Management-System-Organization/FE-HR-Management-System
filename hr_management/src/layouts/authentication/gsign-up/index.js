@@ -7,7 +7,11 @@ import MDButton from "components/MDButton";
 import axios from "axios";
 import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgImage from "assets/images/bg-sign-up-cover.jpeg";
-import { Link } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+
+const API_URL = "http://localhost:7071/api/v1/auth/register_with_rabbitmqguset";
 
 function Cover() {
   const [error, setError] = useState();
@@ -16,8 +20,10 @@ function Cover() {
     username: "",
     password: "",
     rePassword: "",
-    gender: "MALE", // Default değeri belirleyebilirsiniz
+    gender: "MALE",
   });
+
+  const navigate = useNavigate();
 
   function formOnChange(e) {
     const { name, value } = e.target;
@@ -31,7 +37,7 @@ function Cover() {
 
     axios
       .post(
-        "http://localhost:7071/api/v1/auth/register_with_rabbitmqguset",
+        API_URL,
         {
           email,
           username,
@@ -46,17 +52,19 @@ function Cover() {
         }
       )
       .then((response) => {
-        console.log("Kayıt başarılı:", response.data);
+        toast.success("Register successful!");
+
+        setTimeout(() => {
+          navigate("/authentication/sign-in"); // Başarılı olduğunda yönlendirme
+        }, 2000);
       })
       .catch((error) => {
         let errorMessage = error.response.data.message;
-        if (errorMessage == "Parametre Hatası!") {
+        if (errorMessage === "Parametre Hatası!") {
           errorMessage = "Şifre Uzunluğu En Az 8 Karakter, En Fazla 32 Karakter Olabilir";
-          console.log(errorMessage);
         } else {
           setError(errorMessage);
         }
-        setError(errorMessage);
 
         console.error(error);
         console.log(errorMessage);
@@ -65,6 +73,7 @@ function Cover() {
 
   return (
     <CoverLayout image={bgImage}>
+      <ToastContainer position="top-center" autoClose={3000} />
       <Card>
         <MDBox
           variant="gradient"
@@ -124,11 +133,7 @@ function Cover() {
               />
             </MDBox>
             <MDBox mb={2}>
-              <select
-                name="gender"
-                onChange={formOnChange}
-                value={userInfo.gender} // Seçili değeri göstermek için value ekleyin
-              >
+              <select name="gender" onChange={formOnChange} value={userInfo.gender}>
                 <option value="MALE">Male</option>
                 <option value="FEMALE">Female</option>
               </select>

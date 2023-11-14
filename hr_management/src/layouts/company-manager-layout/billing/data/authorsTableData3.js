@@ -48,6 +48,7 @@ export default function Data() {
       { token },
       {
         headers: { "Content-Type": "application/json" },
+        Authorization: `Bearer ${token}`,
       }
     )
       .then((response) => {
@@ -79,37 +80,38 @@ export default function Data() {
     </MDBox>
   );
 
-  const rows = data
-    ? data.map((author, index) => ({
-        ExpenseType: <Author name={author.expenseType} email={""} />,
+  const rows =
+    data && data instanceof Array
+      ? data.map((author, index) => ({
+          ExpenseType: <Author name={author.expenseType} email={""} />,
 
-        status: (
-          <MDBox ml={-1}>
-            <MDBadge badgeContent={author.eexpenseStatus} variant="gradient" size="sm" />
-          </MDBox>
-        ),
-        netAmount: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            {author.netAmount}
-          </MDTypography>
-        ),
-        tax: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            {author.tax}
-          </MDTypography>
-        ),
-        amount: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            {author.amount}
-          </MDTypography>
-        ),
-        lastpayday: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            {formatDate(author.billDate)}
-          </MDTypography>
-        ),
-      }))
-    : [];
+          status: (
+            <MDBox ml={-1}>
+              <MDBadge badgeContent={author.eexpenseStatus} variant="gradient" size="sm" />
+            </MDBox>
+          ),
+          netAmount: (
+            <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+              {author.netAmount}
+            </MDTypography>
+          ),
+          tax: (
+            <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+              {author.tax}
+            </MDTypography>
+          ),
+          amount: (
+            <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+              {author.amount}
+            </MDTypography>
+          ),
+          lastpayday: (
+            <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+              {formatDate(author.billDate)}
+            </MDTypography>
+          ),
+        }))
+      : [];
 
   return {
     columns: [

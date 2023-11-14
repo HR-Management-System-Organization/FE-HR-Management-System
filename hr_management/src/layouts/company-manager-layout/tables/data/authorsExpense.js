@@ -122,40 +122,41 @@ export default function Data() {
     </MDBox>
   );
 
-  const rows = data
-    ? data.map((author, index) => ({
-        Employee: <Author image={team2} name={author.name} email={""} />,
-        function: <Job title={author.izinTur} description={author.nedeni} />,
-        status: (
-          <MDBox ml={-1}>
-            <MDBadge badgeContent={author.status} variant="gradient" size="sm" />
-          </MDBox>
-        ),
-        baslangic: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            {formatDate(author.izinbaslangic)}
-          </MDTypography>
-        ),
-        calisaninintotalizinhakki: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            {author.izinhakki} days
-          </MDTypography>
-        ),
-        izinsüresi: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            {author.izinsuresi} days
-          </MDTypography>
-        ),
-        bitis: (
-          <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-            {formatDate(author.izinbitis)}
-          </MDTypography>
-        ),
+  const rows =
+    data && data instanceof Array
+      ? data.map((author, index) => ({
+          Employee: <Author image={team2} name={author.name} email={""} />,
+          function: <Job title={author.izinTur} description={author.nedeni} />,
+          status: (
+            <MDBox ml={-1}>
+              <MDBadge badgeContent={author.status} variant="gradient" size="sm" />
+            </MDBox>
+          ),
+          baslangic: (
+            <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+              {formatDate(author.izinbaslangic)}
+            </MDTypography>
+          ),
+          calisaninintotalizinhakki: (
+            <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+              {author.izinhakki} days
+            </MDTypography>
+          ),
+          izinsüresi: (
+            <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+              {author.izinsuresi} days
+            </MDTypography>
+          ),
+          bitis: (
+            <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
+              {formatDate(author.izinbitis)}
+            </MDTypography>
+          ),
 
-        Active: <button onClick={() => handleEdit(author.id)}>Accept</button>,
-        Delete: <button onClick={() => handleEdit2(author.id)}>Reject</button>,
-      }))
-    : [];
+          Active: <button onClick={() => handleEdit(author.id)}>Accept</button>,
+          Delete: <button onClick={() => handleEdit2(author.id)}>Reject</button>,
+        }))
+      : [];
 
   return {
     columns: [
