@@ -38,11 +38,9 @@ export default function data() {
     if (authorId !== null) {
       Axios.post(
         "http://localhost:7072/api/v1/user/activationbyadmin?authorId=" + authorId,
-        null, // Boş bir body, çünkü veriyi parametre olarak gönderiyoruz
+        { token },
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
         }
       )
 
@@ -62,11 +60,9 @@ export default function data() {
     if (authorId !== null) {
       Axios.post(
         "http://localhost:7072/api/v1/user/deletebyadmin?authorId=" + authorId,
-        null, // Boş bir body, çünkü veriyi parametre olarak gönderiyoruz
+        { token },
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
         }
       )
 

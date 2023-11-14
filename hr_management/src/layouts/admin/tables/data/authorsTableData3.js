@@ -32,11 +32,9 @@ export default function CommentTable() {
     if (commentId !== null) {
       Axios.post(
         `http://localhost:7074/api/v1/comment/activationbyadmin?commentId=${commentId}`,
-        null,
+        { token },
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
         }
       )
         .then((response) => {
@@ -57,11 +55,9 @@ export default function CommentTable() {
     if (commentId !== null) {
       Axios.post(
         `http://localhost:7074/api/v1/comment/deletebyadmin?commentId=${commentId}`,
-        null,
+        { token },
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
         }
       )
         .then((response) => {

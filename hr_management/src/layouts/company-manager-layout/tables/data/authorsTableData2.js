@@ -47,11 +47,9 @@ export default function Data() {
     if (authorId !== null) {
       Axios.post(
         `http://localhost:7072/api/v1/user/deleterequestbycompanymanager?authorId=${authorId}`,
-        null,
+        { token },
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
         }
       )
         .then((response) => {
@@ -70,15 +68,13 @@ export default function Data() {
     if (authorId !== null) {
       Axios.post(
         `http://localhost:7072/api/v1/user/activerequestbycompanymanager?authorId=${authorId}`,
-        null,
+        { token },
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
         }
       )
         .then((response) => {
-          // Handle the successful response here
+          useEffect();
         })
         .catch((error) => {
           console.error("Error editing data:", error);

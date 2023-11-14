@@ -26,6 +26,7 @@ import CurrencyLiraIcon from "@mui/icons-material/CurrencyLira";
 import team2 from "assets/images/team-2.jpg";
 import team3 from "assets/images/team-3.jpg";
 import team4 from "assets/images/team-4.jpg";
+import { Refresh } from "@mui/icons-material";
 
 export default function Data() {
   const [data, setData] = useState(null);
@@ -52,6 +53,8 @@ export default function Data() {
       })
         .then((response) => {
           // Başarılı yanıtı burada işleyin
+
+          window.location.reload();
         })
         .catch((error) => {
           console.error("Veri düzenleme hatası:", error);
@@ -62,6 +65,7 @@ export default function Data() {
   };
 
   useEffect(() => {
+    console.log(String(localStorage.getItem("Authorization")));
     Axios.post(
       "http://localhost:7072/api/v1/user/findallguestbycompanymanager",
       { token },

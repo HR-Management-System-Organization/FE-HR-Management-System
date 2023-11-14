@@ -124,11 +124,9 @@ export default function EmployeeTable() {
     if (authorId !== null) {
       Axios.post(
         `http://localhost:7072/api/v1/user/deleteprofilebycompanymanager?authorId=${authorId}`,
-        null,
+        { token },
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
         }
       )
         .then((response) => {

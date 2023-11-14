@@ -48,11 +48,9 @@ export default function Data() {
     if (authorId !== null) {
       Axios.post(
         `http://localhost:7072/api/v1/user/deleteavansrequestbycompanymanager?authorId=${authorId}`,
-        null,
+        { token },
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
         }
       )
         .then((response) => {
@@ -71,11 +69,9 @@ export default function Data() {
     if (authorId !== null) {
       Axios.post(
         `http://localhost:7072/api/v1/user/activeavansrequestbycompanymanager?authorId=${authorId}`,
-        null,
+        { token },
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
         }
       )
         .then((response) => {
