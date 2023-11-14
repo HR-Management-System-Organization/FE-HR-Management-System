@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import Card from "@mui/material/Card";
@@ -9,67 +9,51 @@ import MDButton from "components/MDButton";
 import axios from "axios";
 import CoverLayout from "layouts/authentication/components/CoverLayout";
 import bgImage from "assets/images/bg-sign-up-cover.jpeg";
-import MDAlert from "components/MDAlert";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Alert } from "reactstrap";
 
-const API_URL = "http://localhost:7072/api/v1/user/login";
+const API_URL = "http://localhost/user/login";
 
 function Cover() {
   const [credentials, setCredentials] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
-  // const { setUserRole } = useCentralState();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLoggedIn2, setIsLoggedIn2] = useState(false);
-
   const [role, setRole] = useState();
+  const navigate = useNavigate();
 
-  // const storedToken = localStorage.getItem("Authorization");
-  // try {
-  //   const storedRole = jwt_decode(storedToken).role;
-  //   return storedRole;
-  // } catch (error) {
-  //   console.log(error);
-  // }
   useEffect(() => {
-    if (isLoggedIn2) {
+    if (isLoggedIn) {
       const storedToken = localStorage.getItem("Authorization");
       if (storedToken) {
         const decodedToken = jwt_decode(storedToken);
         const decodedUserRole = decodedToken.role;
         setRole(decodedUserRole);
         setIsLoggedIn(true);
-        console.log(role);
-        localStorage.setItem(role, decodedUserRole);
+        localStorage.setItem("role", decodedUserRole); // Burada "role" olarak kaydediyorum
       }
     }
-  });
+  }, [isLoggedIn]);
 
-  const navigate = useNavigate();
+  const handleSignInSuccess = () => {
+    toast.success("Login successful!");
 
-  const formOnChange = (e) => {
-    const { name, value } = e.target;
-    setCredentials({ ...credentials, [name]: value });
-  };
-  useEffect(() => {
-    if (isLoggedIn) {
+    setTimeout(() => {
       const token = localStorage.getItem("Authorization");
       const decoded = jwt_decode(token);
-      if (role === "COMPANY_MANAGER") {
+      const decodedUserRole = decoded.role; // decodedUserRole burada tanımlanıyor
+      if (decodedUserRole === "COMPANY_MANAGER") {
         navigate("/manager/dashboard");
-      } else if (role === "ADMIN") {
+      } else if (decodedUserRole === "ADMIN") {
         navigate("/admin/profile");
-      } else if (role === "EMPLOYEE") {
+      } else if (decodedUserRole === "EMPLOYEE") {
         navigate("/employee/company");
-      } else if (role === "GUEST") {
+      } else if (decodedUserRole === "GUEST") {
         navigate("/guest/homepage");
       } else {
         navigate("/authentication/activation-failed");
       }
-    }
-  }, [isLoggedIn, navigate]);
-
-  const handleSignInSuccess = () => {
-    setIsLoggedIn(false);
+    }, 2000);
   };
 
   const handleSignIn = (e) => {
@@ -88,26 +72,20 @@ function Cover() {
         const token = response.data;
         localStorage.setItem("Authorization", `Bearer ${token}`);
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-        console.log("Login successful!", response.data);
-        setIsLoggedIn2(true);
-        // console.log(role);
+        setIsLoggedIn(true);
         handleSignInSuccess();
       })
       .catch((error) => {
         const errorMessage = error.response.data.message;
-        console.error("Login failed:", error);
-
-        console.log(errorMessage);
         setError(errorMessage);
-      }, []);
-
-    // Clear the input fields
+      });
     setCredentials({ username: "", password: "" });
   };
 
   return (
     <CoverLayout image={bgImage}>
-      {error && <Alert color="danger">Giris basarisiz</Alert>}
+      <ToastContainer position="top-center" autoClose={3000} />
+      {error && <Alert color="danger">{error}</Alert>}
       <Card>
         <MDBox
           variant="gradient"
@@ -136,7 +114,7 @@ function Cover() {
                 name="username"
                 placeholder="Username"
                 value={credentials.username}
-                onChange={formOnChange}
+                onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
                 fullWidth
               />
             </MDBox>
@@ -146,7 +124,7 @@ function Cover() {
                 name="password"
                 placeholder="Password"
                 value={credentials.password}
-                onChange={formOnChange}
+                onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
                 fullWidth
               />
             </MDBox>
