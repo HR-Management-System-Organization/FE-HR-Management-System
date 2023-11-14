@@ -36,6 +36,7 @@ function AddNewEmployee() {
   const [avatar, setAvatar] = useState("");
   const [birthday, setBirthday] = useState("");
   const [companyname, setcompanyname] = useState("");
+  const [gender, setGender] = useState("");
 
   const [userInfo, setUserInfo] = useState({});
   const [companyInfo, setCompanyInfo] = useState({});
@@ -134,6 +135,10 @@ function AddNewEmployee() {
     setAvatar(event.target.value);
   };
 
+  const handleGenderChange = (event) => {
+    setGender(event.target.value);
+  };
+
   const handleBirthdayChange = (date) => {
     if (date) {
       const formattedDate = dayjs(date).format("MM/DD/YYYY");
@@ -164,6 +169,7 @@ function AddNewEmployee() {
         avatar: avatar,
         birthday: birthday,
         companyname: companyname,
+        gender: gender,
       };
 
       axios
@@ -189,6 +195,7 @@ function AddNewEmployee() {
       setInfo("");
       setAvatar("");
       setBirthday("");
+      setGender("");
     }
   }
 
@@ -231,6 +238,14 @@ function AddNewEmployee() {
                         name="E-mail"
                         value={address}
                         onChange={handleAddressChange}
+                      />
+                    </MDBox>
+                    <MDBox mb={2} width="100%">
+                      <MDInput
+                        placeholder="Info"
+                        name="info"
+                        value={info}
+                        onChange={handleInfoChange}
                       />
                     </MDBox>
                   </div>
@@ -280,17 +295,24 @@ function AddNewEmployee() {
                         />
                       </MDBox>
                     </LocalizationProvider>
+                    <MDBox mb={2}>
+                      <TextField
+                        select
+                        label="Gender"
+                        value={gender}
+                        onChange={(e) => setGender(e.target.value)}
+                        variant="outlined"
+                        fullWidth
+                        SelectProps={{
+                          native: true,
+                        }}
+                      >
+                        <option value=""></option>
+                        <option value="Man">MALE</option>
+                        <option value="Woman">FEMALE</option>
+                      </TextField>
+                    </MDBox>
                   </div>
-                </div>
-                <div style={{ display: "flex", justifyContent: "space-between" }}>
-                  <MDBox mb={2} width="100%">
-                    <MDInput
-                      placeholder="Info"
-                      name="info"
-                      value={info}
-                      onChange={handleInfoChange}
-                    />
-                  </MDBox>
                 </div>
                 <MDBox mt={4} mb={1}>
                   <MDButton
