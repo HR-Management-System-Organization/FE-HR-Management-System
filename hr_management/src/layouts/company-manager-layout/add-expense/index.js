@@ -5,6 +5,7 @@ import Axios from "axios";
 import jwtDecode from "jwt-decode";
 import axios from "axios";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 function MyForm() {
   const [reason, setReason] = useState("");
@@ -82,6 +83,7 @@ function MyForm() {
 
   return (
     <DashboardLayout>
+      <DashboardNavbar />
       <div style={{ textAlign: "center" }}>
         <h2>Add Expense</h2>
         <form onSubmit={handleSubmit}>

@@ -36,51 +36,45 @@ Coded by www.creative-tim.com
 */
 
 // HR Management System React layouts
+import ApartmentIcon from "@mui/icons-material/Apartment";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import PeopleIcon from "@mui/icons-material/People";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import PriceChangeIcon from "@mui/icons-material/PriceChange";
 import Activation from "layouts/authentication/activation";
 import ActivationFailed from "layouts/authentication/activation-failed";
 import GSignUp from "layouts/authentication/gsign-up";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
-import Billing from "layouts/billing";
 import Overview from "layouts/profile";
-import UserDashboard from "layouts/user-layout/dashboard";
+import EmployeeHolidays from "layouts/user-layout/holidays";
 import MyCompany from "layouts/user-layout/my-company";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import PriceChangeIcon from "@mui/icons-material/PriceChange";
-import ApartmentIcon from "@mui/icons-material/Apartment";
-import PeopleIcon from "@mui/icons-material/People";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 import Logout from "layouts/authentication/logout";
 import AddNewEmployee from "layouts/company-manager-layout/add-new-employee";
 import ManagerDashboard from "layouts/company-manager-layout/dashboard";
 
+import CompanyBilling from "layouts/company-manager-layout/billing";
 import ManagerMyCompany from "layouts/company-manager-layout/my-company";
 import ManagerTables from "layouts/company-manager-layout/tables";
-import CompanyBilling from "layouts/company-manager-layout/billing";
 import GuestHomepage from "layouts/guest-layout/guest-homepage";
-import GuestNotifications from "layouts/guest-layout/notifications";
-import GuestTables from "layouts/guest-layout/tables";
 
-import AdminBilling from "layouts/admin/billing";
-import AdminDashboard from "layouts/admin/dashboard";
-import AdminNotifications from "layouts/admin/notifications";
 import AdminProfile from "layouts/admin/profile";
 import AdminTables from "layouts/admin/tables";
 import Comment from "layouts/user-layout/add-new-comment";
 
-import Leaverequest from "layouts/user-layout/leaverequest";
 import Avansrequest from "layouts/user-layout/avansrequest";
+import Leaverequest from "layouts/user-layout/leaverequest";
 
 import Company from "layouts/company";
 
-import Addsalary from "layouts/company-manager-layout/add-sallary/tables";
-import Addincome from "layouts/company-manager-layout/add-income";
 import Addexpense from "layouts/company-manager-layout/add-expense";
+import Addincome from "layouts/company-manager-layout/add-income";
+import Addsalary from "layouts/company-manager-layout/add-sallary/tables";
 
 // @mui icons
-import Icon from "@mui/material/Icon";
 import PaidIcon from "@mui/icons-material/Paid";
+import Icon from "@mui/material/Icon";
 
 const routes = [
   {
@@ -330,6 +324,15 @@ const routes = [
     route: "/authentication/logout",
     component: <Logout />,
     visibleRoles: ["ADMIN", "COMPANY_MANAGER", "GUEST", "EMPLOYEE"],
+  },
+  {
+    type: "route",
+    name: "Holidays",
+    key: "holidays",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/employee/holidays",
+    component: <EmployeeHolidays />,
+    visibleRoles: ["EMPLOYEE"],
   },
 ];
 

@@ -20,7 +20,6 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { Container, TextField } from "@mui/material";
 import dayjs from "dayjs";
 import { makeStyles } from "@mui/styles";
-import { Password } from "@mui/icons-material";
 
 function AddNewEmployee() {
   const storedToken = localStorage.getItem("Authorization");
@@ -38,8 +37,11 @@ function AddNewEmployee() {
   const [companyname, setcompanyname] = useState("");
   const [gender, setGender] = useState("");
 
+  const [feedbackMessage, setFeedbackMessage] = useState("");
+
   const [userInfo, setUserInfo] = useState({});
   const [companyInfo, setCompanyInfo] = useState({});
+
   useEffect(() => {
     async function fetchData() {
       const userInfo = await user();
@@ -55,6 +57,7 @@ function AddNewEmployee() {
     }
     fetchData();
   }, []);
+
   async function company(companyId) {
     try {
       console.log("asdad");
@@ -64,6 +67,7 @@ function AddNewEmployee() {
       console.error("company error", error);
     }
   }
+
   async function user() {
     const decodedToken = jwt_decode(storedToken);
     if (storedToken) {
@@ -100,6 +104,7 @@ function AddNewEmployee() {
       },
     },
   });
+
   const classes = useStyles();
 
   const handleNameChange = (event) => {
@@ -150,6 +155,10 @@ function AddNewEmployee() {
 
   const handleAddEmployeeSuccess = () => {
     setIsEmployeeAdded(true);
+    setFeedbackMessage("Employee Added Successfully!"); // Başarı mesajını ayarla
+    setTimeout(() => {
+      setFeedbackMessage(""); // Bir süre sonra mesajı temizle
+    }, 3000); // Mesajı 5 saniye sonra temizle (istediğiniz gibi ayarlayabilirsiniz)
   };
 
   function handleAddNewEmployee() {
@@ -180,6 +189,10 @@ function AddNewEmployee() {
         })
         .catch((error) => {
           console.log("Add employee is failed: ", error.response.data.message);
+          setFeedbackMessage("Failed To Add Employee!");
+          setTimeout(() => {
+            setFeedbackMessage(""); // Bir süre sonra mesajı temizle
+          }, 5000); // Mesajı 5 saniye sonra temizle (istediğiniz gibi ayarlayabilirsiniz)
           console.error("Add employee is failed: ", error);
         })
         .finally(() => {
@@ -210,7 +223,12 @@ function AddNewEmployee() {
                 Add New Employee
               </MDTypography>
             </MDBox>
-
+            <MDBox mt={2}>
+              <MDTypography color="error" fontWeight="bold" fontSize="1em" align="center">
+                {feedbackMessage} {/* Geri bildirim mesajını görüntüle */}
+                {/* A link will be sent to employee&apos;s personal email address for verification. */}
+              </MDTypography>
+            </MDBox>
             <MDBox pt={2} pb={3} px={3}>
               <MDBox component="form" role="form">
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -308,8 +326,8 @@ function AddNewEmployee() {
                         }}
                       >
                         <option value=""></option>
-                        <option value="Man">MALE</option>
-                        <option value="Woman">FEMALE</option>
+                        <option value="MALE">MALE</option>
+                        <option value="FEMALE">FEMALE</option>
                       </TextField>
                     </MDBox>
                   </div>
@@ -323,11 +341,6 @@ function AddNewEmployee() {
                   >
                     Add Employee
                   </MDButton>
-                </MDBox>
-                <MDBox mt={2}>
-                  <MDTypography color="text" fontWeight="light" fontSize="0.7em">
-                    A link will be sent to employee&apos;s personal email address for verification.
-                  </MDTypography>
                 </MDBox>
               </MDBox>
             </MDBox>
