@@ -126,8 +126,7 @@ export default function Data() {
     </MDBox>
   );
 
-  const rows = data
-    ? data.map((author, index) => ({
+  const rows = data ? data.map((author, index) => ({
         author: <Author image={team2} name={author.username} email={""} />,
         function: <Job title={author.nedeni} description={author.managerid} />,
         status: (
