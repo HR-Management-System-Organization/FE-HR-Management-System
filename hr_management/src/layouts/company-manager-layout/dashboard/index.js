@@ -3,7 +3,7 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 import Chart from "chart.js/auto";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
-import MDButton from "components/MDButton";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 
 function MyCompany() {
   const storedToken = localStorage.getItem("Authorization");
@@ -156,6 +156,7 @@ function MyCompany() {
         backgroundPositionY: "50%",
       }}
     >
+      <DashboardNavbar />
       <div
         style={{
           width: "50%",
