@@ -130,21 +130,29 @@ class Comment extends Component {
                       alignItems: "center",
                     }}
                   >
-                    <TableRow>
-                      <TableCell>Name </TableCell>
+                    <TableRow sx={{ display: "flex", gap: 5 }}>
+                      <TableCell sx={{ textAlign: "center" }}>Name </TableCell>
                       <TableCell>Email </TableCell>
-                      <TableCell>Comment</TableCell>
+                      <TableCell sx={{ marginLeft: 18 }}>Comment</TableCell>
                     </TableRow>
                   </TableHead>
                 </Table>
                 {this.state.activeComments.map((comment, index) => (
                   <TableContainer component={Paper} key={index}>
                     <Table sx={{ minWidth: 650 }} size="medium" aria-label="a dense table">
-                      <TableBody justifycontent="space-between">
-                        <TableRow justifycontent="space-between">
-                          <TableCell align="center">{this.state.userInfo.name}</TableCell>
-                          <TableCell align="center">{this.state.userInfo.email}</TableCell>
-                          <TableCell align="center">{comment.comment}</TableCell>
+                      <TableBody
+                        sx={{ justifyContent: "center", textAlign: "center", alignItems: "center" }}
+                      >
+                        <TableRow sx={{ display: "flex", gap: 5 }}>
+                          <TableCell sx={{ fontFamily: "monospace", textAlign: "left" }}>
+                            {this.state.userInfo.name}
+                          </TableCell>
+                          <TableCell sx={{ fontFamily: "monospace", textAlign: "left" }}>
+                            {this.state.userInfo.email}
+                          </TableCell>
+                          <TableCell sx={{ fontFamily: "monospace", textAlign: "left" }}>
+                            {comment.comment}
+                          </TableCell>
                         </TableRow>
                       </TableBody>
                     </Table>
