@@ -153,14 +153,16 @@ export default function App() {
         <CssBaseline />
         {layout === "dashboard" && (
           <>
-            <Sidenav
-              color={sidenavColor}
-              brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-              brandName="HR Management System"
-              routes={routes}
-              onMouseEnter={handleOnMouseEnter}
-              onMouseLeave={handleOnMouseLeave}
-            />
+            {pathname !== "/welcome" && (
+              <Sidenav
+                color={sidenavColor}
+                brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
+                brandName="HR Management System"
+                routes={routes}
+                onMouseEnter={handleOnMouseEnter}
+                onMouseLeave={handleOnMouseLeave}
+              />
+            )}
             <Configurator />
             {configsButton}
           </>
@@ -168,8 +170,7 @@ export default function App() {
         {layout === "vr" && <Configurator />}
         <Routes>
           <Route path="/" element={<GuestHomepage />} />
-          <Route path="/company/:companyId" element={<CompanyInfo />} />{" "}
-          {/* CompanyInfo bileşenini yönlendirin */}
+          <Route path="/company/:companyId" element={<CompanyInfo />} />
         </Routes>
         <Routes>
           {getRoutes(routes)}
@@ -182,14 +183,16 @@ export default function App() {
       <CssBaseline />
       {layout === "dashboard" && (
         <>
-          <Sidenav
-            color={sidenavColor}
-            brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-            brandName="HR Management System"
-            routes={routes}
-            onMouseEnter={handleOnMouseEnter}
-            onMouseLeave={handleOnMouseLeave}
-          />
+          {pathname !== "/welcome" && (
+            <Sidenav
+              color={sidenavColor}
+              brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
+              brandName="HR Management System"
+              routes={routes}
+              onMouseEnter={handleOnMouseEnter}
+              onMouseLeave={handleOnMouseLeave}
+            />
+          )}
           <Configurator />
           {configsButton}
         </>
@@ -198,7 +201,7 @@ export default function App() {
       <Routes>
         {getRoutes(routes)}
         {<Route path="/company/:companyId" element={<CompanyInfo />} />}
-        {<Route path="/" element={<Navigate to="/authentication/sign-in" />} />}
+        {<Route path="/" element={<Navigate to="/welcome" />} />}
       </Routes>
     </ThemeProvider>
   );

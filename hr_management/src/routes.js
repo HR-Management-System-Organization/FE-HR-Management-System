@@ -75,6 +75,7 @@ import Addsalary from "layouts/company-manager-layout/add-sallary/tables";
 // @mui icons
 import PaidIcon from "@mui/icons-material/Paid";
 import Icon from "@mui/material/Icon";
+import WelcomePage from "layouts/authentication/welcome";
 
 const routes = [
   {
@@ -207,15 +208,15 @@ const routes = [
     component: <AdminTables />,
     visibleRoles: ["ADMIN"],
   },
-  // {
-  //   type: "route",
-  //   name: "Billing",
-  //   key: "billing",
-  //   icon: <Icon fontSize="small">receipt_long</Icon>,
-  //   route: "admin/billing",
-  //   component: <AdminBilling />,
-  //   visibleRoles: ["ADMIN"],
-  // },
+  {
+    type: "route",
+    name: "Welcome",
+    key: "welcome",
+    icon: <Icon fontSize="small">receipt_long</Icon>,
+    route: "/welcome",
+    component: <WelcomePage />,
+    visibleRoles: [""],
+  },
 
   {
     type: "route",
@@ -234,6 +235,15 @@ const routes = [
     route: "/employee/leaverequest",
     component: <Leaverequest />,
     visibleRoles: ["COMPANY_MANAGER", "EMPLOYEE"],
+  },
+  {
+    type: "route",
+    name: "Holidays",
+    key: "holidays",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/holidays",
+    component: <EmployeeHolidays />,
+    visibleRoles: ["EMPLOYEE", "COMPANY_MANAGER"],
   },
   {
     type: "route",
@@ -324,15 +334,6 @@ const routes = [
     route: "/authentication/logout",
     component: <Logout />,
     visibleRoles: ["ADMIN", "COMPANY_MANAGER", "GUEST", "EMPLOYEE"],
-  },
-  {
-    type: "route",
-    name: "Holidays",
-    key: "holidays",
-    icon: <Icon fontSize="small">assignment</Icon>,
-    route: "/employee/holidays",
-    component: <EmployeeHolidays />,
-    visibleRoles: ["EMPLOYEE"],
   },
 ];
 
