@@ -35,7 +35,7 @@ class Comment extends Component {
   }
 
   fetchActiveComments = () => {
-    fetch("http://localhost:7074/api/v1/comment/active-comments")
+    fetch("http://34.173.81.212/comment/active-comments")
       .then((res) => res.json())
       .then((data) => {
         this.setState({ activeComments: data });
@@ -51,7 +51,7 @@ class Comment extends Component {
       const decodedToken = jwtDecode(storedToken);
       const userId = decodedToken.myId;
       axios
-        .get(`http://localhost:7072/api/v1/user/find_by_id/${userId}`)
+        .get(`http://34.173.81.212/user/find_by_id/${userId}`)
         .then((response) => {
           this.setState({ userInfo: response.data });
         })
@@ -72,7 +72,7 @@ class Comment extends Component {
     if (storedToken) {
       const decodedToken = jwtDecode(storedToken);
       const userId = decodedToken.myId;
-      const apiUrl = "http://localhost/comment/personel-make-comment";
+      const apiUrl = "http://34.173.81.212/comment/personel-make-comment";
 
       this.setState({ showText: true });
 

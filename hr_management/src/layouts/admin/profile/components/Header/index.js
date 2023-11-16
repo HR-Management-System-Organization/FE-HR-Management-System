@@ -32,8 +32,8 @@ function Header({ fullName }) {
       const decodedToken = jwt_decode(storedToken);
 
       formData.append("userId", decodedToken.id);
-
-      const response = await axios.post("http://localhost:7072/api/v1/user/photoUrl", formData, {
+// 34.173.81.212x
+      const response = await axios.post("http://34.173.81.212/user/photoUrl", formData, {
         headers: {
           "Content-Type": "multipart/form-data", //Multi part data olarak database deki metota gönderiyorum
         },

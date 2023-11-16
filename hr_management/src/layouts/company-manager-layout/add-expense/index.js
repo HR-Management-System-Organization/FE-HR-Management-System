@@ -22,8 +22,8 @@ function MyForm() {
   };
   const handleFileUpload = (e) => {
     e.preventDefault();
-
-    const apiUrl = `http://localhost:7073/api/v1/company/uploadpdf`;
+    // 34.173.81.212x
+    const apiUrl = `http://34.173.81.212/company/uploadpdf`;
 
     if (selectedFile) {
       const formData = new FormData();
@@ -52,7 +52,10 @@ function MyForm() {
       if (storedToken) {
         const decodedToken = jwtDecode(storedToken);
         try {
-          const response = await axios.get(`http://localhost/user/find_by_id/${decodedToken.myId}`);
+          // 34.173.81.212x
+          const response = await axios.get(
+            `http://34.173.81.212/user/find_by_id/${decodedToken.myId}`
+          );
           setUserInfo(response.data);
         } catch (error) {
           console.error("Kullanıcı bilgilerini alırken bir hata oluştu:", error);
@@ -65,8 +68,8 @@ function MyForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const apiUrl = `http://localhost:7073/api/v1/company/addexpense?&sebep=${reason}&companyid=${userInfo.companyId}&gelir=${income}&gelirtur=${incomeType}&gelirtarihi=${incomeDate}&id=${userInfo.id}&name=${userInfo.name}&surname=${userInfo.surName}`;
+    // 34.173.81.212x
+    const apiUrl = `http://34.173.81.212/company/addexpense?&sebep=${reason}&companyid=${userInfo.companyId}&gelir=${income}&gelirtur=${incomeType}&gelirtarihi=${incomeDate}&id=${userInfo.id}&name=${userInfo.name}&surname=${userInfo.surName}`;
 
     Axios.post(apiUrl)
       .then((response) => {

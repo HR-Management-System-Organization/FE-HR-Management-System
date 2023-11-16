@@ -51,7 +51,8 @@ function Overview() {
       console.log(decodedToken.myId);
       try {
         const response = await axios.get(
-          `http://localhost:7072/api/v1/user/find_by_id/${decodedToken.myId}`
+          // 34.173.81.212x
+          `http://34.173.81.212/user/find_by_id/${decodedToken.myId}`
         );
         setUserInfo(response.data);
       } catch (error) {

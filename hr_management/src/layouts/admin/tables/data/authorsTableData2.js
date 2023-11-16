@@ -36,8 +36,9 @@ export default function data() {
     console.log("Author ID to edit:", authorId, " ", typeof authorId); // Add this line for debugging
     // Burada POST isteğinizi göndermek için Axios veya başka bir HTTP istemci kullanabilirsiniz,
     if (authorId !== null) {
+      // 34.173.81.212x
       Axios.post(
-        "http://localhost:7072/api/v1/user/activationbyadmin?authorId=" + authorId,
+        "http://34.173.81.212/user/activationbyadmin?authorId=" + authorId,
         { token },
         {
           headers: { "Content-Type": "application/json" },
@@ -59,7 +60,8 @@ export default function data() {
     // Burada POST isteğinizi göndermek için Axios veya başka bir HTTP istemci kullanabilirsiniz,
     if (authorId !== null) {
       Axios.post(
-        "http://localhost:7072/api/v1/user/deletebyadmin?authorId=" + authorId,
+        // 34.173.81.212x
+        "http://34.173.81.212/user/deletebyadmin?authorId=" + authorId,
         { token },
         {
           headers: { "Content-Type": "application/json" },
@@ -79,7 +81,8 @@ export default function data() {
 
   useEffect(() => {
     Axios.post(
-      "http://localhost:7072/api/v1/user/findallbyadminpending",
+      // 34.173.81.212x
+      "http://34.173.81.212/user/findallbyadminpending",
       { token },
       {
         headers: { "Content-Type": "application/json" },

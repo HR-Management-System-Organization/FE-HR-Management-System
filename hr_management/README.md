@@ -29,7 +29,7 @@ ASOMA created for commercial companies for managing their human resource process
 npm install
 ```
 - Runs the app in the development mode.
-Open http://localhost:3000 to view it in your browser.
+Open http://34.173.81.212:3000 to view it in your browser.
 ```
 npm start
 ```

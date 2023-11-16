@@ -16,15 +16,16 @@ function EmployeeTableData() {
     // Burce Mars fotoğrafını yükleme hatası durumunda kullan
     setProfileImage(burceMars);
   };
-
-  const [profileImage, setProfileImage] = useState("http://localhost:7072/api/v1/user/images/");
+  // 34.173.81.212x
+  const [profileImage, setProfileImage] = useState("http://34.173.81.212/user/images/");
 
   useEffect(() => {
     if (storedToken) {
       const decodedToken = jwt_decode(storedToken);
 
       axios
-        .get(`http://localhost:7072/api/v1/user/get-company-employees/${decodedToken.id}`)
+        // 34.173.81.212x
+        .get(`http://34.173.81.212/user/get-company-employees/${decodedToken.id}`)
         .then((response) => {
           console.log("response data is...", response.data);
 
@@ -34,7 +35,8 @@ function EmployeeTableData() {
               {
                 avatar: (
                   <MDAvatar
-                    src={"http://localhost:7072/api/v1/user/images/" + emp.authid} //getImage metotundan dönen image profil fotosu olarak yazdırılıyor
+                    // 34.173.81.212x
+                    src={"http://34.173.81.212/user/images/" + emp.authid} //getImage metotundan dönen image profil fotosu olarak yazdırılıyor
                     alt="profile-image"
                     size="l"
                     shadow="sm"

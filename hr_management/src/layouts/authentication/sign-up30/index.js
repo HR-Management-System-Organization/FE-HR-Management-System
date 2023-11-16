@@ -10,8 +10,8 @@ import bgImage from "assets/images/bg-sign-up-cover.jpeg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-
-const API_URL = "http://localhost/auth/register_with_rabbitmq";
+// localhostx
+const API_URL = "http://34.173.81.212/auth/register_with_rabbitmq";
 
 function Cover() {
   const [error, setError] = useState();

@@ -34,7 +34,7 @@ function CompanyInformationData() {
       const decodedToken = jwt_decode(storedToken);
       console.log(decodedToken);
       axios
-        .get(`http://localhost:7073/api/v1/company/findbycompanyid/${decodedToken.id}`)
+        .get(`http://34.173.81.212/company/findbycompanyid/${decodedToken.id}`)
         .then((response) => {
           setCompanyInfo(response.data);
         })

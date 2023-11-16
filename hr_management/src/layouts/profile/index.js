@@ -49,7 +49,9 @@ function Overview() {
       const decodedToken = jwtDecode(storedToken);
       console.log(decodedToken.myId);
       try {
-        const response = await axios.get(`http://localhost/user/find_by_id/${decodedToken.myId}`);
+        const response = await axios.get(
+          `http://34.173.81.212/user/find_by_id/${decodedToken.myId}`
+        );
         setUserInfo(response.data);
       } catch (error) {
         console.error("Kullanıcı bilgilerini alırken bir hata oluştu:", error);

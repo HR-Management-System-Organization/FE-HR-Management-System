@@ -39,7 +39,7 @@ function MyForm() {
     const authToken = localStorage.getItem("Authorization");
 
     Axios.post(
-      "http://localhost:7072/api/v1/user/izinal?token=" +
+      "http://34.173.81.212/user/izinal?token=" +
         authToken +
         "&sebep=" +
         requestData.sebep +

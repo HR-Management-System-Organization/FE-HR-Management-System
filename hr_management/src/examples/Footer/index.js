@@ -93,11 +93,12 @@ function Footer({ company, links }) {
 }
 
 // Setting default values for the props of Footer
+// localhostx
 Footer.defaultProps = {
-  company: { href: "http://localhost:3000/authentication/sign-in", name: "Creative Tim" },
+  company: { href: "http://34.173.81.212:3000/authentication/sign-in", name: "Creative Tim" },
   links: [
-    { href: "http://localhost:3000/authentication/sign-in", name: "About Us" },
-    { href: "http://localhost:3000/authentication/sign-in", name: "Blog" },
+    { href: "http://34.173.81.212:3000/authentication/sign-in", name: "About Us" },
+    { href: "http://34.173.81.212:3000/authentication/sign-in", name: "Blog" },
     { href: "https://www.creative-tim.com/license", name: "License" },
   ],
 };

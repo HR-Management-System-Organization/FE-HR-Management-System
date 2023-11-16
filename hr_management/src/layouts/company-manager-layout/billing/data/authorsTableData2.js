@@ -46,7 +46,8 @@ export default function Data() {
     console.log("Author ID to edit:", authorId, " ", typeof authorId);
     if (authorId !== null) {
       Axios.post(
-        `http://localhost:7072/api/v1/user/deleterequestbycompanymanager?authorId=${authorId}`,
+        // 34.173.81.212x
+        `http://34.173.81.212/user/deleterequestbycompanymanager?authorId=${authorId}`,
         null,
         {
           headers: {
@@ -69,7 +70,8 @@ export default function Data() {
     console.log("Author ID to edit:", authorId, " ", typeof authorId);
     if (authorId !== null) {
       Axios.post(
-        `http://localhost:7072/api/v1/user/activerequestbycompanymanager?authorId=${authorId}`,
+        // 34.173.81.212x
+        `http://34.173.81.212/user/activerequestbycompanymanager?authorId=${authorId}`,
         null,
         {
           headers: {
@@ -90,7 +92,8 @@ export default function Data() {
 
   useEffect(() => {
     Axios.post(
-      "http://localhost:7072/api/v1/user/findallrequesbycompanymanager",
+      // 34.173.81.212x
+      "http://34.173.81.212/user/findallrequesbycompanymanager",
       { token },
       {
         headers: { "Content-Type": "application/json" },
@@ -126,7 +129,8 @@ export default function Data() {
     </MDBox>
   );
 
-  const rows = data ? data.map((author, index) => ({
+  const rows = data
+    ? data.map((author, index) => ({
         author: <Author image={team2} name={author.username} email={""} />,
         function: <Job title={author.nedeni} description={author.managerid} />,
         status: (

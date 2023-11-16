@@ -12,8 +12,8 @@ import bgImage from "assets/images/bg-sign-up-cover.jpeg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Alert } from "reactstrap";
-
-const API_URL = "http://localhost/user/login";
+// localhostx
+const API_URL = "http://34.173.81.212/user/login";
 
 function Cover() {
   const [credentials, setCredentials] = useState({ username: "", password: "" });
