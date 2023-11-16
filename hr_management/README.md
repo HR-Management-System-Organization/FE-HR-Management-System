@@ -43,7 +43,7 @@ npm install axios
 Within the download you'll find the following directories and files:
 
 ```
-material-dashboard-react
+ASOMA HR Management System
     ├── public
     │   ├── apple-icon.png
     │   ├── favicon.png
