@@ -3,18 +3,55 @@ import { Box, Card, ListItem, ListItemButton, ListItemText, List, Button } from 
 import MDButton from "components/MDButton";
 import { useNavigate } from "react-router-dom";
 import MDTypography from "components/MDTypography";
-
+import Axios from "axios";
 function WelcomePage() {
   const navigate = useNavigate();
-
+  const token = String(localStorage.getItem("Authorization"));
   const handleCardClick30 = () => {
-    navigate("/authentication/sign-up30");
+    Axios.post(
+      `http://localhost:7072/api/v1/user/activedate?p=1`,
+      { token },
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    )
+      .then((response) => {
+        // Handle the successful response here
+        navigate("/authentication/sign-in");
+      })
+      .catch((error) => {
+        console.error("Error editing data:", error);
+      });
   };
   const handleCardClick60 = () => {
-    navigate("/authentication/sign-up60");
+    Axios.post(
+      `http://localhost:7072/api/v1/user/activedate?p=2`,
+      { token },
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    )
+      .then((response) => {
+        // Handle the successful response here
+      })
+      .catch((error) => {
+        console.error("Error editing data:", error);
+      });
   };
   const handleCardClick90 = () => {
-    navigate("/authentication/sign-up90");
+    Axios.post(
+      `http://localhost:7072/api/v1/user/activedate?p=3`,
+      { token },
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    )
+      .then((response) => {
+        // Handle the successful response here
+      })
+      .catch((error) => {
+        console.error("Error editing data:", error);
+      });
   };
 
   return (
@@ -37,21 +74,6 @@ function WelcomePage() {
           width: "60%",
         }}
       >
-        <MDButton
-          sx={{
-            marginBottom: 5,
-            alignSelf: "right",
-            marginTop: 3,
-            color: "white",
-            width: 300,
-          }}
-          color="info"
-          onClick={() => {
-            navigate("/authentication/sign-in");
-          }}
-        >
-          Sign in
-        </MDButton>
         <Box
           sx={{
             display: "flex",
@@ -180,29 +202,6 @@ function WelcomePage() {
         </Box>
       </Box>
       {/* guest (sağ) taraf */}
-      <Box sx={{ width: "40%", textAlign: "center" }}>
-        <MDTypography variant="h5" color="light" sx={{ marginBottom: 3 }}>
-          You can register as a guest and get basic informations about companies.
-        </MDTypography>
-        <MDButton
-          sx={{ marginRight: 2, width: 200 }}
-          color="info"
-          onClick={() => {
-            navigate("/authentication/sign-in");
-          }}
-        >
-          Sign in
-        </MDButton>
-        <MDButton
-          sx={{ marginRight: 2, width: 200 }}
-          color="secondary"
-          onClick={() => {
-            navigate("/authentication/gsign-up");
-          }}
-        >
-          Sign up
-        </MDButton>
-      </Box>
     </Box>
   );
 }

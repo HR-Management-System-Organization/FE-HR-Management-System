@@ -201,7 +201,7 @@ export default function App() {
       <Routes>
         {getRoutes(routes)}
         {<Route path="/company/:companyId" element={<CompanyInfo />} />}
-        {<Route path="/" element={<Navigate to="/welcome" />} />}
+        {<Route path="/" element={<Navigate to="authentication/sign-in" />} />}
       </Routes>
     </ThemeProvider>
   );

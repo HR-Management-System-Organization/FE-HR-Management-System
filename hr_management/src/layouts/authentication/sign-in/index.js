@@ -42,8 +42,12 @@ function Cover() {
       const token = localStorage.getItem("Authorization");
       const decoded = jwt_decode(token);
       const decodedUserRole = decoded.role; // decodedUserRole burada tanımlanıyor
+      const decodedUserstatus = decoded.status; // decodedUserRole burada tanımlanıyor
+
       if (decodedUserRole === "COMPANY_MANAGER") {
-        navigate("/manager/dashboard");
+        if (decodedUserstatus === "INACTIVE") {
+          navigate("/authentication/uyelikyenile");
+        } else navigate("/manager/dashboard");
       } else if (decodedUserRole === "ADMIN") {
         navigate("/admin/profile");
       } else if (decodedUserRole === "EMPLOYEE") {

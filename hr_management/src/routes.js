@@ -45,7 +45,12 @@ import Activation from "layouts/authentication/activation";
 import ActivationFailed from "layouts/authentication/activation-failed";
 import GSignUp from "layouts/authentication/gsign-up";
 import SignIn from "layouts/authentication/sign-in";
-import SignUp from "layouts/authentication/sign-up";
+import SignUp30 from "layouts/authentication/sign-up30";
+import SignUp60 from "layouts/authentication/sign-up60";
+
+import SignUp90 from "layouts/authentication/sign-up90";
+import Uyelikyenile from "layouts/authentication/uyelikyenile";
+
 import Overview from "layouts/profile";
 import EmployeeHolidays from "layouts/user-layout/holidays";
 import MyCompany from "layouts/user-layout/my-company";
@@ -139,9 +144,37 @@ const routes = [
     key: "sign-up",
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/authentication/sign-up",
-    component: <SignUp />,
+    component: <WelcomePage />,
     visibleRoles: [""],
   },
+  {
+    type: "route",
+    name: "Sign Up",
+    key: "sign-up",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/authentication/sign-up30",
+    component: <SignUp30 />,
+    visibleRoles: [""],
+  },
+  {
+    type: "route",
+    name: "Sign Up",
+    key: "sign-up",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/authentication/sign-up60",
+    component: <SignUp60 />,
+    visibleRoles: [""],
+  },
+  {
+    type: "route",
+    name: "Sign Up",
+    key: "sign-up",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/authentication/sign-up90",
+    component: <SignUp90 />,
+    visibleRoles: [""],
+  },
+
   {
     type: "route",
     name: "Sign Up",
@@ -325,6 +358,15 @@ const routes = [
     route: "admin/profile",
     component: <AdminProfile />,
     visibleRoles: ["ADMIN"],
+  },
+  {
+    type: "route",
+    name: "extend your membership",
+    key: "sign-up",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/authentication/uyelikyenile",
+    component: <Uyelikyenile />,
+    visibleRoles: ["COMPANY_MANAGER"],
   },
   {
     type: "admin",
