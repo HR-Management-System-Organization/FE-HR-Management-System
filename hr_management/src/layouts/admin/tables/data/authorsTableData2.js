@@ -45,7 +45,7 @@ export default function data() {
       )
 
         .then((response) => {
-          // İsteğiniz başarıyla tamamlandığında yapılması gereken işlemler
+          window.location.reload();
         })
         .catch((error) => {
           console.error("Error editing data:", error);
@@ -67,6 +67,7 @@ export default function data() {
       )
 
         .then((response) => {
+          window.location.reload();
           // İsteğiniz başarıyla tamamlandığında yapılması gereken işlemler
         })
         .catch((error) => {

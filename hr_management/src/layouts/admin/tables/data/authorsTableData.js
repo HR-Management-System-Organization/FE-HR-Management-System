@@ -134,6 +134,7 @@ export default function EmployeeTable() {
         .then((response) => {
           // Filter out the deleted profile from the data state
           setData((prevData) => prevData.filter((author) => author.id !== authorId));
+          window.location.reload();
         })
         .catch((error) => {
           console.error("Error deleting data:", error);

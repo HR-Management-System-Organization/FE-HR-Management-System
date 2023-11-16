@@ -169,15 +169,15 @@ function MyCompany() {
       >
         <div style={{ height: "100%", margin: "0 auto" }}>
           <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Income Chart</h2>
-          <canvas ref={chartRef} />
+          <canvas ref={chartRef} style={{ width: "100%" }} />
           <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Total Income-Expense Chart</h2>
-          <canvas ref={chartRef2} />
+          <canvas ref={chartRef2} style={{ width: "100%" }} />
         </div>
 
         <div style={{ height: "100%", margin: "0 auto" }}>
           <h2 style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>Expense Chart</h2>
-          <canvas ref={chartRef3} style={{ padding: "60px" }} />
-          <canvas ref={chartRef4} />
+          <canvas ref={chartRef3} style={{ width: "100%" }} />
+          <canvas ref={chartRef4} style={{ width: "100%" }} />
         </div>
       </div>
     </DashboardLayout>

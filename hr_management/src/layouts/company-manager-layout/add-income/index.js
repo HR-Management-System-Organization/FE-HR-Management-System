@@ -41,6 +41,7 @@ function MyForm() {
     Axios.post(apiUrl)
       .then((response) => {
         // Handle the response, e.g., display a success message
+        window.location.reload();
       })
       .catch((error) => {
         let errorMessage = error.response.data.message;

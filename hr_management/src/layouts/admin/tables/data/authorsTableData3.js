@@ -40,6 +40,7 @@ export default function CommentTable() {
         .then((response) => {
           // Filter out the accepted comment from the data state
           setData((prevData) => prevData.filter((comment) => comment.commentId !== commentId));
+          window.location.reload();
         })
         .catch((error) => {
           console.error("Error accepting data:", error);
@@ -63,6 +64,7 @@ export default function CommentTable() {
         .then((response) => {
           // Filter out the deleted comment from the data state
           setData((prevData) => prevData.filter((comment) => comment.commentId !== commentId));
+          window.location.reload();
         })
         .catch((error) => {
           console.error("Error deleting data:", error);

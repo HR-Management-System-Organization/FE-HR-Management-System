@@ -112,7 +112,9 @@ export default function EmployeeTable() {
       "&surName=" +
       surName;
     Axios.put(apiUrl)
-      .then((response) => {})
+      .then((response) => {
+        window.location.reload();
+      })
       .catch((error) => {
         console.error("Error fetching employee data:", error);
       });
@@ -131,6 +133,7 @@ export default function EmployeeTable() {
       )
         .then((response) => {
           // Handle the successful response here
+          window.location.reload();
         })
         .catch((error) => {
           console.error("Error editing data:", error);
@@ -183,7 +186,7 @@ export default function EmployeeTable() {
         edit: (
           <MDBox mt={4} mb={1}>
             <div>
-              <MDButton onClick={() => handleOpen(author.id)}>
+              <MDButton color="success" onClick={() => handleOpen(author.id)}>
                 EDIT
                 <EditIcon fontSize="big" />
               </MDButton>
@@ -228,7 +231,11 @@ export default function EmployeeTable() {
             </div>
           </MDBox>
         ),
-        Delete: <button onClick={() => handleEdit2(author.id)}>Delete</button>,
+        Delete: (
+          <MDButton color="error" onClick={() => handleEdit2(author.id)}>
+            Delete
+          </MDButton>
+        ),
       }))
     : [];
 

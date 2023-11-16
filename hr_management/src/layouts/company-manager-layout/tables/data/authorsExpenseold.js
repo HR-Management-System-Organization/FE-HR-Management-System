@@ -19,6 +19,7 @@ import MDAvatar from "components/MDAvatar";
 import MDBadge from "components/MDBadge";
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
+import CurrencyLiraIcon from "@mui/icons-material/CurrencyLira";
 
 // Images
 import team2 from "assets/images/team-2.jpg";
@@ -87,17 +88,20 @@ export default function Data() {
           function: <Job title={author.expenseId} description={author.nedeni} />,
           status: (
             <MDBox ml={-1}>
-              <MDBadge badgeContent={author.status} variant="gradient" size="sm" />
+              <MDBadge badgeContent={author.eexpenseStatus} variant="gradient" size="m" />
             </MDBox>
           ),
-          baslangic: (
+          billDate: (
             <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-              {formatDate(author.izinbaslangic)}
+              {formatDate(author.billDate)}
             </MDTypography>
           ),
-          calisaninintotalizinhakki: (
+          amount: (
             <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-              {author.izinhakki} days
+              {author.amount}{" "}
+              <CurrencyLiraIcon style={{ marginLeft: "5px" }} fontSize="small">
+                receipt_long
+              </CurrencyLiraIcon>
             </MDTypography>
           ),
           izinsüresi: (
@@ -116,16 +120,14 @@ export default function Data() {
   return {
     columns: [
       { Header: "Employee", accessor: "Employee", width: "15%", align: "left" },
-      { Header: "function", accessor: "function", align: "left" },
+
       { Header: "status", accessor: "status", align: "center" },
-      { Header: "baslangic", accessor: "baslangic", align: "center" },
+      { Header: "billDate", accessor: "billDate", align: "center" },
       {
-        Header: "calisaninintotalizinhakki",
-        accessor: "calisaninintotalizinhakki",
+        Header: "amount",
+        accessor: "amount",
         align: "center",
       },
-      { Header: "izinsüresi", accessor: "izinsüresi", align: "center" },
-      { Header: "bitis", accessor: "bitis", align: "center" },
     ],
     rows: rows,
   };

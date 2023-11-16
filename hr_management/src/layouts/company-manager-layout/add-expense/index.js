@@ -33,6 +33,7 @@ function MyForm() {
         .then((response) => {
           // İşlem başarılıysa, response'dan gerekli bilgileri alabilirsiniz.
           console.log(response.data);
+          window.location.reload();
           // Başka işlemler yapabilirsiniz, örneğin bir mesaj gösterme.
         })
         .catch((error) => {

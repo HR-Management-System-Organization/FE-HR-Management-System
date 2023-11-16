@@ -20,6 +20,7 @@ import MDBadge from "components/MDBadge";
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import CurrencyLiraIcon from "@mui/icons-material/CurrencyLira";
+import MDButton from "components/MDButton";
 
 // Images
 import team2 from "assets/images/team-2.jpg";
@@ -55,6 +56,7 @@ export default function Data() {
       )
         .then((response) => {
           // Handle the successful response here
+          window.location.reload();
         })
         .catch((error) => {
           console.error("Error editing data:", error);
@@ -76,6 +78,7 @@ export default function Data() {
       )
         .then((response) => {
           // Handle the successful response here
+          window.location.reload();
         })
         .catch((error) => {
           console.error("Error editing data:", error);
@@ -152,8 +155,16 @@ export default function Data() {
           </MDTypography>
         ),
 
-        Active: <button onClick={() => handleEdit(author.id)}>Accept</button>,
-        Delete: <button onClick={() => handleEdit2(author.id)}>Reject</button>,
+        Active: (
+          <MDButton color="success" onClick={() => handleEdit(author.id)}>
+            Accept
+          </MDButton>
+        ),
+        Delete: (
+          <MDButton color="warning" onClick={() => handleEdit2(author.id)}>
+            Reject
+          </MDButton>
+        ),
       }))
     : [];
 

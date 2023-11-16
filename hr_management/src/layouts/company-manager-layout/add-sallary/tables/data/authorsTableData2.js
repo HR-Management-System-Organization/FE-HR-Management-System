@@ -21,6 +21,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import jwt_decode from "jwt-decode";
 import CurrencyLiraIcon from "@mui/icons-material/CurrencyLira";
+import MDButton from "components/MDButton";
 
 // Images
 import team2 from "assets/images/team-2.jpg";
@@ -121,7 +122,8 @@ export default function Data() {
           />
         ),
         Active: (
-          <button
+          <MDButton
+            color="success"
             onClick={() =>
               handleEdit(
                 author.id,
@@ -133,7 +135,7 @@ export default function Data() {
             }
           >
             Accept
-          </button>
+          </MDButton>
         ),
       }))
     : [];

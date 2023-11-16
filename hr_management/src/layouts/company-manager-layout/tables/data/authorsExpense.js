@@ -19,6 +19,8 @@ import MDAvatar from "components/MDAvatar";
 import MDBadge from "components/MDBadge";
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
+import CurrencyLiraIcon from "@mui/icons-material/CurrencyLira";
+import MDButton from "components/MDButton";
 
 // Images
 import team2 from "assets/images/team-2.jpg";
@@ -53,7 +55,7 @@ export default function Data() {
         }
       )
         .then((response) => {
-          // Handle the successful response here
+          window.location.reload();
         })
         .catch((error) => {
           console.error("Error editing data:", error);
@@ -74,7 +76,7 @@ export default function Data() {
         }
       )
         .then((response) => {
-          // Handle the successful response here
+          window.location.reload();
         })
         .catch((error) => {
           console.error("Error editing data:", error);
@@ -129,17 +131,20 @@ export default function Data() {
           function: <Job title={author.expenseId} description={author.nedeni} />,
           status: (
             <MDBox ml={-1}>
-              <MDBadge badgeContent={author.eExpenseStatus} variant="gradient" size="sm" />
+              <MDBadge badgeContent={author.eexpenseStatus} variant="gradient" size="m" />
             </MDBox>
           ),
-          baslangic: (
+          billDate: (
             <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
               {formatDate(author.billDate)}
             </MDTypography>
           ),
-          calisaninintotalizinhakki: (
+          amount: (
             <MDTypography component="a" href="#" variant="caption" color="text" fontWeight="medium">
-              {author.amount} days
+              {author.amount}{" "}
+              <CurrencyLiraIcon style={{ marginLeft: "5px" }} fontSize="small">
+                receipt_long
+              </CurrencyLiraIcon>
             </MDTypography>
           ),
           izinsüresi: (
@@ -153,24 +158,30 @@ export default function Data() {
             </MDTypography>
           ),
 
-          Active: <button onClick={() => handleEdit(author.expenseId)}>Accept</button>,
-          Delete: <button onClick={() => handleEdit2(author.expenseId)}>Reject</button>,
+          Active: (
+            <MDButton color="success" onClick={() => handleEdit(author.expenseId)}>
+              Accept
+            </MDButton>
+          ),
+          Delete: (
+            <MDButton color="warning" onClick={() => handleEdit2(author.expenseId)}>
+              Reject
+            </MDButton>
+          ),
         }))
       : [];
 
   return {
     columns: [
       { Header: "Employee", accessor: "Employee", width: "15%", align: "left" },
-      { Header: "function", accessor: "function", align: "left" },
+
       { Header: "status", accessor: "status", align: "center" },
-      { Header: "baslangic", accessor: "baslangic", align: "center" },
+      { Header: "billDate", accessor: "billDate", align: "center" },
       {
-        Header: "calisaninintotalizinhakki",
-        accessor: "calisaninintotalizinhakki",
+        Header: "amount",
+        accessor: "amount",
         align: "center",
       },
-      { Header: "izinsüresi", accessor: "izinsüresi", align: "center" },
-      { Header: "bitis", accessor: "bitis", align: "center" },
 
       { Header: "Active", accessor: "Active", align: "center" },
       { Header: "Delete", accessor: "Delete", align: "center" },
