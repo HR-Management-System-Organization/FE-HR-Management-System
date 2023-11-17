@@ -68,7 +68,7 @@ function GuestInfoCard({ title, description, info, social, action }) {
   const handleSubmit = () => {
     console.log(editedInfo);
     const apiUrl =
-      "http://localhost:7072/api/v1/user/updateemployee?id=" +
+      "http://34.173.81.212/user/updateemployee?id=" +
       decodedToken.myId +
       "&email=" +
       editedInfo.personalEmail +

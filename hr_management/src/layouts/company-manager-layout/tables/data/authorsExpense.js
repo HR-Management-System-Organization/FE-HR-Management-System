@@ -48,7 +48,7 @@ export default function Data() {
     console.log("Author ID to edit:", authorId, " ", typeof authorId);
     if (authorId !== null) {
       Axios.post(
-        `http://localhost/company/deleteexpensebycompanymanager?authorId=${authorId}`,
+        `http://34.173.81.212/company/deleteexpensebycompanymanager?authorId=${authorId}`,
         { token },
         {
           headers: { "Content-Type": "application/json" },
@@ -69,7 +69,7 @@ export default function Data() {
     console.log("Author ID to edit:", authorId, " ", typeof authorId);
     if (authorId !== null) {
       Axios.post(
-        `http://localhost/company/activeexpensebycompanymanager?authorId=${authorId}`,
+        `http://34.173.81.212/company/activeexpensebycompanymanager?authorId=${authorId}`,
         { token },
         {
           headers: { "Content-Type": "application/json" },
@@ -88,7 +88,7 @@ export default function Data() {
 
   useEffect(() => {
     Axios.post(
-      "http://localhost/company/findalloldrequesbycompanymanager2",
+      "http://34.173.81.212/company/findalloldrequesbycompanymanager2",
       { token },
       {
         headers: { "Content-Type": "application/json" },

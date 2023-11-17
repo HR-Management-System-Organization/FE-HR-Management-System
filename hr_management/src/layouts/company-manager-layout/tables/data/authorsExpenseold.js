@@ -45,7 +45,7 @@ export default function Data() {
 
   useEffect(() => {
     Axios.post(
-      "http://localhost/company/findalloldrequesbycompanymanager3",
+      "http://34.173.81.212/company/findalloldrequesbycompanymanager3",
       { token },
       {
         headers: { "Content-Type": "application/json" },

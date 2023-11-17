@@ -20,11 +20,11 @@ function CompanyCommentData() {
       const decodedToken = jwt_decode(storedToken);
       console.log(decodedToken);
 
-      // below URL should be changed to `http://localhost:9093/api/v1/comment/get-comments-by-company/${decodedToken.id}`
+      // below URL should be changed to `http://34.173.81.212:9093/comment/get-comments-by-company/${decodedToken.id}`
       // after navigation by roles is completed
 
       axios
-        .get(`${API_URLS.comment.localhost}/get-comments-by-company/${decodedToken.id}`)
+        .get(`${API_URLS.comment.34.173.81.212}/get-comments-by-company/${decodedToken.id}`)
         .then((response) => {
           setCommentInfo(response.data);
           console.log("response data is...", response.data);

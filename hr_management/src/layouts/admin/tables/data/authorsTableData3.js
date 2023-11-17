@@ -31,7 +31,7 @@ export default function CommentTable() {
 
     if (commentId !== null) {
       Axios.post(
-        `http://localhost:7074/api/v1/comment/activationbyadmin?commentId=${commentId}`,
+        `http://34.173.81.212/comment/activationbyadmin?commentId=${commentId}`,
         { token },
         {
           headers: { "Content-Type": "application/json" },
@@ -55,7 +55,7 @@ export default function CommentTable() {
 
     if (commentId !== null) {
       Axios.post(
-        `http://localhost:7074/api/v1/comment/deletebyadmin?commentId=${commentId}`,
+        `http://34.173.81.212/comment/deletebyadmin?commentId=${commentId}`,
         { token },
         {
           headers: { "Content-Type": "application/json" },
@@ -76,7 +76,7 @@ export default function CommentTable() {
 
   useEffect(() => {
     Axios.post(
-      "http://localhost:7074/api/v1/comment/findallbyadminpending",
+      "http://34.173.81.212/comment/findallbyadminpending",
       { token },
       {
         headers: { "Content-Type": "application/json" },

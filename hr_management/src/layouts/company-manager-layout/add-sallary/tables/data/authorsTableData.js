@@ -34,7 +34,7 @@ export default function data() {
 
   useEffect(() => {
     Axios.post(
-      "http://localhost:7072/api/v1/user/findallguestbycompanymanager",
+      "http://34.173.81.212/user/findallguestbycompanymanager",
       { token },
       {
         headers: { "Content-Type": "application/json" },

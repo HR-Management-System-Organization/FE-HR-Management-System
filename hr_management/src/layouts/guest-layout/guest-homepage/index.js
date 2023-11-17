@@ -34,7 +34,9 @@ function GuestHomepage() {
     const decodedToken = jwtDecode(storedToken);
     if (storedToken) {
       try {
-        const response = await axios.get(`http://localhost/user/find_by_id/${decodedToken.myId}`);
+        const response = await axios.get(
+          `http://34.173.81.212/user/find_by_id/${decodedToken.myId}`
+        );
         return response.data;
       } catch (error) {
         console.error("Kullanıcı bilgileri alınırken hata oluştu:", error);
@@ -47,7 +49,7 @@ function GuestHomepage() {
   async function getCompanies() {
     if (storedToken) {
       try {
-        const response = await axios.get("http://localhost/company/findall");
+        const response = await axios.get("http://34.173.81.212/company/findall");
         return response.data;
       } catch (error) {
         console.error("Şirket bilgileri alınırken hata oluştu:", error);
@@ -71,7 +73,7 @@ function GuestHomepage() {
   };
 
   useEffect(() => {
-    const apiUrl = "http://localhost/company/findall";
+    const apiUrl = "http://34.173.81.212/company/findall";
 
     axios
       .get(apiUrl)

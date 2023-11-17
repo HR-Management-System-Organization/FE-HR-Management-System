@@ -9,7 +9,7 @@ function WelcomePage() {
   const token = String(localStorage.getItem("Authorization"));
   const handleCardClick30 = () => {
     Axios.post(
-      `http://localhost:7072/api/v1/user/activedate?p=1`,
+      `http://34.173.81.212/user/activedate?p=1`,
       { token },
       {
         headers: { "Content-Type": "application/json" },
@@ -25,7 +25,7 @@ function WelcomePage() {
   };
   const handleCardClick60 = () => {
     Axios.post(
-      `http://localhost:7072/api/v1/user/activedate?p=2`,
+      `http://34.173.81.212/user/activedate?p=2`,
       { token },
       {
         headers: { "Content-Type": "application/json" },
@@ -40,7 +40,7 @@ function WelcomePage() {
   };
   const handleCardClick90 = () => {
     Axios.post(
-      `http://localhost:7072/api/v1/user/activedate?p=3`,
+      `http://34.173.81.212/user/activedate?p=3`,
       { token },
       {
         headers: { "Content-Type": "application/json" },

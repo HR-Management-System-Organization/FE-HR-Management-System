@@ -44,7 +44,7 @@ export default function Data() {
       console.log("companyid");
       console.log(companyid);
       console.log("companyid");
-      const apiUrl = `http://localhost:7072/api/v1/user/addsalary?authorId=${id}&maas=${maas}&name=${name}&surname=${surName}&companyid=${companyid}`;
+      const apiUrl = `http://34.173.81.212/user/addsalary?authorId=${id}&maas=${maas}&name=${name}&surname=${surName}&companyid=${companyid}`;
 
       // Axios ile POST isteği gönderin
       Axios.post(apiUrl, null, {
@@ -68,7 +68,7 @@ export default function Data() {
   useEffect(() => {
     console.log(String(localStorage.getItem("Authorization")));
     Axios.post(
-      "http://localhost:7072/api/v1/user/findallguestbycompanymanager",
+      "http://34.173.81.212/user/findallguestbycompanymanager",
       { token },
       {
         headers: { "Content-Type": "application/json" },

@@ -36,7 +36,7 @@ function MyForm() {
     const authToken = localStorage.getItem("Authorization");
 
     Axios.post(
-      "http://localhost:7072/api/v1/user/avansal?token=" +
+      "http://34.173.81.212/user/avansal?token=" +
         authToken +
         "&sebep=" +
         requestData.sebep +

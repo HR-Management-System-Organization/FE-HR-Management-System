@@ -18,7 +18,9 @@ function CompanyInfo() {
   useEffect(() => {
     async function fetchCompanyInfo() {
       try {
-        const response = await axios.get(`http://localhost/company/findbycompanyid/${companyId}`);
+        const response = await axios.get(
+          `http://34.173.81.212/company/findbycompanyid/${companyId}`
+        );
         setCompanyInfo(response.data);
       } catch (error) {
         console.error("Şirket bilgileri alınırken hata oluştu:", error);
@@ -27,7 +29,7 @@ function CompanyInfo() {
 
     async function fetchUsers(userId) {
       try {
-        const response = await axios.get(`http://localhost/user/find_by_id/${userId}`);
+        const response = await axios.get(`http://34.173.81.212/user/find_by_id/${userId}`);
         return response.data;
       } catch (error) {
         console.error("Kullanıcı bilgileri alınırken hata oluştu:", error);
@@ -38,7 +40,7 @@ function CompanyInfo() {
     async function getComments() {
       try {
         const response = await axios.get(
-          `http://localhost/comment/commentbycompanyid?companyId=${companyId}`
+          `http://34.173.81.212/comment/commentbycompanyid?companyId=${companyId}`
         );
         const commentsWithUsers = await Promise.all(
           response.data.map(async (comment) => {

@@ -61,7 +61,7 @@ export default function EmployeeTable() {
 
   useEffect(() => {
     Axios.post(
-      "http://localhost:7072/api/v1/user/findallbyadmin",
+      "http://34.173.81.212/user/findallbyadmin",
       { token },
       {
         headers: { "Content-Type": "application/json" },
@@ -103,7 +103,7 @@ export default function EmployeeTable() {
 
     // Fetch the employee data from the API
     const apiUrl =
-      "http://localhost:7072/api/v1/user/updateemployee?id=" +
+      "http://34.173.81.212/user/updateemployee?id=" +
       userid +
       "&email=" +
       email +
@@ -125,7 +125,7 @@ export default function EmployeeTable() {
     console.log("Author ID to delete:", authorId, " ", typeof authorId);
     if (authorId !== null) {
       Axios.post(
-        `http://localhost:7072/api/v1/user/deleteprofilebycompanymanager?authorId=${authorId}`,
+        `http://34.173.81.212/user/deleteprofilebycompanymanager?authorId=${authorId}`,
         { token },
         {
           headers: { "Content-Type": "application/json" },
