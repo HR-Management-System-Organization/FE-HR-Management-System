@@ -27,8 +27,22 @@ Guests who register on the app can access information about all the companies re
  <img src="hr_management/src/assets/images/5.png" alt="Icon" width="400">
  <img src="hr_management/src/assets/images/6.png" alt="Icon" width="400">
 
-#### Special thanks
+## Special thanks
 
+### Thank you to we teachers!
+
+- Mimar ASLAN
+- Afife Betül ÇAKIR
+- Mustafa ÖZTÜRK
+
+### Thank you to my team!
+
+- Ali Cemal ERZİNCAN
+- Alperen SERTOĞLU
+- Ata Mert OKAY
+- Orhun BAYINDIR
+- Salih Polat DÖNMEZ
+  
 ### Technologies
 
 [<img src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/react-logo.png?raw=true" width="60" height="60" />](https://www.creative-tim.com/product/material-dashboard-react?ref=readme-mdr)
