@@ -19,13 +19,13 @@ Guests who register on the app can access information about all the companies re
 
 ### Screenshots
 
- <img src="/src/assets/images/7.jpeg" alt="Icon" width="400">
- <img src="/src/assets/images/2.jpeg" alt="Icon" width="400">
- <img src="/src/assets/images/3.jpeg" alt="Icon" width="400">
- <img src="/src/assets/images/4.jpeg" alt="Icon" width="400">
- <img src="/src/assets/images/1.jpeg" alt="Icon" width="400">
- <img src="/src/assets/images/5.jpeg" alt="Icon" width="400">
- <img src="/src/assets/images/6.jpeg" alt="Icon" width="400">
+ <img src="/src/assets/images/7.png" alt="Icon" width="400">
+ <img src="/src/assets/images/2.png" alt="Icon" width="400">
+ <img src="/src/assets/images/3.png" alt="Icon" width="400">
+ <img src="/src/assets/images/4.png" alt="Icon" width="400">
+ <img src="/src/assets/images/1.png" alt="Icon" width="400">
+ <img src="/src/assets/images/5.png" alt="Icon" width="400">
+ <img src="/src/assets/images/6.png" alt="Icon" width="400">
 
 #### Special thanks
 
